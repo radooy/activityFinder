@@ -27,7 +27,7 @@ async function login(username, password) {
     }
 
     let token = jwt.sign({_id: user._id, username: user.username},SECRET,{expiresIn:"1h"});
-    return {_id: user._id, username:user.username, token};
+    return {_id: user._id, username:user.username, city: user.city, token};
 }
 
 module.exports = {
