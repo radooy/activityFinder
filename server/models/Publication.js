@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const moment = require("moment");
-const { MONGOOSE_NAME_VALIDATION } = require("../utils/errorMessages");
+const { MONGOOSE_NAME_VALIDATION, MONGOOSE_DESC_VALIDATION, MONGOOSE_PHONENUM_VALIDATION, MONGOOSE_URL_VALIDATION } = require("../utils/errorMessages");
 
 const sports = require("../utils/sportsData")();
+const cities = require("../utils/citiesData")();
 
 const PublicationSchema = new mongoose.Schema({
     nameOfUser: {
@@ -14,7 +14,7 @@ const PublicationSchema = new mongoose.Schema({
             message: MONGOOSE_NAME_VALIDATION
         },
         trim: true,
-        required: [true, "Please enter your name!"]
+        required: [true, "Please enter your first name!"]
     },
     sport: {
         type: String,
@@ -23,7 +23,50 @@ const PublicationSchema = new mongoose.Schema({
     },
     date: {
         type: String,
-        required: true
+        required: [true, "Please select a date!"]
+    },
+    description: {
+        type: String,
+        validate:{
+            validator: function(value){
+                return /^[a-zA-Z0-9 .!?"-]{8,50}$/.test(value);
+            },
+            message: MONGOOSE_DESC_VALIDATION
+        },
+        trim: true,
+        required: [true, "Please enter description!"]
+    },
+    countOfPeopleLookingFor: {
+        type: Number,
+        required: [true, "Please select a valid number!"],
+    },
+    city: {
+        type: String,
+        enum: cities,
+        required: true,
+    },
+    phoneNumber: {
+        type: String,
+        validate:{
+            validator: function(value){
+                return /^[0]{1}[0-9]{9}$/.test(value);
+            },
+            message: MONGOOSE_PHONENUM_VALIDATION
+        },
+        required: [true, "Please enter phone number!"]
+    },
+    imgUrl: {
+        type: String,
+        validate:{
+            validator: function(value){
+                return /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(value);
+            },
+            message: MONGOOSE_URL_VALIDATION
+        }
+    },
+    creator: {
+        type: mongoose.Types.ObjectId,
+        ref: "User"
     }
 });
 
