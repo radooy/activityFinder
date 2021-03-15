@@ -1,7 +1,34 @@
 const router = require("express").Router();
+const authService = require("../services/authService");
 
-router.get("/register", (req,res)=>{
-    res.json({ message: "register" });
+router.post("/register", (req,res)=>{
+    let {username, password, rePassword} = req.body;
+    if (password!==rePassword) {
+        res.status(409).json({err: "Password and Repeat password fields should match!"});
+    }
+
+    authService.register(username,password)
+        .then(createduser=>{
+            res.status(201).json({_id: createduser._id});
+        })
+        .catch(err=>{
+            console.log(err.message);
+            res.status(409).json({err: err.message});
+        });
 });
+
+router.post("/login", (req,res)=>{
+    let {username, password} = req.body;
+    authService.login(username,password)    
+        .then(token=>{
+            res.status(200).json({token});
+        })
+        .catch(err=>{
+            console.log(err.message);
+            res.status(401).json({err: err.message});
+        });
+})
+
+
 
 module.exports = router;
