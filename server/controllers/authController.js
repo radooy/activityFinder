@@ -2,13 +2,13 @@ const router = require("express").Router();
 const authService = require("../services/authService");
 
 router.post("/register", (req,res)=>{
-    let {username, password, rePassword} = req.body;
+    let {username, password, rePassword, city} = req.body;
     if (password!==rePassword) {
         res.status(409).json({err: "Password and Repeat Password fields should match!"});
         return;
     }
 
-    authService.register(username,password)
+    authService.register(username,password, city)
         .then(createduser=>{
             res.status(201).json({_id: createduser._id});
         })

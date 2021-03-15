@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const SALT_ROUNDS = require("../config/config");
 const { MONGOOSE_USERNAME_VALIDATION , MONGOOSE_PASSWORD_VALIDATION } = require("../utils/errorMessages");
 
+const cities = require("../utils/citiesData")();
+
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -25,7 +27,20 @@ const UserSchema = new mongoose.Schema({
             message: MONGOOSE_PASSWORD_VALIDATION
         },
         required: [true, "Please enter password!"],
-    }
+    },
+    city: {
+        type: String,
+        enum: cities,
+        required: true,
+    },
+    publicationsMade: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Publication"
+    }],
+    publicationsAppliedFor: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Publication"
+    }]
 });
 
 UserSchema.pre("save", function (next) {
@@ -37,4 +52,4 @@ UserSchema.pre("save", function (next) {
         });
 });
 
-module.exports = mongoose.model("user", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

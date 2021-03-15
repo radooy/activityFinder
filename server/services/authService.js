@@ -4,14 +4,14 @@ const User = require("../models/User");
 const { LOGIN_FAIL, REGISTER_USERNAME_ALREADY_IN_USE } = require("../utils/errorMessages");
 const { SECRET } = require("../config/config");
 
-async function register(username, password) {
+async function register(username, password, city) {
     let user = await User.findOne({ username });
 
     if (user) {
         throw new Error(REGISTER_USERNAME_ALREADY_IN_USE);
     }
 
-    let createdUser = new User({ username, password });
+    let createdUser = new User({ username, password, city });
     return createdUser.save();
 }
 
