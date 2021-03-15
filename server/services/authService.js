@@ -26,7 +26,7 @@ async function login(username, password) {
         throw new Error(LOGIN_FAIL);
     }
 
-    let token = jwt.sign({_id: user._id, username: user.username},SECRET);
+    let token = jwt.sign({_id: user._id, username: user.username},SECRET,{expiresIn:"1h"});
     return {_id: user._id, username:user.username, token};
 }
 
