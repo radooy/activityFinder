@@ -21,8 +21,8 @@ router.post("/register", (req,res)=>{
 router.post("/login", (req,res)=>{
     let {username, password} = req.body;
     authService.login(username,password)    
-        .then(token=>{
-            res.status(200).json({token});
+        .then(({token, _id, username})=>{
+            res.status(200).json({token, username,_id});
         })
         .catch(err=>{
             console.log(err.message);

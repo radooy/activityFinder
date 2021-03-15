@@ -1,14 +1,15 @@
 const router = require("express").Router();
 const moment = require("moment");
 const publicationService = require("../services/publicationService");
+const { isAuth } = require("../middlewares/auth");
 
-router.post("/create", (req,res)=>{
-    let { nameOfUser, sport, date } = req.body;
+router.post("/create", isAuth, (req,res)=>{
+    let { _id, nameOfUser, sport, date, description, countOfPeople, city, phoneNumber, imgUrl } = req.body;
     let dateFormated = moment(new Date(date)).format("DD.MM.YYYY hh:mm:ss");
 
-    publicationService.create(nameOfUser,sport,dateFormated)
+    publicationService.create(_id, nameOfUser, sport, dateFormated, description, countOfPeople, city, phoneNumber, imgUrl)
         .then(publication=>{
-            res.status(201).json({message : "created"})
+            res.status(201).json({_id : publication._id})
         })
         .catch(err=>{
             console.log(err.message);

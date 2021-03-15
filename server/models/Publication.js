@@ -36,7 +36,7 @@ const PublicationSchema = new mongoose.Schema({
         trim: true,
         required: [true, "Please enter description!"]
     },
-    countOfPeopleLookingFor: {
+    countOfPeople: {
         type: Number,
         required: [true, "Please select a valid number!"],
     },
@@ -62,7 +62,8 @@ const PublicationSchema = new mongoose.Schema({
                 return /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(value);
             },
             message: MONGOOSE_URL_VALIDATION
-        }
+        },
+        required: [true, "Please enter URL!"]
     },
     creator: {
         type: mongoose.Types.ObjectId,
