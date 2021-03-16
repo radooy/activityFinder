@@ -13,4 +13,16 @@ router.get("/:userid", (req,res)=>{
         })
 })
 
+router.get("/:userId/publicationsMade", (req,res)=>{
+    let userId = req.params.userId;
+    userService.getUserPublications(userId)
+        .then(pubs=>{
+            res.status(200).json({publications: pubs});
+        })
+        .catch(err=>{
+            console.log(err.message);
+            res.status(404).json({err: err.message});
+        })
+});
+
 module.exports = router;

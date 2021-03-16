@@ -12,12 +12,6 @@ function getAll(){
     return Publication.find({}).lean();
 }
 
-function getOwn(userId){
-    return Publication
-                .find({creator: userId})
-                .lean();
-}
-
 function getOne(id){
     return Publication.findById(id).lean();
 }
@@ -26,6 +20,5 @@ function getOne(id){
 module.exports = {
     create,
     getAll,
-    getOwn,
     getOne
 }
