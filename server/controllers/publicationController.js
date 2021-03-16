@@ -3,6 +3,7 @@ const moment = require("moment");
 const publicationService = require("../services/publicationService");
 const userService = require("../services/userService");
 const { isAuth } = require("../middlewares/auth");
+const User = require("../models/User");
 
 router.get("/", (req,res)=>{
     publicationService.getAll()
@@ -36,7 +37,15 @@ router.post("/create", isAuth , (req,res)=>{
 
     publicationService.create(id, nameOfUser, sport, dateFormated, description, countOfPeople, city, phoneNumber, imgUrl)
         .then(pub => {
-           res.status(201).json({_id: pub._id});
+            userService.getOne(id)
+                .then(user=>{
+                    let publicationsMade = user.publicationsMade;
+                    publicationsMade.push(pub._id);
+                    User.updateOne({_id: id},{publicationsMade})
+                    .then(()=>{
+                        res.status(201).json({_id: pub._id});
+                    });
+                });
         })
         .catch(err => {
             console.log(err.message);
