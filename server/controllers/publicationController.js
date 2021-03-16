@@ -53,4 +53,26 @@ router.post("/create", isAuth , (req,res)=>{
         });
 });
 
+router.delete("/:id", isAuth, (req,res)=>{
+    let id = req.params.id;
+    let userId = req.user.id;
+
+    publicationService.removeOne(id)
+        .then(()=>{
+            userService.getOne(userId)
+                .then(user=>{
+                    let publicationsMade = user.publicationsMade;
+                    let index = publicationsMade.indexOf(id);
+                    publicationsMade.splice(index,1);
+                    User.updateOne({_id: userId},{publicationsMade})
+                        .then(()=>{
+                            res.status(200).json({message: "deleted"})
+                        });
+                });
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+})
+
 module.exports = router;

@@ -16,9 +16,14 @@ function getOne(id){
     return Publication.findById(id).lean();
 }
 
+function removeOne(id){
+    return Publication.findByIdAndRemove(id);
+}
+
 
 module.exports = {
     create,
     getAll,
-    getOne
+    getOne,
+    removeOne
 }
