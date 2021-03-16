@@ -8,6 +8,24 @@ function create(_id, nameOfUser, sport, date, description, countOfPeople, city, 
     return publication.save();
 }
 
+function getAll(){
+    return Publication.find({}).lean();
+}
+
+function getOwn(userId){
+    return Publication
+                .find({creator: userId})
+                .lean();
+}
+
+function getOne(id){
+    return Publication.findById(id).lean();
+}
+
+
 module.exports = {
-    create
+    create,
+    getAll,
+    getOwn,
+    getOne
 }
