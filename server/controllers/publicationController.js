@@ -5,6 +5,7 @@ const userService = require("../services/userService");
 const { isAuth } = require("../middlewares/auth");
 const User = require("../models/User");
 
+//GET ALL
 router.get("/", (req,res)=>{
     publicationService.getAll()
         .then(pubs=>{
@@ -16,6 +17,7 @@ router.get("/", (req,res)=>{
         })
 });
 
+//GET ONE
 router.get("/:id", (req,res)=>{
         let id = req.params.id;
     publicationService.getOne(id)
@@ -24,11 +26,11 @@ router.get("/:id", (req,res)=>{
         })
         .catch(err=>{
             console.log(err.message);
-            res.status(404).json({err: err.message});
+            res.status(404).json({err: "Publication not found!"});
         });
 });
 
-
+//CREATE
 router.post("/create", isAuth , (req,res)=>{
     let id = req.user.id;
     
@@ -53,6 +55,7 @@ router.post("/create", isAuth , (req,res)=>{
         });
 });
 
+//DELETE
 router.delete("/:id", isAuth, (req,res)=>{
     let id = req.params.id;
     let userId = req.user.id;
@@ -72,7 +75,22 @@ router.delete("/:id", isAuth, (req,res)=>{
         })
         .catch(err=>{
             console.log(err);
+            res.status(409).json({message: "cannot delete resource"})
         })
+});
+
+//EDIT
+router.patch("/:id", isAuth, (req,res)=>{
+    let id = req.params.id;
+    let { nameOfUser, sport, date, description, countOfPeople, city, phoneNumber, imgUrl } = req.body;
+    publicationService.updateOne(id, nameOfUser, sport, date, description, countOfPeople, city, phoneNumber, imgUrl)
+        .then(()=>{
+            res.status(200).json({message: "updated successfully"})
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(409).json({message: "cannot update resource"})
+        });
 })
 
 module.exports = router;

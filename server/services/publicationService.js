@@ -20,10 +20,15 @@ function removeOne(id){
     return Publication.findByIdAndRemove(id);
 }
 
+function updateOne(id, nameOfUser, sport, date, description, countOfPeople, city, phoneNumber, imgUrl){
+    return Publication.findByIdAndUpdate(id, {nameOfUser, sport, date, description, countOfPeople, city, phoneNumber, imgUrl});
+}
+
 
 module.exports = {
     create,
     getAll,
     getOne,
-    removeOne
+    removeOne,
+    updateOne
 }

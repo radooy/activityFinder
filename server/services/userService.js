@@ -3,9 +3,6 @@ const Publication = require("../models/Publication");
 
 async function getOne(_id) {
     let user = await User.findById(_id);
-    if (user===null) {
-        throw new Error("User not found!")
-    }
     return user;
 }
 
@@ -15,7 +12,12 @@ function getUserPublications(userId){
                 .lean();
 }
 
+function remove(userId){
+    return User.findByIdAndRemove(userId);
+}
+
 module.exports = {
     getOne,
-    getUserPublications
+    getUserPublications,
+    remove
 }

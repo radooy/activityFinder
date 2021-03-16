@@ -36,10 +36,6 @@ const UserSchema = new mongoose.Schema({
     publicationsMade: [{
         type: mongoose.Types.ObjectId,
         ref: "Publication"
-    }],
-    publicationsAppliedFor: [{
-        type: mongoose.Types.ObjectId,
-        ref: "Publication"
     }]
 });
 
