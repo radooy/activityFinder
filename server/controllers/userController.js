@@ -25,4 +25,16 @@ router.get("/:userId/publicationsMade", (req,res)=>{
         })
 });
 
+router.delete("/:userId/delete", (req,res)=>{
+    let userId = req.params.userId;
+    userService.remove(userId)  
+        .then(()=>{
+            res.status(200).json({message: "User deleted successfully"});
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(409).json({message: "Cannot delete user"})
+        })
+})
+
 module.exports = router;
