@@ -34,10 +34,10 @@ router.get("/:id", (req,res)=>{
 router.post("/create", isAuth , (req,res)=>{
     let id = req.user.id;
     
-    let { nameOfUser, sport, date, description, countOfPeople, city, phoneNumber, imgUrl } = req.body;
+    let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
     let dateFormated = moment(new Date(date)).format("DD.MM.YYYY hh:mm:ss");
 
-    publicationService.create(id, nameOfUser, sport, dateFormated, description, countOfPeople, city, phoneNumber, imgUrl)
+    publicationService.create(id, nameOfUser, sport, dateFormated, description, peopleNeeded, city, phoneNumber, imgUrl)
         .then(pub => {
             userService.getOne(id)
                 .then(user=>{
@@ -82,8 +82,8 @@ router.delete("/:id", isAuth, (req,res)=>{
 //EDIT
 router.patch("/:id", isAuth, (req,res)=>{
     let id = req.params.id;
-    let { nameOfUser, sport, date, description, countOfPeople, city, phoneNumber, imgUrl } = req.body;
-    publicationService.updateOne(id, nameOfUser, sport, date, description, countOfPeople, city, phoneNumber, imgUrl)
+    let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
+    publicationService.updateOne(id, nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl)
         .then(()=>{
             res.status(200).json({message: "updated successfully"})
         })
@@ -91,6 +91,20 @@ router.patch("/:id", isAuth, (req,res)=>{
             console.log(err);
             res.status(409).json({message: "cannot update resource"})
         });
-})
+});
+
+//INCREASE COUNT OF PEOPLE
+router.patch("/increaseCount/:id", isAuth, (req,res)=>{
+    let id = req.params.id;
+    
+    publicationService.increaseCountOfPeopleApplied(id)
+        .then(()=>{
+            res.status(200).json({message: "Successfully applied!"})
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(409).json({err: err.message})
+        });
+});
 
 module.exports = router;

@@ -22,7 +22,7 @@ const PublicationSchema = new mongoose.Schema({
         required: true
     },
     date: {
-        type: String,
+        type: Date,
         required: [true, "Please select a date!"]
     },
     description: {
@@ -36,9 +36,13 @@ const PublicationSchema = new mongoose.Schema({
         trim: true,
         required: [true, "Please enter description!"]
     },
-    countOfPeople: {
+    peopleNeeded: {
         type: Number,
         required: [true, "Please select a valid number!"],
+    },
+    peopleApplied:{
+        type: Number,
+        default: 0
     },
     city: {
         type: String,
