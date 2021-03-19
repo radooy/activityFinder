@@ -22,7 +22,7 @@ const PublicationSchema = new mongoose.Schema({
         required: true
     },
     date: {
-        type: Date,
+        type: String,
         required: [true, "Please select a date!"]
     },
     description: {

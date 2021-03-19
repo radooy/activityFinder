@@ -33,8 +33,9 @@ router.get("/:id", (req,res)=>{
 //CREATE
 router.post("/create", isAuth , (req,res)=>{
     let id = req.user.id;
-    
     let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
+    
+
     let dateFormated = moment(new Date(date)).format("DD.MM.YYYY hh:mm:ss");
 
     publicationService.create(id, nameOfUser, sport, dateFormated, description, peopleNeeded, city, phoneNumber, imgUrl)
@@ -69,13 +70,13 @@ router.delete("/:id", isAuth, (req,res)=>{
                     publicationsMade.splice(index,1);
                     User.updateOne({_id: userId},{publicationsMade})
                         .then(()=>{
-                            res.status(200).json({message: "deleted"})
+                            res.status(200).json({message: "Successfully deleted!"})
                         });
                 });
         })
         .catch(err=>{
             console.log(err);
-            res.status(409).json({message: "cannot delete resource"})
+            res.status(409).json({message: "Cannot delete current resource!"})
         })
 });
 
@@ -85,11 +86,11 @@ router.patch("/:id", isAuth, (req,res)=>{
     let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
     publicationService.updateOne(id, nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl)
         .then(()=>{
-            res.status(200).json({message: "updated successfully"})
+            res.status(200).json({message: "Updated successfully!"})
         })
         .catch(err=>{
             console.log(err);
-            res.status(409).json({message: "cannot update resource"})
+            res.status(409).json({message: "Cannot update current resource!"})
         });
 });
 
