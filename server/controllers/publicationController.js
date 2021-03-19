@@ -95,7 +95,7 @@ router.patch("/:id", isAuth, (req,res)=>{
 });
 
 //INCREASE COUNT OF PEOPLE
-router.patch("/increaseCount/:id", isAuth, (req,res)=>{
+router.patch("/:id/increaseCount", isAuth, (req,res)=>{
     let id = req.params.id;
     
     publicationService.increaseCountOfPeopleApplied(id)
