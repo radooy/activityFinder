@@ -9,7 +9,7 @@ router.get("/:userid", (req,res)=>{
         })
         .catch(err=>{
             console.log(err.message);
-            res.status(404).json({err: "User not found!"});
+            res.status(404).json({message: "User not found!"});
         })
 })
 
@@ -21,7 +21,7 @@ router.get("/:userId/publicationsMade", (req,res)=>{
         })
         .catch(err=>{
             console.log(err.message);
-            res.status(404).json({err: "User or publications not found"});
+            res.status(404).json({message: "User or publications not found"});
         })
 });
 

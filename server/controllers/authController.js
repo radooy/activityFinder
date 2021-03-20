@@ -14,7 +14,7 @@ router.post("/register", (req,res)=>{
         })
         .catch(err=>{
             console.log(err.message);
-            res.status(409).json({err: err.message});
+            res.status(409).json({message: err.message});
         });
 });
 
@@ -27,7 +27,7 @@ router.post("/login", (req,res)=>{
         })
         .catch(err=>{
             console.log(err.message);
-            res.status(401).json({err: err.message});
+            res.status(401).json({message: err.message});
         });
 })
 

@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
         })
         .catch(err => {
             console.log(err.message);
-            res.status(404).json({ err: err.message });
+            res.status(404).json({ message: err.message });
         })
 });
 
@@ -26,7 +26,7 @@ router.get("/:id", (req, res) => {
         })
         .catch(err => {
             console.log(err.message);
-            res.status(404).json({ err: "Publication not found!" });
+            res.status(404).json({ message: "Publication not found!" });
         });
 });
 
@@ -52,7 +52,7 @@ router.post("/create", isAuth, (req, res) => {
         })
         .catch(err => {
             console.log(err.message);
-            res.status(409).json({ err: err.message });
+            res.status(409).json({ message: err.message });
         });
 });
 
@@ -81,14 +81,14 @@ router.delete("/:id", isAuth, async (req, res) => {
                 })
                 .catch(err => {
                     console.log(err);
-                    res.status(409).json({ err: err.message })
+                    res.status(409).json({ message: err.message })
                 })
         } else {
             res.status(401).json({ message: "You are not allowed to delete current resource!" })
         }
 
     } catch (error) {
-        res.status(409).json({ message: "Cannot delete current resource!" });
+        res.status(400).json({ message: "Resource not found!" });
     }
 
 
@@ -127,7 +127,7 @@ router.patch("/:id/apply", isAuth, (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(409).json({ err: err.message })
+            res.status(409).json({ message: err.message })
         });
 });
 
