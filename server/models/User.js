@@ -36,6 +36,10 @@ const UserSchema = new mongoose.Schema({
     publicationsMade: [{
         type: mongoose.Types.ObjectId,
         ref: "Publication"
+    }],
+    publicationsJoined:[{
+        type: mongoose.Types.ObjectId,
+        ref: "Publication"
     }]
 });
 

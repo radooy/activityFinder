@@ -40,10 +40,6 @@ const PublicationSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please select a valid number!"],
     },
-    peopleApplied:{
-        type: Number,
-        default: 0
-    },
     city: {
         type: String,
         enum: cities,
@@ -69,6 +65,10 @@ const PublicationSchema = new mongoose.Schema({
         },
         required: [true, "Please enter URL!"]
     },
+    peopleApplied:[{
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }],
     creator: {
         type: mongoose.Types.ObjectId,
         ref: "User"

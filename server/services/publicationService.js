@@ -24,17 +24,29 @@ function updateOne(id, nameOfUser, sport, date, description, peopleNeeded, city,
     return Publication.findByIdAndUpdate(id, {nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl});
 }
 
-async function increaseCountOfPeopleApplied(id){
-    let pub= await getOne(id);
+async function applyUser(pubId, userId){
+    let pub = await getOne(pubId);
 
-    if (Number(pub.peopleApplied) === Number(pub.peopleNeeded)) {
+    if (String(pub.creator)===String(userId)) {
+        throw new Error("Creator isn't allowed to join his own publication!");
+    }
+
+    let countOfAppliedPeople = pub.peopleApplied.length;
+    if (countOfAppliedPeople === Number(pub.peopleNeeded)) {
         throw new Error("Max number of people applied for this publication is already reached!");
     }
 
-    let currentPeopleApllied = Number(pub.peopleApplied)+1;
+    let mapped = pub.peopleApplied.map(user=>user.toString()); // needed for includes check, because mongodb doesnt work as expected with array.prototype.includes(mongoId)
 
-    return Publication.findByIdAndUpdate(id, {peopleApplied: currentPeopleApllied});
+    if (mapped.includes(userId)) {
+        throw new Error("You have already applied for this publication!");
+    }
 
+    let currentPeopleApllied = pub.peopleApplied;
+
+    currentPeopleApllied.push(userId);
+
+    return Publication.findByIdAndUpdate(pubId, {peopleApplied: currentPeopleApllied});
 }
 
 
@@ -44,5 +56,5 @@ module.exports = {
     getOne,
     removeOne,
     updateOne,
-    increaseCountOfPeopleApplied
+    applyUser
 }

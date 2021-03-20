@@ -21,7 +21,7 @@ function auth(req, res, next) {
     // if (tokenFromCookie) {
     //     jwt.verify(tokenFromCookie, SECRET, function(err,decoded){
     //         if (err) {
-    //             res.clearCookie("AuthCookie");
+    //             res.clearCookie("AuthCookie"); //fake cookie/token
     //         }else{
     //             req.user = decoded;
     //         }
@@ -30,8 +30,11 @@ function auth(req, res, next) {
 
         //dummy code for backend postman test
 
+        //creator = 60548fce0f44872b483a824c;
+        //applier= 6055b7a3b0630c079c6eef62;
+
         // req.user = {
-        //     id:"60548fce0f44872b483a824c",
+        //     id:"60548fce0f44872b483a824c"
         // }
     
     next();

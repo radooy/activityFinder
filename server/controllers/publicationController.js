@@ -6,105 +6,128 @@ const { isAuth } = require("../middlewares/auth");
 const User = require("../models/User");
 
 //GET ALL
-router.get("/", (req,res)=>{
+router.get("/", (req, res) => {
     publicationService.getAll()
-        .then(pubs=>{
-            res.status(200).json({publications: pubs});
+        .then(pubs => {
+            res.status(200).json({ publications: pubs });
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err.message);
-            res.status(404).json({err: err.message});
+            res.status(404).json({ err: err.message });
         })
 });
 
 //GET ONE
-router.get("/:id", (req,res)=>{
-        let id = req.params.id;
+router.get("/:id", (req, res) => {
+    let id = req.params.id;
     publicationService.getOne(id)
-        .then(pub =>{
-            res.status(200).json({publication: pub});
+        .then(pub => {
+            res.status(200).json({ publication: pub });
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err.message);
-            res.status(404).json({err: "Publication not found!"});
+            res.status(404).json({ err: "Publication not found!" });
         });
 });
 
 //CREATE
-router.post("/create", isAuth , (req,res)=>{
+router.post("/create", isAuth, (req, res) => {
     let id = req.user.id;
     let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
-    
+
 
     let dateFormated = moment(new Date(date)).format("DD.MM.YYYY hh:mm:ss");
 
     publicationService.create(id, nameOfUser, sport, dateFormated, description, peopleNeeded, city, phoneNumber, imgUrl)
         .then(pub => {
             userService.getOne(id)
-                .then(user=>{
+                .then(user => {
                     let publicationsMade = user.publicationsMade;
                     publicationsMade.push(pub._id);
-                    User.updateOne({_id: id},{publicationsMade})
-                    .then(()=>{
-                        res.status(201).json({_id: pub._id});
-                    });
+                    User.updateOne({ _id: id }, { publicationsMade })
+                        .then(() => {
+                            res.status(201).json({ _id: pub._id });
+                        });
                 });
         })
         .catch(err => {
             console.log(err.message);
-            res.status(409).json({err: err.message});
+            res.status(409).json({ err: err.message });
         });
 });
 
 //DELETE
-router.delete("/:id", isAuth, (req,res)=>{
+router.delete("/:id", isAuth, async (req, res) => {
     let id = req.params.id;
     let userId = req.user.id;
+    try {
+        let pub = await publicationService.getOne(id);
+        let creator = String(pub.creator);
 
-    publicationService.removeOne(id)
-        .then(()=>{
-            userService.getOne(userId)
-                .then(user=>{
-                    let publicationsMade = user.publicationsMade;
-                    let index = publicationsMade.indexOf(id);
-                    publicationsMade.splice(index,1);
-                    User.updateOne({_id: userId},{publicationsMade})
-                        .then(()=>{
-                            res.status(200).json({message: "Successfully deleted!"})
+        console.log(String(userId) === creator);
+        if (String(userId) === creator) {
+            publicationService.removeOne(id)
+                .then(() => {
+                    userService.getOne(userId)
+                        .then(user => {
+                            let publicationsMade = user.publicationsMade;
+                            let index = publicationsMade.indexOf(id);
+                            publicationsMade.splice(index, 1);
+                            User.updateOne({ _id: userId }, { publicationsMade })
+                                .then(() => {
+                                    res.status(200).json({ message: "Successfully deleted!" })
+                                });
                         });
-                });
-        })
-        .catch(err=>{
-            console.log(err);
-            res.status(409).json({message: "Cannot delete current resource!"})
-        })
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(409).json({ err: err.message })
+                })
+        } else {
+            res.status(401).json({ message: "You are not allowed to delete current resource!" })
+        }
+
+    } catch (error) {
+        res.status(409).json({ message: "Cannot delete current resource!" });
+    }
+
+
 });
 
 //EDIT
-router.patch("/:id", isAuth, (req,res)=>{
+router.patch("/:id", isAuth, (req, res) => {
     let id = req.params.id;
     let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
     publicationService.updateOne(id, nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl)
-        .then(()=>{
-            res.status(200).json({message: "Updated successfully!"})
+        .then(() => {
+            res.status(200).json({ message: "Updated successfully!" })
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err);
-            res.status(409).json({message: "Cannot update current resource!"})
+            res.status(409).json({ message: "Cannot update current resource!" })
         });
 });
 
 //INCREASE COUNT OF PEOPLE
-router.patch("/:id/apply", isAuth, (req,res)=>{
+router.patch("/:id/apply", isAuth, (req, res) => {
     let id = req.params.id;
-    
-    publicationService.increaseCountOfPeopleApplied(id)
-        .then(()=>{
-            res.status(200).json({message: "Successfully applied!"})
+    let userId = req.user.id;
+
+    publicationService.applyUser(id, userId)
+        .then(() => {
+            userService.getOne(userId)
+                .then(user => {
+                    let publicationsJoined = user.publicationsJoined;
+                    publicationsJoined.push(id);
+                    User.updateOne({ _id: userId }, { publicationsJoined })
+                        .then(() => {
+                            res.status(200).json({ message: "Successfully applied for publication!" })
+                        });
+                });
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err);
-            res.status(409).json({err: err.message})
+            res.status(409).json({ err: err.message })
         });
 });
 
