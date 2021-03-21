@@ -10,8 +10,8 @@ class Header extends React.Component{
             <header>
                 some header here
             </header>
-        )
-    }
+        );
+    };
 }
 
-export default Header
+export default Header;
