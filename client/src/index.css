@@ -7,4 +7,12 @@
 body {
   margin: 0;
   font-family: "Comfortaa", 'Comic Sans MS', cursive;
+  background: linear-gradient(to right ,rgb(216, 213, 213), #312e30 );
+}
+
+.site-wrapper{
+  margin:auto;
+  width: 100%;
+  max-width: 95%;
+  background-color: transparent;
 }
