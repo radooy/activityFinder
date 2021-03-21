@@ -84,7 +84,7 @@ router.delete("/:id", isAuth, async (req, res) => {
                     res.status(409).json({ message: err.message })
                 })
         } else {
-            res.status(401).json({ message: "You are not allowed to delete current resource!" })
+            res.status(401).json({ message: "You are not allowed to delete current resource!" });
         }
 
     } catch (error) {
@@ -95,17 +95,37 @@ router.delete("/:id", isAuth, async (req, res) => {
 });
 
 //EDIT
-router.patch("/:id", isAuth, (req, res) => {
+router.patch("/:id", isAuth, async (req, res) => {
     let id = req.params.id;
-    let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
-    publicationService.updateOne(id, nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl)
-        .then(() => {
-            res.status(200).json({ message: "Updated successfully!" })
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(409).json({ message: "Cannot update current resource!" })
-        });
+    let userId = req.user.id;
+
+    try {
+        let pub = await publicationService.getOne(id);
+        let creator = String(pub.creator);
+
+        console.log(String(userId) === creator);
+
+        console.log(String(userId));
+        console.log(creator);
+        if (String(userId) === creator) {
+            let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
+            publicationService.updateOne(id, nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl)
+                .then(() => {
+                    res.status(200).json({ message: "Updated successfully!" })
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(409).json({ message: "Cannot update current resource!" })
+                });
+        }else{
+            res.status(401).json({ message: "You are not allowed to edit current resource!" })
+        }
+
+    } catch (error) {
+        res.status(400).json({ message: "Resource not found!" });
+    }
+
+
 });
 
 //INCREASE COUNT OF PEOPLE
