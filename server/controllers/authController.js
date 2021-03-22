@@ -21,9 +21,9 @@ router.post("/register", (req,res)=>{
 router.post("/login", (req,res)=>{
     let {username, password} = req.body;
     authService.login(username,password)    
-        .then(({token, _id, username, city})=>{
+        .then(({token, id, username, city})=>{
             res.cookie("AuthCookie", token,{httpOnly:true});
-            res.status(200).json({token, username, _id, city}); //if needed for client localStorage
+            res.status(200).json({token, username, id, city}); //if needed for client localStorage
         })
         .catch(err=>{
             console.log(err.message);
