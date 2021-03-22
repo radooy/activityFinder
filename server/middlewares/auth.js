@@ -30,11 +30,11 @@ function auth(req, res, next) {
 
         //dummy code for backend postman test
 
-        //creator = 60548fce0f44872b483a824c;
+        //creator = 60590002d8dba21e689d2f9c;
         //applier= 6055b7a3b0630c079c6eef62;
 
         // req.user = {
-        //     id:"60548fce0f44872b483a824c"
+        //     id:"60590002d8dba21e689d2f9c"
         // }
     
     next();
