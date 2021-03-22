@@ -16,10 +16,10 @@ class Header extends React.Component{
         fetch("http://localhost:5000/api/utils/cities")
         .then(res => res.json())
         .then((data) => {
-          this.setState({ cities: data })
-          console.log(data);
+          this.setState({ cities: data.cities })
+          console.log(data.cities);
         })
-        .catch(console.log)
+        .catch(err=>console.log(err));
       }
 
     render(){
