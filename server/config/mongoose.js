@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const { DB_URI } = require("./config");
+const { ATLAS_DB_URI } = require("./config");
 
-mongoose.connect(DB_URI, {
+mongoose.connect(ATLAS_DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

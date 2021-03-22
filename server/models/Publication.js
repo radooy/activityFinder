@@ -38,7 +38,9 @@ const PublicationSchema = new mongoose.Schema({
     },
     peopleNeeded: {
         type: Number,
-        required: [true, "Please select a valid number!"],
+        minValue: 1,
+        maxValue: 20,
+        required: [true, "Please select a valid number in range from 1 to 20!"],
     },
     city: {
         type: String,
