@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
+
+const IntroContainer = styled.div`
+    margin:50px 0;
+`
+
 const Heading = styled.h1`
+    font-family: 'Audiowide', cursive;
     text-align:center;
+    font-size: 50px;
 `;
 
 const Paragraph = styled.p`
@@ -24,6 +31,7 @@ const Paragraph = styled.p`
 
 
 export {
+    IntroContainer,
     Heading,
     Paragraph
 }
