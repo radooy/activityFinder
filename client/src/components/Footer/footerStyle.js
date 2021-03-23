@@ -5,7 +5,7 @@ const StyledFooter = styled.footer`
     text-align:center;
     display:flex;
     justify-content:space-around;
-
+    margin-bottom: 20px;
 
 
     .footer-link{
