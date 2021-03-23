@@ -8,13 +8,14 @@ const IntroContainer = styled.div`
 const Heading = styled.h1`
     font-family: 'Audiowide', cursive;
     text-align:center;
-    font-size: 50px;
+    font-size: 70px;
 `;
 
 const Paragraph = styled.p`
     text-align:center;
+    font-size:20px;
     font-weight:500;
-    max-width:50%;
+    max-width:60%;
     margin:auto;
     color:#e9e9e9;
 
@@ -22,7 +23,7 @@ const Paragraph = styled.p`
 
 
     .paragraph-link{
-    text-decoration:none;
+    text-decoration:underline;
     font-weight:900;
     color:black;
 }

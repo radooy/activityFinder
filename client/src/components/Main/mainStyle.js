@@ -15,7 +15,7 @@ const ContentWrapper = styled.div`
     .guest-page-image{
         max-width:100%;
         border-radius:10px;
-        opacity:70%;
+        opacity:85%;
     }
 `;
 
