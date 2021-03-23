@@ -5,6 +5,16 @@ const StyledFooter = styled.footer`
     text-align:center;
     display:flex;
     justify-content:space-around;
+
+
+
+    .footer-link{
+        text-decoration:none;
+        color:white;
+        &:hover{
+        color:black;
+    }
+    }
 `;
 
 export default StyledFooter;

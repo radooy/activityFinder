@@ -1,5 +1,6 @@
 import React from "react";
-import {StyledHeader, StyledUl, StyledLi, Logo } from "./headerStyle"
+import { Link } from "react-router-dom";
+import {StyledHeader, StyledUl, StyledLi, Logo } from "./headerStyle";
 
 class Header extends React.Component{
     constructor(props){
@@ -26,10 +27,10 @@ class Header extends React.Component{
         return (
             /* Will be transformed to Link To */
             <StyledHeader>
-                <Logo src="https://i.postimg.cc/65Jr9g81/dark-logo-transparent.png" alt="Activity-Finder"/>
+                <Link to="/" className = "logo"><Logo src="https://i.postimg.cc/65Jr9g81/dark-logo-transparent.png" alt="Activity-Finder"/></Link>
                 <StyledUl>
-                    <StyledLi>Register</StyledLi> 
-                    <StyledLi>Login</StyledLi>
+                    <Link to="/register" className="auth-link"> <StyledLi>Register</StyledLi> </Link>
+                    <Link to="/login" className="auth-link"> <StyledLi>Login</StyledLi> </Link>
                 </StyledUl>
             </StyledHeader>
         );
