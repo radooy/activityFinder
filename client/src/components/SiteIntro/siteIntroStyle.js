@@ -1,5 +1,14 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 
+const fadeIn = keyframes`
+    0%{
+         opacity: 0;
+    }
+
+   100%{
+        opacity: 1;
+    }
+`
 
 const IntroContainer = styled.div`
     margin:50px 0;
@@ -29,10 +38,21 @@ const Paragraph = styled.p`
 }
 `;
 
+const Article = styled.article`
+    font-size: 32px;
+    text-align:center;
+    color:whitesmoke;
+    padding: 5px 20px;
+    text-shadow: 2px 2px #000000;
+    animation-name: ${fadeIn};
+    animation-duration: 3s;
+`
+
 
 
 export {
     IntroContainer,
     Heading,
-    Paragraph
+    Paragraph,
+    Article
 }
