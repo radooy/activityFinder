@@ -23,6 +23,19 @@ class Register extends Component {
 
     onSubmitHandler(e) {
         e.preventDefault();
+        fetch("http://localhost:5000/api/auth/register",{
+            method:"POST",
+            headers: {
+                'Content-Type':'application/json',
+              },
+            body: JSON.stringify({username: this.state.username, password:this.state.password, rePassword:this.state.rePassword,city: this.state.city})
+        }).then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
 
 
