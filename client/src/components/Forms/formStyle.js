@@ -1,9 +1,21 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+
+const slideFromRight = keyframes`
+    0%{
+        transform: translateX(100%);
+    }
+
+    100%{
+        transform: translateX(0);
+    }
+`
 
 const Wrapper = styled.div`
     margin: 0 auto;
     border-radius: 10px;
     padding: 0 30%;
+    animation-name:${slideFromRight};
+    animation-duration:2s;
 `
 
 const Heading = styled.h2`
