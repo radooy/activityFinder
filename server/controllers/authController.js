@@ -8,12 +8,11 @@ router.post("/register", (req,res)=>{
         return;
     }
 
-    authService.register(username,password, city)
+    authService.register(username, password, city)
         .then(createduser=>{
             res.status(201).json({_id: createduser._id});
         })
         .catch(err=>{
-            console.log(err.message);
             res.status(409).json({message: err.message});
         });
 });
