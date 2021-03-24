@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         validate:{
             validator: function(value){
-                return /^[a-z0-9._-]{4,16}$/.test(value);
+                return /^[a-z0-9._-]{4,20}$/.test(value);
             },
             message: MONGOOSE_USERNAME_VALIDATION
         },
