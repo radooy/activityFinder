@@ -1,4 +1,14 @@
-import styled from "styled-components";
+import styled , {keyframes} from "styled-components";
+
+const slideFromLeft = keyframes`
+    0%{
+        transform: translateX(-100%);
+    }
+
+    100%{
+        transform: translateX(0);
+    }
+`
 
 const MainContainer = styled.div`
     margin: 20px 0;
@@ -15,6 +25,8 @@ const ContentWrapper = styled.div`
         max-width:100%;
         border-radius:10px;
         opacity:85%;
+        animation-name: ${slideFromLeft};
+        animation-duration:2s;
     }
 `;
 
