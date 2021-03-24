@@ -4,7 +4,7 @@ const routes = require("../routes");
 const { auth } = require("../middlewares/auth");
 
 function setUp(app) {
-
+    app.use(express.urlencoded({extended:true}));
     app.use(express.json());
     app.use(cors());
 
