@@ -1,5 +1,6 @@
 import { Component } from "react";
-import { Wrapper, Heading, Form, Input, Submit, Label, Select } from "./formStyle"
+import { Redirect } from "react-router-dom"
+import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle"
 
 class Register extends Component {
     constructor(props) {
@@ -9,8 +10,9 @@ class Register extends Component {
             username: "",
             password: "",
             rePassword: "",
-            city: "",
-            cities: []
+            city: "Sofia",
+            cities: [],
+            redirect: null
         }
     }
 
@@ -24,21 +26,26 @@ class Register extends Component {
     onSubmitHandler(e) {
         e.preventDefault();
 
-        fetch("http://localhost:5000/api/auth/register",{
-            method:"POST",
+        fetch("http://localhost:5000/api/auth/register", {
+            method: "POST",
             headers: {
-                'Content-Type':'application/json',
-              },
-            body: JSON.stringify({username: this.state.username, password:this.state.password, rePassword:this.state.rePassword,city: this.state.city})
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: this.state.username, password: this.state.password, rePassword: this.state.rePassword, city: this.state.city })
         })
-        .then(response => response.json())
-        .then(data => {
-            if(data.message) throw data.message;
-          console.log('Success:', data);
-        })
-        .catch(err => {
-          console.log('Error:', err);
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) throw data.message;
+                console.log('Success:', data);
+                this.setState({
+                    ...this.state,
+                    redirect: "/login"
+                });
+
+            })
+            .catch(err => {
+                console.log('Error:', err);
+            });
     }
 
 
@@ -53,9 +60,13 @@ class Register extends Component {
 
 
     render() {
+        if (this.state.redirect) {
+
+            return <Redirect to={this.state.redirect} />
+
+        }
         return (
             <Wrapper>
-                <Heading>Register:</Heading>
                 <Form onSubmit={this.onSubmitHandler.bind(this)}>
                     <Label htmlFor="username">Username:</Label>
                     <Input type="text" name="username" id="username" onChange={this.onChangeHandler.bind(this)} />
@@ -67,7 +78,7 @@ class Register extends Component {
                     <Select name="city" id="city" onChange={this.onChangeHandler.bind(this)}>
                         {this.state.cities.map((city) => <option key={city}> {city} </option>)}
                     </Select>
-                    <Submit value="Register" />
+                    <Submit value="Join us" />
                 </Form>
             </Wrapper>
         );

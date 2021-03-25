@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Wrapper, Heading, Form, Input, Submit, Label } from "./formStyle"
+import { Wrapper, Form, Input, Submit, Label } from "./formStyle"
 
 class Login extends Component {
     constructor(props) {
@@ -40,7 +40,7 @@ class Login extends Component {
     render() {
         return (
             <Wrapper>
-                <Heading>Already got an account? Login from here:</Heading>
+                
                 <Form onSubmit={this.onSubmitHandler.bind(this)}>
                     <Label htmlFor="username">Username:</Label>
                     <Input type="text" name="username" id="username" onChange={this.onChangeHandler.bind(this)}/>
