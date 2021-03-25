@@ -20,6 +20,21 @@ class Login extends Component {
 
     onSubmitHandler(e){
         e.preventDefault();
+        fetch("http://localhost:5000/api/auth/login",{
+            method:"POST",
+            headers: {
+                'Content-Type':'application/json',
+              },
+            body: JSON.stringify({username: this.state.username, password:this.state.password})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.message) throw data.message;
+          console.log('Success:', data);
+        })
+        .catch(err => {
+          console.log('Error:', err);
+        });
     }
 
     render() {
