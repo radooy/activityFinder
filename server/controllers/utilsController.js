@@ -8,6 +8,6 @@ router.get("/cities", (req,res)=>{
 
 router.get("/sports", (req,res)=>{
     res.status(200).json({sports});
-})
+});
 
 module.exports = router;

@@ -4,7 +4,7 @@ const authService = require("../services/authService");
 router.post("/register", (req,res)=>{
     let {username, password, rePassword, city} = req.body;
     if (password!==rePassword) {
-        res.status(409).json({err: "Password and Repeat Password fields should match!"});
+        res.status(409).json({message: "Password and Repeat Password fields should match!"});
         return;
     }
 
