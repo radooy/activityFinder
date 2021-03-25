@@ -23,18 +23,21 @@ class Register extends Component {
 
     onSubmitHandler(e) {
         e.preventDefault();
+
         fetch("http://localhost:5000/api/auth/register",{
             method:"POST",
             headers: {
                 'Content-Type':'application/json',
               },
             body: JSON.stringify({username: this.state.username, password:this.state.password, rePassword:this.state.rePassword,city: this.state.city})
-        }).then(response => response.json())
+        })
+        .then(response => response.json())
         .then(data => {
+            if(data.message) throw data.message;
           console.log('Success:', data);
         })
-        .catch((error) => {
-          console.error('Error:', error);
+        .catch(err => {
+          console.log('Error:', err);
         });
     }
 
@@ -44,7 +47,6 @@ class Register extends Component {
             .then(res => res.json())
             .then((data) => {
                 this.setState({ cities: data.cities })
-                console.log(data.cities);
             })
             .catch(err => console.log(err));
     }
