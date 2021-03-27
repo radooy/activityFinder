@@ -1,12 +1,16 @@
 import { Switch, Route } from "react-router-dom";
-import SiteIntroHead from "../../SiteIntro/SiteIntroHead";
-import SiteIntroBody from "../../SiteIntro/SiteIntroBody";
+import SiteIntroHead from "./SiteIntro/SiteIntroHead";
+import SiteIntroBody from "./SiteIntro/SiteIntroBody";
 import Login from "../../Forms/Login";
 import Register from "../../Forms/Register";
+import About from "../../About/About"
 import { ContentWrapper } from "./guestStyle"
 
 const GuestPage = () => {
     return (
+
+        //Header
+
     <>
         <SiteIntroHead />
         <ContentWrapper>
@@ -15,9 +19,12 @@ const GuestPage = () => {
                 <Route exact path="/" component={SiteIntroBody} />
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
+                <Route path="/about" component={About}/>
             </Switch>
         </ContentWrapper>
     </>
+
+        //Footer
     );
 
 }
