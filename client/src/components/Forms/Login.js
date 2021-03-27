@@ -16,7 +16,7 @@ class Login extends Component {
     onChangeHandler(e) {
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value.toLowerCase()
         })
     }
 
@@ -27,7 +27,7 @@ class Login extends Component {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username: this.state.username, password: this.state.password })
+            body: JSON.stringify({ username: this.state.username.toLowerCase(), password: this.state.password })
         })
             .then(response => response.json())
             .then(data => {

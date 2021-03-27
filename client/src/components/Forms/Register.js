@@ -31,7 +31,7 @@ class Register extends Component {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username: this.state.username, password: this.state.password, rePassword: this.state.rePassword, city: this.state.city })
+            body: JSON.stringify({ username: this.state.username.toLowerCase(), password: this.state.password, rePassword: this.state.rePassword, city: this.state.city })
         })
             .then(response => response.json())
             .then(data => {
@@ -44,7 +44,7 @@ class Register extends Component {
 
             })
             .catch(err => {
-                console.log('Error:', err);
+                console.log(err);
             });
     }
 
