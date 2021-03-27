@@ -15,17 +15,20 @@ const StyledUl = styled.ul`
     list-style-type: none;
     display:flex;
     flex-wrap:wrap;
+
     .header-link{
         text-decoration:none;
         font-size:20px;
     }
-
 `
 const StyledLi= styled.li`
     margin:0 20px;
     color:#e9e9e9;
+    text-shadow: 2px 2px #000000;
     &:hover{
         color:black;
+        font-size:21px;
+        text-shadow: none;
     }
 `
 
