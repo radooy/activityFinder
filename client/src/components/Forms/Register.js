@@ -76,7 +76,7 @@ class Register extends Component {
                     <Input type="password" name="rePassword" id="rePassword" onChange={this.onChangeHandler.bind(this)} />
                     <Label htmlFor="city">Choose your city:</Label>
                     <Select name="city" id="city" onChange={this.onChangeHandler.bind(this)}>
-                        {this.state.cities.map((city) => <option key={city}> {city} </option>)}
+                        {this.state.cities.map((city) => <option key={city} value={city}> {city} </option>)}
                     </Select>
                     <Submit value="Join us" />
                 </Form>
