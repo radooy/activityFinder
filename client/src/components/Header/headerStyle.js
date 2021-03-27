@@ -15,7 +15,7 @@ const StyledUl = styled.ul`
     list-style-type: none;
     display:flex;
     flex-wrap:wrap;
-    .auth-link{
+    .header-link{
         text-decoration:none;
         font-size:20px;
     }

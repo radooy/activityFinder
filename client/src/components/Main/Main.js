@@ -1,20 +1,23 @@
 import { MainContainer } from "./mainStyle";
 import Guest from "./Guest/Guest";
+import User from "./User/User"
 
 const Main = () => {
-    
+    let loggedIn = true;
     return (
         <MainContainer>
-
+        
         {/* If not logged in */}
-            <Guest/>
+
+            {!loggedIn && <Guest/>}
+
         {/* /If not logged in */}
 
 
 
         {/* If logged in */}
 
-            {/* User view here */}
+            {loggedIn && <User/>}
 
         {/* /If logged in */}
 
