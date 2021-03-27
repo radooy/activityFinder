@@ -10,7 +10,7 @@ const Header = () => {
             <StyledUl>
                 {loggedIn && <>
                 <Link to="/create" className="header-link"> <StyledLi>Create a publication</StyledLi> </Link>
-                <Link to="/profile" className="header-link"> <StyledLi>My profile</StyledLi> </Link>
+                <Link to="/my-profile" className="header-link"> <StyledLi>My profile</StyledLi> </Link>
                 <Link to="/logout" className="header-link"> <StyledLi>Logout</StyledLi> </Link>
                 </>
                 }

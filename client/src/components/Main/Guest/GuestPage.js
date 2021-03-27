@@ -5,7 +5,7 @@ import Login from "../../Forms/Login";
 import Register from "../../Forms/Register";
 import { ContentWrapper } from "./guestStyle"
 
-const Guest = () => {
+const GuestPage = () => {
     return (
     <>
         <SiteIntroHead />
@@ -22,4 +22,4 @@ const Guest = () => {
 
 }
 
-export default Guest;
+export default GuestPage;

@@ -1,5 +1,5 @@
 import { MainContainer } from "./mainStyle";
-import Guest from "./Guest/Guest";
+import GuestPage from "./Guest/GuestPage";
 import User from "./User/User"
 
 const Main = () => {
@@ -9,7 +9,7 @@ const Main = () => {
         
         {/* If not logged in */}
 
-            {!loggedIn && <Guest/>}
+            {!loggedIn && <GuestPage/>}
 
         {/* /If not logged in */}
 
