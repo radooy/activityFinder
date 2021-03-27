@@ -1,8 +1,10 @@
-
+import { Wrapper, Heading } from "./aboutStyle"
 
 const About = () => {
-    return(
-        <div>About</div>
+    return (
+        <Wrapper >
+           <Heading>About Activity Finder</Heading>
+        </Wrapper>
     );
 }
 
