@@ -2,7 +2,7 @@
 
 const CreatePage = () => {
     return(
-        <div>Create</div>
+        <div>CreatePage</div>
     );
 }
 

@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Redirect } from "react-router-dom"
 import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle"
 
-class Register extends Component {
+class RegisterForm extends Component {
     constructor(props) {
         super(props)
 
@@ -85,4 +85,4 @@ class Register extends Component {
     }
 }
 
-export default Register
+export default RegisterForm
