@@ -36,7 +36,7 @@ router.post("/create", isAuth, (req, res) => {
     let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
 
 
-    let dateFormated = moment(new Date(date)).format("DD.MM.YYYY hh:mm:ss");
+    let dateFormated = moment(new Date(date)).format("DD.MM.YYYY HH:mm");
 
     publicationService.create(id, nameOfUser, sport, dateFormated, description, peopleNeeded, city, phoneNumber, imgUrl)
         .then(pub => {
