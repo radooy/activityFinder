@@ -26,6 +26,11 @@ const Heading = styled.h2`
 
 const Form = styled.form`
     display:grid;
+
+    .activity-submit{
+        max-width:150px;
+        height:30px;
+    }
 `
 
 const Input = styled.input`
