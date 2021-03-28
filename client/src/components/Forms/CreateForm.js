@@ -1,4 +1,5 @@
 import { Component } from "react"
+import {Redirect} from "react-router-dom"
 import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle"
 
 class CreateForm extends Component {
@@ -80,6 +81,9 @@ class CreateForm extends Component {
 
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to= {this.state.redirect}/>
+        }
         return (
             <Wrapper>
                 <Form onSubmit={this.onSubmitHandler.bind(this)}>
