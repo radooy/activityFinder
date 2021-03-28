@@ -1,8 +1,10 @@
-
+import CreateForm from "../../../Forms/CreateForm"
 
 const CreatePage = () => {
     return(
-        <div>CreatePage</div>
+        <div>
+            <CreateForm/>
+        </div>
     );
 }
 
