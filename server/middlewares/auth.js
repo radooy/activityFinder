@@ -34,7 +34,7 @@ function auth(req, res, next) {
         //applier= 6055b7a3b0630c079c6eef62;
 
         // req.user = {
-        //     id:"60590002d8dba21e689d2f9c"
+        //     id:"605f0dd1e6a01610f047e883"
         // }
     
     next();
