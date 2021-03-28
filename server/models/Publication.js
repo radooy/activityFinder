@@ -29,7 +29,7 @@ const PublicationSchema = new mongoose.Schema({
         type: String,
         validate:{
             validator: function(value){
-                return /^[a-zA-Z0-9 .!?"-]{8,50}$/.test(value);
+                return /^[a-zA-Z0-9 .!?"-]{8,200}$/.test(value);
             },
             message: MONGOOSE_DESC_VALIDATION
         },
@@ -61,7 +61,7 @@ const PublicationSchema = new mongoose.Schema({
         type: String,
         validate:{
             validator: function(value){
-                return /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(value);
+                return /^https?:\/\/(.*)$/.test(value);
             },
             message: MONGOOSE_URL_VALIDATION
         },
