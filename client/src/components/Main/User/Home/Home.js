@@ -1,4 +1,4 @@
-import ActivitySection from "./AcctivitiesSection/ActivitiesSection"
+import ActivitiesSection from "./AcctivitiesSection/ActivitiesSection"
 import {Wrapper, Heading} from "./homeStyle"
 
 const HomePage = () => {
@@ -9,7 +9,7 @@ const HomePage = () => {
 
         <Wrapper>
             <Heading>Activities in {cityName}</Heading>
-            <ActivitySection/>
+            <ActivitiesSection/>
         </Wrapper>
 
     );
