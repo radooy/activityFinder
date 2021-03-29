@@ -7,7 +7,6 @@ import { MainContainer } from "./mainStyle";
 const Main = () => {
     
     const userInfo = useContext(UserContext);
-    console.log(userInfo);
 
     return (
         <MainContainer>
