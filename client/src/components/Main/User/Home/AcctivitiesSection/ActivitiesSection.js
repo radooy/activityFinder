@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+import UserContext from "../../../../Context/Context";
 import Activity from "../Activity/Activity"
 import {ActivitiesWrappper} from "./activitiesSectionStyle"
 
 const ActivitiesSection = () => {
-    const [state, setState] = useState([]);
 
-    console.log(state);
+    const [state, setState] = useState([]);
+    const userInfo = useContext(UserContext);
+
     useEffect(()=>{
         fetch("http://localhost:5000/api/publications",{
             credentials:"include"
@@ -15,8 +17,11 @@ const ActivitiesSection = () => {
                 if (data.message) throw data.message;
                 setState(data.publications)
             })
-            .catch(err=>console.log(err))
-    },[])
+            .catch(err=>{
+                userInfo.logOut();
+                console.log(err)
+            })
+    },[userInfo])
 
 
     return(

@@ -1,15 +1,20 @@
-import { MainContainer } from "./mainStyle";
-import GuestPage from "./Guest/GuestPage";
+import { useContext } from "react";
+import UserContext from "../Context/Context";
 import User from "./User/User"
+import GuestPage from "./Guest/GuestPage";
+import { MainContainer } from "./mainStyle";
 
 const Main = () => {
-    let loggedIn = true;
+    
+    const userInfo = useContext(UserContext);
+    console.log(userInfo);
+
     return (
         <MainContainer>
         
         {/* If not logged in */}
 
-            {!loggedIn && <GuestPage/>}
+            {userInfo.loggedIn===false && <GuestPage/>}
 
         {/* /If not logged in */}
 
@@ -17,7 +22,7 @@ const Main = () => {
 
         {/* If logged in */}
 
-            {loggedIn && <User/>}
+            {userInfo.loggedIn && <User/>}
 
         {/* /If logged in */}
 

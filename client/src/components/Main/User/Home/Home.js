@@ -1,14 +1,16 @@
+import { useContext } from "react";
+import UserContext from "../../../Context/Context";
 import ActivitiesSection from "./AcctivitiesSection/ActivitiesSection"
 import {Wrapper, Heading} from "./homeStyle"
 
 const HomePage = () => {
 
-    let cityName = localStorage.getItem("city");
+    const userInfo = useContext(UserContext);
 
     return(
 
         <Wrapper>
-            <Heading>Activities in {cityName}</Heading>
+            <Heading>Welcome, {userInfo.username}</Heading>
             <ActivitiesSection/>
         </Wrapper>
 
