@@ -20,6 +20,10 @@ const StyledUl = styled.ul`
         text-decoration:none;
         font-size:20px;
     }
+
+    .logout{
+        cursor: pointer;
+    }
 `
 const StyledLi= styled.li`
     margin:0 20px;
