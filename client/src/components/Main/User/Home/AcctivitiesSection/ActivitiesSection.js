@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react"
 import UserContext from "../../../../Context/Context";
 import Activity from "../Activity/Activity"
-import {ActivitiesWrappper} from "./activitiesSectionStyle"
+import {ActivitiesWrappper, NoActivitiesDiv} from "./activitiesSectionStyle"
 
 const ActivitiesSection = () => {
 
@@ -25,15 +25,16 @@ const ActivitiesSection = () => {
 
 
     return(
-        <ActivitiesWrappper>
-            {state && state.map(activity => <Activity
+        <ActivitiesWrappper display = {state.length===0 ? "block" : "grid"}>
+            {state.length>0 ? state.map(activity => <Activity
                 key={activity._id}
                 sport={activity.sport}
                 description={activity.description}
                 city={activity.city}
                 date={activity.date}
                 peopleApplied={activity.peopleApplied.length}
-                peopleNeeded={activity.peopleNeeded}/>)}
+                peopleNeeded={activity.peopleNeeded}
+                />):<NoActivitiesDiv>There are currently no activities to show!</NoActivitiesDiv>}
         </ActivitiesWrappper>
     )
 }

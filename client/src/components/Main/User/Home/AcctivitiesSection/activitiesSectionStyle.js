@@ -13,11 +13,19 @@ const fadeIn = keyframes`
 const ActivitiesWrappper = styled.section`
     max-width: 95%;
     width: 100%;
-    display:grid;
+    display: ${props => props.display};
     grid-template-columns: repeat(4, 1fr);
     margin:auto;
     animation-name: ${fadeIn};
     animation-duration: 5s;
 `
-
-export {ActivitiesWrappper}
+const NoActivitiesDiv = styled.div`
+    margin-top:30px;
+    text-align:center;
+    font-size:30px;
+    color:whitesmoke;
+`
+export {
+    ActivitiesWrappper,
+    NoActivitiesDiv
+}
