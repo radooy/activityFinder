@@ -10,7 +10,7 @@ const HomePage = () => {
     return(
 
         <Wrapper>
-            <Heading>Welcome, {userInfo.username}</Heading>
+            <Heading>Available activities for you, {userInfo.username}</Heading>
             <ActivitiesSection/>
         </Wrapper>
 

@@ -5,7 +5,8 @@ const Wrapper = styled.div`
 `;
 
 const Heading = styled.h1`
-    text-align: center
+    text-align: center;
+    font-size:45px;
 `;
 
 export {
