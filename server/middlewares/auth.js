@@ -16,7 +16,9 @@ function auth(req, res, next) {
     // }
     
     //With cookie and callback
+    console.log("auth");
     let tokenFromCookie = req.cookies["x-auth-token"];
+    console.log(`token from cookie: ${tokenFromCookie}`)
     if (tokenFromCookie) {
         jwt.verify(tokenFromCookie, SECRET, function(err,decoded){
             if (err) {
