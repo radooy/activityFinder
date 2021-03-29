@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState } from "react"
 import {ActivityWrapper, Heading, InfoFor} from "./activityStyle"
 
 const Activity = ({nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl, peopleApplied}) => {
     let [detailed, setDetailed] = useState(false)
     
-    let onClickHandler = () => {
+    const onClickHandler = (e) => {
         setDetailed(!detailed);
     }
+
     return(
-        <ActivityWrapper onClick = {()=>onClickHandler()}>
+        <ActivityWrapper onClick = {onClickHandler}>
             <Heading>{sport}</Heading>
             {detailed && <img className="activity-img" src={imgUrl} alt="Activity"/>}   
             {detailed && <InfoFor><b>Name of creator:</b> {nameOfUser}</InfoFor>}
