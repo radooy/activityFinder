@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Wrapper, Form, Input, Submit, Label } from "./formStyle"
+import UserContext from "../Context/Context"
 
 class Login extends Component {
     constructor(props) {
@@ -12,6 +13,8 @@ class Login extends Component {
             redirect: null
         }
     }
+
+    static contextType = UserContext;
 
     onChangeHandler(e) {
         this.setState({
@@ -33,14 +36,11 @@ class Login extends Component {
             .then(data => {
                 if (data.message) throw data.message;
                 document.cookie = `x-auth-token = ${data.token}`;
-                localStorage.setItem("username",data.username);
-                localStorage.setItem("city",data.city);
-                localStorage.setItem("id",data.id);
                 this.setState({
                     ...this.state,
                     redirect : "/"
                 })
-                console.log(data.token);
+                this.context.logIn(data.username,data.id,data.city)
             })
             .catch(err => {
                 console.log(err);
