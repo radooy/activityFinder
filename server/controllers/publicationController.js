@@ -5,8 +5,23 @@ const userService = require("../services/userService");
 const { isAuth } = require("../middlewares/auth");
 const User = require("../models/User");
 
+
+//GET ALL FROM CITY
+
+router.get("/filter", isAuth, (req, res) => {
+    let city = req.query.city;
+    publicationService.getAllByCity(city)
+        .then(pubs => {
+            res.status(200).json({ publications: pubs });
+        })
+        .catch(err => {
+            console.log(err.message);
+            res.status(404).json({ message: err.message });
+        })
+});
+
 //GET ALL
-router.get("/", (req, res) => {
+router.get("/", isAuth, (req, res) => {
     publicationService.getAll()
         .then(pubs => {
             res.status(200).json({ publications: pubs });
@@ -29,6 +44,8 @@ router.get("/:id", (req, res) => {
             res.status(404).json({ message: "Publication not found!" });
         });
 });
+
+
 
 //CREATE
 router.post("/create", isAuth, (req, res) => {

@@ -16,6 +16,10 @@ function getOne(id){
     return Publication.findById(id).lean();
 }
 
+function getAllByCity(city){
+    return Publication.find({city:city}).lean();
+}
+
 function removeOne(id){
     return Publication.findByIdAndRemove(id);
 }
@@ -54,6 +58,7 @@ module.exports = {
     create,
     getAll,
     getOne,
+    getAllByCity,
     removeOne,
     updateOne,
     applyUser
