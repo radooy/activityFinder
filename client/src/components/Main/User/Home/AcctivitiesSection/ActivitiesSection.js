@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react"
+import { Link } from "react-router-dom"
 import UserContext from "../../../../Context/Context";
 import Activity from "../Activity/Activity"
 import {ActivitiesWrappper, NoActivitiesDiv} from "./activitiesSectionStyle"
@@ -26,7 +27,10 @@ const ActivitiesSection = () => {
 
     return(
         <ActivitiesWrappper display = {state.length===0 ? "block" : "grid"}>
-            {state.length>0 ? state.map(activity => <Activity
+            {state.length>0 ? state.map(activity =>
+            <>
+            <Link to={`/details/${activity._id}`} className="details-link">
+            <Activity
                 key={activity._id}
                 sport={activity.sport}
                 description={activity.description}
@@ -34,7 +38,10 @@ const ActivitiesSection = () => {
                 date={activity.date}
                 peopleApplied={activity.peopleApplied.length}
                 peopleNeeded={activity.peopleNeeded}
-                />):<NoActivitiesDiv>There are currently no activities to show!</NoActivitiesDiv>}
+            /> 
+            </Link>
+            
+            </>):<NoActivitiesDiv>There are currently no activities to show!</NoActivitiesDiv>}
         </ActivitiesWrappper>
     )
 }

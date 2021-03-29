@@ -14,10 +14,16 @@ const ActivitiesWrappper = styled.section`
     max-width: 95%;
     width: 100%;
     display: ${props => props.display};
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     margin:auto;
     animation-name: ${fadeIn};
     animation-duration: 5s;
+
+
+    .details-link{
+        text-decoration:none;
+        color:black
+    }
 `
 const NoActivitiesDiv = styled.div`
     margin-top:30px;
