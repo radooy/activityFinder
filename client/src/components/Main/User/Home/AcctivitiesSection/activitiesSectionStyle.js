@@ -24,6 +24,15 @@ const ActivitiesWrappper = styled.section`
         text-decoration:none;
         color:black
     }
+
+    .not-detailed{
+        &:hover{
+        box-shadow:5px 5px 8px black;
+        cursor:pointer;
+        background-color: #d8e4fb;
+        border-radius:25px;
+        }
+    }
 `
 const NoActivitiesDiv = styled.div`
     margin-top:30px;

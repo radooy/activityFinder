@@ -29,10 +29,11 @@ const ActivitiesSection = () => {
         <ActivitiesWrappper display={state.length === 0 ? "block" : "grid"}>
             {state.length > 0 ? state.map(activity =>
 
-                <div key={activity._id}>
+                <div key={activity._id} className="not-detailed">
 
                     <Link to={`/details/${activity._id}`} className="details-link">
                         <Activity
+                            detailed={false}
                             sport={activity.sport}
                             description={activity.description}
                             city={activity.city}
