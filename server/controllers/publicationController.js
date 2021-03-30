@@ -158,7 +158,7 @@ router.patch("/:id/apply", isAuth, (req, res) => {
                     publicationsJoined.push(id);
                     User.updateOne({ _id: userId }, { publicationsJoined })
                         .then(() => {
-                            res.status(200).json({ message: "Successfully applied for publication!" })
+                            res.status(200).json({ success: "Successfully applied for publication!" })
                         });
                 });
         })
