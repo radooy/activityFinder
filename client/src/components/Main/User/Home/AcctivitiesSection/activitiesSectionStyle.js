@@ -19,6 +19,7 @@ const ActivitiesWrappper = styled.section`
     animation-name: ${fadeIn};
     animation-duration: 5s;
 
+    
 
     .details-link{
         text-decoration:none;
@@ -29,7 +30,7 @@ const ActivitiesWrappper = styled.section`
         &:hover{
         box-shadow:5px 5px 8px black;
         cursor:pointer;
-        background-color: #d8e4fb;
+        background-color: #d6d7d8;
         border-radius:25px;
         }
     }
