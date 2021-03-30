@@ -55,6 +55,11 @@ class UserAuthProvider extends Component{
 
 
     render(){
+        if (this.state.loggedIn === null) {
+            return (
+                <span>Loading...</span>
+            )
+        }
         return(
         <UserContext.Provider value={{
             loggedIn: this.state.loggedIn,
