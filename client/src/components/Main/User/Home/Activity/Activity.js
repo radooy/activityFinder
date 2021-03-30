@@ -1,23 +1,30 @@
-import { useState } from "react"
 import {ActivityWrapper, Heading, InfoFor} from "./activityStyle"
 
-const Activity = ({nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl, peopleApplied}) => {
-    let [detailed, setDetailed] = useState(false)
+const Activity = ({detailed, nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl, peopleApplied}) => {
     
-    const onClickHandler = (e) => {
-        setDetailed(!detailed);
-    }
-
+    
     return(
-        <ActivityWrapper onClick = {onClickHandler}>
+        <ActivityWrapper display={detailed ? "flex" : "grid"}>
+            {detailed ? <>
+                
+            <div className="flex">
+                <Heading>{sport}</Heading>
+                <InfoFor><b>Name of creator:</b> {nameOfUser}</InfoFor>
+                <InfoFor><b>Description:</b> {description}</InfoFor>
+                <InfoFor><b>City:</b> {city}</InfoFor>
+                <InfoFor><b>Date:</b> {date}</InfoFor>
+                <InfoFor><b>Applied:</b> {peopleApplied}/{peopleNeeded}</InfoFor>
+                <InfoFor><b>Phone Number:</b> {phoneNumber}</InfoFor>
+            </div>
+            <img className="activity-img" src={imgUrl} alt="Activity"/>
+            </> : <>
             <Heading>{sport}</Heading>
-            {detailed && <img className="activity-img" src={imgUrl} alt="Activity"/>}   
-            {detailed && <InfoFor><b>Name of creator:</b> {nameOfUser}</InfoFor>}
             <InfoFor className="preview"><b>Description:</b> {description}</InfoFor>
             <InfoFor><b>City:</b> {city}</InfoFor>
             <InfoFor><b>Date:</b> {date}</InfoFor>
             <InfoFor><b>Applied:</b> {peopleApplied}/{peopleNeeded}</InfoFor>
-            {detailed && <InfoFor><b>Phone Number:</b> {phoneNumber}</InfoFor>}
+            </>
+            }
         </ActivityWrapper>
     )
 }

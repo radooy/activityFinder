@@ -1,16 +1,21 @@
 import styled from "styled-components"
 
 const ActivityWrapper = styled.div`
-    display:grid;
+    display:${props => props.display};
     grid-template-columns: repeat(auto-fill,autofit, 200px);
     
-    border-radius:3px;
-    padding:5px;
+    border-radius:20px;
+    padding:15px 20px;
     margin:10px;
+    flex-wrap:wrap;
+    box-shadow: inset 0 0 40px #ffffff;
     
 
     .activity-img{
-        max-width:50%;
+        max-width:40%;
+        width:100%;
+        border-radius:20px;
+        box-shadow:2px 2px 2px white;
     }
 
     .preview{
@@ -21,16 +26,20 @@ const ActivityWrapper = styled.div`
         max-width: 30ch;
     }
 
-    &:hover{
-        box-shadow:5px 5px 8px black;
-        cursor:pointer;
-        background-color: #d8e4fb;
+    .flex{
+        margin: 0 70px;
+        padding: 0 20px;
+        border-radius:5px;
+        max-width:30%;
+        width:90%;
     }
+
 `
 const Heading = styled.h3`
     text-shadow: 1px 1px #ffffff;
     font-size:30px;
-    
+    margin: 0;
+    text-align:center;
 `
 
 const InfoFor = styled.p`
