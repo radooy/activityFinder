@@ -6,7 +6,7 @@ class UserAuthProvider extends Component{
         super(props)
 
         this.state = {
-            loggedIn: false,
+            loggedIn: null,
             username: "",
             id: "",
             city:""
@@ -31,6 +31,28 @@ class UserAuthProvider extends Component{
             city:""
         })
     }
+
+    componentDidMount(){
+        fetch("http://localhost:5000/api/auth/verify",{
+            credentials:"include",
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if (data.message) throw data.message;
+            this.setState({
+                loggedIn : data.isVerified,
+                username: data.username,
+                id: data.id,
+                city:data.city
+            })
+        })
+        .catch(err=>console.log(err));
+    }
+
 
     render(){
         return(

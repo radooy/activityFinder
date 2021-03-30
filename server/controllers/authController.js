@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const authService = require("../services/authService");
+const jwt = require('jsonwebtoken');
+const { SECRET } = require("../config/config")
 
 router.post("/register", (req,res)=>{
     let {username, password, rePassword, city} = req.body;
@@ -27,6 +29,30 @@ router.post("/login", (req,res)=>{
             console.log(err.message);
             res.status(401).json({message: err.message});
         });
+})
+
+router.post("/verify", (req,res,next) => {
+    let isVerified = false;
+    let tokenFromCookie = req.cookies["x-auth-token"];
+    console.log(`isVerified token from cookie: ${tokenFromCookie}`)
+    if (tokenFromCookie) {
+        jwt.verify(tokenFromCookie, SECRET, function(err,decoded){
+            if (err) {
+                res.clearCookie("x-auth-token"); //fake cookie/token
+                res.json({isVerified});
+                return;
+            }else{
+                let username = decoded.username;
+                let id = decoded.id;
+                let city = decoded.city;
+                isVerified = true;
+                res.status(200).json({username,id,city, isVerified})
+                return;
+            }
+        });
+    }else{
+        res.json({isVerified});
+    }
 })
 
 
