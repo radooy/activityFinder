@@ -92,7 +92,7 @@ router.delete("/:id", isAuth, async (req, res) => {
                             publicationsMade.splice(index, 1);
                             User.updateOne({ _id: userId }, { publicationsMade })
                                 .then(() => {
-                                    res.status(200).json({ message: "Successfully deleted!" })
+                                    res.status(200).json({ Success: "Successfully deleted!" })
                                 });
                         });
                 })
@@ -128,7 +128,7 @@ router.patch("/:id", isAuth, async (req, res) => {
             let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
             publicationService.updateOne(id, nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl)
                 .then(() => {
-                    res.status(200).json({ message: "Updated successfully!" })
+                    res.status(200).json({ Succsess: "Updated successfully!" })
                 })
                 .catch(err => {
                     console.log(err);
@@ -183,7 +183,7 @@ router.patch("/:id/unapply", isAuth, (req, res) => {
                     publicationsJoined.splice(index,1);
                     User.updateOne({ _id: userId }, { publicationsJoined })
                         .then(() => {
-                            res.status(200).json({ success: "Successfully unapplied for publication!" })
+                            res.status(200).json({ Success: "Successfully unapplied for publication!" })
                         });
                 });
         })
