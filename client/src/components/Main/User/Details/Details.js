@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Redirect } from "react-router-dom"
+import Context from "../../../Context/Context"
 import Activity from "../Home/Activity/Activity"
 import { DetailsWrapper, Button } from "./detailsStyle"
 
@@ -9,6 +10,8 @@ const Details = (props) => {
     const [activity, setActivity] = useState({});
     const [redirect, setRedirect] = useState("");
     const [peopleApplied, setPeopleApplied] = useState(0);
+    const [visible, setVisible] = useState(false);
+    const context = useContext(Context);
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/publications/${id}`, {
@@ -17,6 +20,9 @@ const Details = (props) => {
             .then(res => res.json())
             .then(data => {
                 if (data.message) throw data.message;
+                if (data.publication.peopleApplied.includes(context.id)) {
+                    setVisible(true);
+                }
                 setActivity(data.publication);
                 setPeopleApplied(data.publication.peopleApplied.length);
             })
@@ -26,7 +32,7 @@ const Details = (props) => {
             })
     }, []);
 
-    const onClickHandler = ()=>{
+    const onApplyHandler = ()=>{
         fetch(`http://localhost:5000/api/publications/${id}/apply`,{
             method:"PATCH",
             credentials:"include"
@@ -35,6 +41,24 @@ const Details = (props) => {
         .then(data=>{
             if (data.message) throw data.message
             setPeopleApplied(peopleApplied+1);
+            setVisible(true)
+            console.log(peopleApplied)
+            console.log(data);
+        })
+        .catch(err=>console.log(err));
+    }
+
+    const onUnapplyHandler = ()=>{
+        fetch(`http://localhost:5000/api/publications/${id}/unapply`,{
+            method:"PATCH",
+            credentials:"include"
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            if (data.message) throw data.message
+            setPeopleApplied(peopleApplied-1);
+            setVisible(false)
             console.log(peopleApplied)
             console.log(data);
         })
@@ -65,7 +89,8 @@ const Details = (props) => {
                 imgUrl={activity.imgUrl}
                 phoneNumber={activity.phoneNumber}
             />
-            <Button onClick={onClickHandler}>Apply</Button>
+            <Button style={{display: !visible ? "inline" : "none"}} onClick={onApplyHandler}>Apply</Button>
+            <Button style={{display: visible ? "inline" : "none"}} onClick={onUnapplyHandler}>Unapply</Button>
             <Button onClick={onBackClickHandler}>Back</Button>
         </DetailsWrapper>
     );

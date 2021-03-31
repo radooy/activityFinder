@@ -14,7 +14,7 @@ const Activity = ({detailed, nameOfUser, sport, date, description, peopleNeeded,
                 <InfoFor><b>City:</b> {city}</InfoFor>
                 <InfoFor><b>Date:</b> {date}</InfoFor>
                 <InfoFor><b>Applied:</b> {peopleApplied}/{peopleNeeded}</InfoFor>
-                <InfoFor><b>Phone Number:</b> {phoneNumber}</InfoFor>
+                <InfoFor><b>Phone number:</b> {phoneNumber}</InfoFor>
             </div>
             <img className="activity-img" src={imgUrl} alt="Activity"/>
             </> : <>

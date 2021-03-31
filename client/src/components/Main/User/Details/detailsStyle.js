@@ -14,7 +14,6 @@ const Button = styled.button`
     background-color:transparent;
     cursor:pointer;
     border-color:transparent;
-
     color:white;
     background-color:grey;
     border-color:transparent;
@@ -27,6 +26,8 @@ const Button = styled.button`
 
     }
 `
+
+
 
 export {
     DetailsWrapper,
