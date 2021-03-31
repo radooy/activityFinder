@@ -3,6 +3,7 @@ import HomePage from "./Home/Home"
 import CreatePage from "../User/Create/CreatePage"
 import Profile from "../User/Profile/Profile"
 import Details from "./Details/Details"
+import Edit from "./Edit/Edit"
 
 const User = () => {
     //Header
@@ -16,6 +17,7 @@ const User = () => {
             <Route path="/create" component={CreatePage}/>
             <Route path="/my-profile" component={Profile}/>
             <Route path="/details/:id" component={Details}/>
+            <Route path="/edit/:id" component={Edit}/>
         </Switch>
         </>
     );

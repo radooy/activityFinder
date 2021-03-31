@@ -12,8 +12,9 @@ const ActivityWrapper = styled.div`
     
 
     .activity-img{
-        max-width:40%;
+        max-width:320px;
         width:100%;
+        max-height:300px;
         border-radius:20px;
         box-shadow:2px 2px 2px white;
     }
