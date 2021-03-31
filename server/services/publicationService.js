@@ -53,6 +53,22 @@ async function applyUser(pubId, userId){
     return Publication.findByIdAndUpdate(pubId, {peopleApplied: currentPeopleApllied});
 }
 
+async function unApplyUser(pubId, userId){
+    let pub = await getOne(pubId);
+    let mapped = pub.peopleApplied.map(user=>user.toString());
+
+    if (!mapped.includes(userId)) {
+       throw new Error("You can't unapply from publication that you are not applied for!")
+    }
+
+    let index = mapped.indexOf(userId);
+
+    let currentPeopleApllied = pub.peopleApplied;
+    currentPeopleApllied.splice(index,1);
+
+    return Publication.findByIdAndUpdate(pubId, {peopleApplied: currentPeopleApllied});
+}
+
 
 module.exports = {
     create,
@@ -61,5 +77,6 @@ module.exports = {
     getAllByCity,
     removeOne,
     updateOne,
-    applyUser
+    applyUser,
+    unApplyUser
 }

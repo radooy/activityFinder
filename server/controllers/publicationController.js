@@ -145,7 +145,7 @@ router.patch("/:id", isAuth, async (req, res) => {
 
 });
 
-//INCREASE COUNT OF PEOPLE
+//APPLY USER FOR PUBLICATION
 router.patch("/:id/apply", isAuth, (req, res) => {
     let id = req.params.id;
     let userId = req.user.id;
@@ -159,6 +159,31 @@ router.patch("/:id/apply", isAuth, (req, res) => {
                     User.updateOne({ _id: userId }, { publicationsJoined })
                         .then(() => {
                             res.status(200).json({ success: "Successfully applied for publication!" })
+                        });
+                });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(409).json({ message: err.message })
+        });
+});
+
+//UNAPPLY USER FOR PUBLICATION
+router.patch("/:id/unapply", isAuth, (req, res) => {
+    let id = req.params.id;
+    let userId = req.user.id;
+
+    publicationService.unApplyUser(id, userId)
+        .then(() => {
+            userService.getOne(userId)
+                .then(user => {
+                    let mapped = user.publicationsJoined.map(pubId=>pubId.toString());
+                    let index = mapped.indexOf(id);
+                    let publicationsJoined = user.publicationsJoined;
+                    publicationsJoined.splice(index,1);
+                    User.updateOne({ _id: userId }, { publicationsJoined })
+                        .then(() => {
+                            res.status(200).json({ success: "Successfully unapplied for publication!" })
                         });
                 });
         })
