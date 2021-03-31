@@ -5,7 +5,7 @@ const DetailsWrapper = styled.div`
 `
 
 const Button = styled.button`
-    margin-left:100px;
+    margin-left:80px;
     font-family: 'Audiowide', cursive;
     width:100px;
     height:40px;

@@ -11,6 +11,9 @@ const Details = (props) => {
     const [redirect, setRedirect] = useState("");
     const [peopleApplied, setPeopleApplied] = useState(0);
     const [visible, setVisible] = useState(false);
+    const [isCreator, setCreator] = useState(false);
+
+
     const context = useContext(Context);
 
     useEffect(() => {
@@ -20,9 +23,15 @@ const Details = (props) => {
             .then(res => res.json())
             .then(data => {
                 if (data.message) throw data.message;
+
                 if (data.publication.peopleApplied.includes(context.id)) {
                     setVisible(true);
                 }
+
+                if (data.publication.creator.toString()===context.id) {
+                    setCreator(true);
+                }
+
                 setActivity(data.publication);
                 setPeopleApplied(data.publication.peopleApplied.length);
             })
@@ -40,10 +49,8 @@ const Details = (props) => {
         .then(res=>res.json())
         .then(data=>{
             if (data.message) throw data.message
-            setPeopleApplied(peopleApplied+1);
-            setVisible(true)
-            console.log(peopleApplied)
-            console.log(data);
+            setRedirect("/");
+            
         })
         .catch(err=>console.log(err));
     }
@@ -61,6 +68,24 @@ const Details = (props) => {
             setVisible(false)
             console.log(peopleApplied)
             console.log(data);
+        })
+        .catch(err=>console.log(err));
+    }
+
+    const onEditHandler = ()=>{
+        setRedirect(`/edit/${id}`)
+    }
+
+    const onDeleteHandler = ()=>{
+        fetch(`http://localhost:5000/api/publications/${id}`,{
+            method:"DELETE",
+            credentials:"include"
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            if (data.message) throw data.message
+            setRedirect("/")
         })
         .catch(err=>console.log(err));
     }
@@ -89,8 +114,11 @@ const Details = (props) => {
                 imgUrl={activity.imgUrl}
                 phoneNumber={activity.phoneNumber}
             />
-            <Button style={{display: !visible ? "inline" : "none"}} onClick={onApplyHandler}>Apply</Button>
-            <Button style={{display: visible ? "inline" : "none"}} onClick={onUnapplyHandler}>Unapply</Button>
+            {isCreator ? <> <Button onClick={onEditHandler}>Edit</Button>
+                        <Button onClick={onDeleteHandler}>Delete</Button></>
+                        : <><Button style={{display: !visible ? "inline" : "none"}} onClick={onApplyHandler}>Apply</Button>
+                        <Button style={{display: visible ? "inline" : "none"}} onClick={onUnapplyHandler}>Unapply</Button></>}
+            
             <Button onClick={onBackClickHandler}>Back</Button>
         </DetailsWrapper>
     );
