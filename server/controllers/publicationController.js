@@ -126,9 +126,10 @@ router.patch("/:id", isAuth, async (req, res) => {
         console.log(creator);
         if (String(userId) === creator) {
             let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
-            publicationService.updateOne(id, nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl)
+            let dateFormated = moment(new Date(date)).format("DD.MM.YYYY HH:mm");
+            publicationService.updateOne(id, nameOfUser, sport, dateFormated, description, peopleNeeded, city, phoneNumber, imgUrl)
                 .then(() => {
-                    res.status(200).json({ Succsess: "Updated successfully!" })
+                    res.status(200).json({ Success: "Updated successfully!" })
                 })
                 .catch(err => {
                     console.log(err);
@@ -158,7 +159,7 @@ router.patch("/:id/apply", isAuth, (req, res) => {
                     publicationsJoined.push(id);
                     User.updateOne({ _id: userId }, { publicationsJoined })
                         .then(() => {
-                            res.status(200).json({ success: "Successfully applied for publication!" })
+                            res.status(200).json({ Success: "Successfully applied for publication!" })
                         });
                 });
         })
