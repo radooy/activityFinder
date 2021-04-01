@@ -17,7 +17,7 @@ const Header = () => {
                 {userInfo.loggedIn && <>
                     <Link to="/create" className="header-link"> <StyledLi>Create a publication</StyledLi> </Link>
                     <Link to="/my-profile" className="header-link"> <StyledLi>My profile</StyledLi> </Link>
-                    <StyledLi className="header-link logout" onClick={() => logOut()} >Logout</StyledLi>
+                    <StyledLi className="header-link logout" onClick={logOut}>Logout</StyledLi>
                 </>
                 }
                 {userInfo.loggedIn === false && <>
