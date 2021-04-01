@@ -4,7 +4,7 @@ const MainContainer = styled.div`
     margin: 20px 0;
 `
 const Button = styled.button`
-    margin-left:80px;
+    margin-left:50px;
     font-family: 'Audiowide', cursive;
     width:100px;
     height:40px;

@@ -18,7 +18,7 @@ const ActivitiesWrappper = styled.section`
     margin:auto;
     margin-bottom:40px;
     animation-name: ${fadeIn};
-    animation-duration: 5s;
+    animation-duration: 1.5s;
 
     
 
