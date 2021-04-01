@@ -2,7 +2,8 @@ import { useState, useEffect, useContext } from "react"
 import { Redirect } from "react-router-dom"
 import Context from "../../../Context/Context"
 import Activity from "../Home/Activity/Activity"
-import { DetailsWrapper, Button } from "./detailsStyle"
+import { DetailsWrapper} from "./detailsStyle"
+import { Button } from "../../mainStyle"
 
 const Details = (props) => {
     const id = props.match.params.id;
