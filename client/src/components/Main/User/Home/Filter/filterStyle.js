@@ -22,7 +22,7 @@ const Select = styled.select`
     font-family: 'Audiowide', cursive;
     width:160px;
     height:40px;
-    font-size:20px;
+    font-size:17px;
     border-radius:10px;
     background-color:transparent;
     cursor:pointer;

@@ -20,6 +20,10 @@ function getAllByCity(city){
     return Publication.find({city:city}).lean();
 }
 
+function getAllBySport(sport){
+    return Publication.find({sport:sport}).lean();
+}
+
 function removeOne(id){
     return Publication.findByIdAndRemove(id);
 }
@@ -75,6 +79,7 @@ module.exports = {
     getAll,
     getOne,
     getAllByCity,
+    getAllBySport,
     removeOne,
     updateOne,
     applyUser,

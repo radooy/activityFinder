@@ -9,8 +9,10 @@ const User = require("../models/User");
 //GET ALL FROM CITY
 
 router.get("/filter", isAuth, (req, res) => {
-    let city = req.query.city;
-    publicationService.getAllByCity(city)
+    console.log(req.query)
+    let filterParam = req.query.city || req.query.sport;
+    if(req.query.city){
+        publicationService.getAllByCity(filterParam)
         .then(pubs => {
             res.status(200).json({ publications: pubs });
         })
@@ -18,6 +20,19 @@ router.get("/filter", isAuth, (req, res) => {
             console.log(err.message);
             res.status(404).json({ message: err.message });
         })
+    }else if(req.query.sport){
+        publicationService.getAllBySport(filterParam)
+        .then(pubs => {
+            res.status(200).json({ publications: pubs });
+        })
+        .catch(err => {
+            console.log(err.message);
+            res.status(404).json({ message: err.message });
+        })
+    }else{
+        throw new Error("Filters not found")
+    }
+    
 });
 
 //GET ALL

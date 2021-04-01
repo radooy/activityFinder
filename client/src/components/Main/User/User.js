@@ -4,6 +4,7 @@ import CreatePage from "../User/Create/CreatePage"
 import Profile from "../User/Profile/Profile"
 import Details from "./Details/Details"
 import Edit from "./Edit/Edit"
+import Filter from "./Home/Filter/Filter"
 
 const User = () => {
     //Header
@@ -18,6 +19,7 @@ const User = () => {
             <Route path="/my-profile" component={Profile}/>
             <Route path="/details/:id" component={Details}/>
             <Route path="/edit/:id" component={Edit}/>
+            <Route path='/filter' component={Filter}/>
         </Switch>
         </>
     );
