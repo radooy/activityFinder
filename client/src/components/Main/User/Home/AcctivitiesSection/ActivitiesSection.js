@@ -43,7 +43,9 @@ const ActivitiesSection = () => {
                         />
                     </Link>
 
-                </div>) : <NoActivitiesDiv>There are currently no activities to show!</NoActivitiesDiv>}
+                </div>
+                
+                ): <NoActivitiesDiv>There are currently no activities to show!</NoActivitiesDiv>}
         </ActivitiesWrappper>
     )
 }

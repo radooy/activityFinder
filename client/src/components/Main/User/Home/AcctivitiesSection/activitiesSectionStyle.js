@@ -16,6 +16,7 @@ const ActivitiesWrappper = styled.section`
     display: ${props => props.display};
     grid-template-columns: repeat(5, 1fr);
     margin:auto;
+    margin-bottom:40px;
     animation-name: ${fadeIn};
     animation-duration: 5s;
 
