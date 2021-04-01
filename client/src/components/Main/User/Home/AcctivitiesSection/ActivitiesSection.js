@@ -1,12 +1,11 @@
 import { useEffect, useState, useContext } from "react"
-import { Link } from "react-router-dom"
 import UserContext from "../../../../Context/Context";
-import Activity from "../Activity/Activity"
-import { ActivitiesWrappper, NoActivitiesDiv } from "./activitiesSectionStyle"
+import ActivityPresentation from "./ActivitiesPresentation"
 
 const ActivitiesSection = () => {
 
     const [state, setState] = useState([]);
+
     const userInfo = useContext(UserContext);
 
     useEffect(() => {
@@ -19,34 +18,15 @@ const ActivitiesSection = () => {
                 setState(data.publications)
             })
             .catch(err => {
-                userInfo.logOut();
                 console.log(err)
             })
     }, [userInfo])
 
 
     return (
-        <ActivitiesWrappper display={state.length === 0 ? "block" : "grid"}>
-            {state.length > 0 ? state.map(activity =>
-
-                <div key={activity._id} className="not-detailed">
-
-                    <Link to={`/details/${activity._id}`} className="details-link">
-                        <Activity
-                            detailed={false}
-                            sport={activity.sport}
-                            description={activity.description}
-                            city={activity.city}
-                            date={activity.date}
-                            peopleApplied={activity.peopleApplied.length}
-                            peopleNeeded={activity.peopleNeeded}
-                        />
-                    </Link>
-
-                </div>
-                
-                ): <NoActivitiesDiv>There are currently no activities to show!</NoActivitiesDiv>}
-        </ActivitiesWrappper>
+        <>
+        <ActivityPresentation state={state}/>
+        </>
     )
 }
 
