@@ -48,9 +48,9 @@ const Details = (props) => {
         })
         .then(res=>res.json())
         .then(data=>{
-            if (data.message) throw data.message
-            setRedirect("/");
-            
+            if (data.message) throw data.message;
+            setPeopleApplied(peopleApplied+1);
+            setVisible(true);
         })
         .catch(err=>console.log(err));
     }
@@ -65,9 +65,7 @@ const Details = (props) => {
             console.log(data);
             if (data.message) throw data.message
             setPeopleApplied(peopleApplied-1);
-            setVisible(false)
-            console.log(peopleApplied)
-            console.log(data);
+            setVisible(false);
         })
         .catch(err=>console.log(err));
     }
