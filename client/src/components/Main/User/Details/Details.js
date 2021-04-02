@@ -113,12 +113,12 @@ const Details = (props) => {
                 imgUrl={activity.imgUrl}
                 phoneNumber={activity.phoneNumber}
             />
-            {isCreator ? <> <Button onClick={onEditHandler}>Edit</Button>
-                        <Button onClick={onDeleteHandler}>Delete</Button></>
-                        : <>{peopleApplied<activity.peopleNeeded && <Button style={{display: !visible ? "inline" : "none"}} onClick={onApplyHandler}>Apply</Button>}
-                        <Button style={{display: visible ? "inline" : "none"}} onClick={onUnapplyHandler}>Unapply</Button></>}
+            {isCreator ? <> <Button className="edit-btn" onClick={onEditHandler}>Edit</Button>
+                        <Button className="delete-btn" onClick={onDeleteHandler}>Delete</Button></>
+                        : <>{peopleApplied<activity.peopleNeeded && <Button className="apply-btn" style={{display: !visible ? "inline" : "none"}} onClick={onApplyHandler}>Apply</Button>}
+                        <Button className="delete-btn unapply-btn" style={{display: visible ? "inline" : "none"}} onClick={onUnapplyHandler}>Unapply</Button></>}
             
-            <Button onClick={onBackClickHandler}>Back</Button>
+            <Button className="back-btn" onClick={onBackClickHandler}>Back</Button>
         </DetailsWrapper>
     );
 }

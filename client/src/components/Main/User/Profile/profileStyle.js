@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const font = "'Potta One', cursive;"
+const font = "'Audiowide', cursive;"
 
 const Wrapper = styled.div`
     box-shadow: inset 2px 10px 40px 10px #dddaec;

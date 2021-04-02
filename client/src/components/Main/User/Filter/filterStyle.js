@@ -10,6 +10,22 @@ const FilterWrapper = styled.div`
     width:100%;
     border-radius:20px;
     flex-wrap: wrap;
+
+    .reset-btn{
+        background-color:#f7de00;
+    }
+
+    .back-btn{
+        background-color:#b30d0d;
+    }
+
+    .go-btn{
+        background-color:#03b603;
+    }
+
+    .select-btn{
+        background-color: #2c2353
+    }
 `
 const FilterParagraph = styled.p`
     font-size:25px;

@@ -81,7 +81,7 @@ const Filter = (props) => {
             <FilterParagraph>Filter by:</FilterParagraph>
 
             {citiesButton && 
-            <Button onClick={onCitiesButtonClick}>City</Button>
+            <Button className="select-btn" onClick={onCitiesButtonClick}>City</Button>
             }
 
             {!sportsButton && 
@@ -90,7 +90,7 @@ const Filter = (props) => {
             </Select>}
 
             {sportsButton && 
-            <Button onClick={onSportsButtonClick}>Sports</Button> 
+            <Button className="select-btn" onClick={onSportsButtonClick}>Sports</Button> 
             }
 
             {!citiesButton && 
@@ -100,13 +100,14 @@ const Filter = (props) => {
 
             
             
-            {(!citiesButton || !sportsButton) && 
-            <Button onClick={onGoButtonClick}>GO!</Button>
+            {(!citiesButton || !sportsButton) && <>
+            <Button className="go-btn" onClick={onGoButtonClick}>GO!</Button>
+            <Button className="reset-btn" onClick={onResetButtonClick}>Reset</Button>
+            </>
             }
             
-            <Button onClick={onResetButtonClick}>Reset</Button>
 
-            <Button onClick={onBackClickHandler}>Back</Button>
+            <Button className="back-btn" onClick={onBackClickHandler}>Back</Button>
 
         </FilterWrapper>
         {publications.length>0 && <ActivitiesPresentation state={publications}/>}
