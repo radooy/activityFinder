@@ -115,7 +115,7 @@ const Details = (props) => {
             />
             {isCreator ? <> <Button onClick={onEditHandler}>Edit</Button>
                         <Button onClick={onDeleteHandler}>Delete</Button></>
-                        : <><Button style={{display: !visible ? "inline" : "none"}} onClick={onApplyHandler}>Apply</Button>
+                        : <>{peopleApplied<activity.peopleNeeded && <Button style={{display: !visible ? "inline" : "none"}} onClick={onApplyHandler}>Apply</Button>}
                         <Button style={{display: visible ? "inline" : "none"}} onClick={onUnapplyHandler}>Unapply</Button></>}
             
             <Button onClick={onBackClickHandler}>Back</Button>
