@@ -5,10 +5,10 @@ const FilterWrapper = styled.div`
     justify-content:center;
     margin:20px auto;
     align-items:center;
-    box-shadow: inset 2px 2px 2px 4px black;
+    box-shadow: inset 2px 2px 10px 4px black;
     max-width:75%;
     width:100%;
-    border-radius:10px;
+    border-radius:20px;
     flex-wrap: wrap;
 `
 const FilterParagraph = styled.p`

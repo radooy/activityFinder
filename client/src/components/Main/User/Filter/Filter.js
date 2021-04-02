@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { FilterWrapper, FilterParagraph, Select } from "./filterStyle"
-import { Button } from "../../../mainStyle"
-import ActivitiesPresentation from "../AcctivitiesSection/ActivitiesPresentation"
+import { Button } from "../../mainStyle"
+import ActivitiesPresentation from "../Home/AcctivitiesSection/ActivitiesPresentation"
 
 const Filter = (props) => {
     let [sportsButton, setSportsButton] = useState(true);

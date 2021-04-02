@@ -19,7 +19,6 @@ const Activity = ({detailed, nameOfUser, sport, date, description, peopleNeeded,
             <img className="activity-img" src={imgUrl} alt="Activity"/>
             </> : <>
             <Heading>{sport}</Heading>
-            <InfoFor className="preview"><b>Description:</b> {description}</InfoFor>
             <InfoFor><b>City:</b> {city}</InfoFor>
             <InfoFor><b>Date:</b> {date}</InfoFor>
             <InfoFor><b>Applied:</b> {peopleApplied}/{peopleNeeded}</InfoFor>
