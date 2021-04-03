@@ -21,8 +21,8 @@ const Wrapper = styled.div`
         }
     }
 
-    .change-password{
-        height:80px;
+    .applied-for{
+        height:70px;
     }
 `
 

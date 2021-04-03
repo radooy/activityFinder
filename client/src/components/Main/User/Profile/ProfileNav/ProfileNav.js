@@ -6,8 +6,8 @@ import { Button } from "../../../mainStyle"
 const ProfileNav = () => {
     return(
     <ButtonContainer>
-        <Link to="/my-profile/publications"><Button className="my-publications-button">My publications</Button></Link>
-        <Button className="my-publications-button change-password">Change profile information</Button>
+        <Link to="/my-profile/publications-made"><Button className="my-publications-button">My publications</Button></Link>
+        <Link to ="/my-profile/publications-applied"><Button className="my-publications-button applied-for">Publications applied</Button></Link>
     </ButtonContainer>
     )
 }

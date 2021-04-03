@@ -4,6 +4,7 @@ import ProfileNav from "./ProfileNav/ProfileNav"
 import Context from "../../../Context/Context"
 import { Wrapper, Heading, Container } from "./profileStyle"
 import MyPublications from "./MyPublications/MyPublications"
+import Applied from "./MyPublications/AppliedFor"
 
 const Profile = () => {
 
@@ -17,7 +18,8 @@ const Profile = () => {
             <Container>
                 <ProfileNav />
                 <Switch>
-                    <Route path="/my-profile/publications" component={MyPublications} />
+                    <Route path="/my-profile/publications-made" component={MyPublications} />
+                    <Route path="/my-profile/publications-applied" component={Applied} />
                 </Switch>
             </Container>
 
