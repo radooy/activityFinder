@@ -4,14 +4,13 @@ import User from "./User/User"
 import GuestPage from "./Guest/GuestPage";
 import { MainContainer } from "./mainStyle";
 
-const Main = () => {
-    
+const Main = (props) => {
     const userInfo = useContext(UserContext);
 
     return (
         <MainContainer>
-
-            {userInfo.loggedIn ? <User/> : <GuestPage/>}
+            
+            {userInfo.loggedIn ? <User/> : <GuestPage {...props}/>}
 
         </MainContainer>
     );

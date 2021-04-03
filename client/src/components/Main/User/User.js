@@ -5,6 +5,7 @@ import Profile from "../User/Profile/Profile"
 import Details from "./Details/Details"
 import Edit from "./Edit/Edit"
 import Filter from "./Filter/Filter"
+import ErrorPage from "../../Error/ErrorPage"
 
 const User = () => {
     return(
@@ -15,6 +16,7 @@ const User = () => {
             <Route path="/details/:id" component={Details}/>
             <Route path="/edit/:id" component={Edit}/>
             <Route path='/filter' component={Filter}/>
+            <Route component={ErrorPage}/>
         </Switch>
     );
 }

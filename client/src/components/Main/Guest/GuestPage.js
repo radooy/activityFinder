@@ -4,12 +4,16 @@ import SiteIntroBody from "./SiteIntro/SiteIntroBody";
 import LoginForm from "../../Forms/LoginForm";
 import RegisterForm from "../../Forms/RegisterForm";
 import { ContentWrapper } from "./guestStyle"
+import ErrorPage from "../../Error/ErrorPage"
 
-const GuestPage = () => {
+const GuestPage = (props) => {
+    
+    //monkey code
+    if (props.location.pathname!=="/" && props.location.pathname!=="/login" && props.location.pathname!=="/register" && props.location.pathname!=="/about") {
+        return <ErrorPage/>;
+    }
+
     return (
-
-        //Header
-
     <>
         <SiteIntroHead />
         <ContentWrapper>
@@ -21,8 +25,6 @@ const GuestPage = () => {
             </Switch>
         </ContentWrapper>
     </>
-
-        //Footer
     );
 
 }
