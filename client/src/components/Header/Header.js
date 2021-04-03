@@ -1,13 +1,16 @@
 import React from "react";
 import { useContext } from "react";
 import UserContext from "../Context/Context";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { StyledHeader, StyledUl, StyledLi, Logo } from "./headerStyle";
 
 const Header = () => {
     const userInfo = useContext(UserContext);
+    let history = useHistory();
+
     const logOut = () => {
         userInfo.logOut();
+        history.push("/login");
     }
 
     return (
