@@ -6,7 +6,7 @@ const { isAuth } = require("../middlewares/auth");
 const User = require("../models/User");
 
 
-//GET ALL FROM CITY
+//GET ALL FROM CITY OR SPORTS
 
 router.get("/filter", isAuth, (req, res) => {
     console.log(req.query)
@@ -96,8 +96,21 @@ router.delete("/:id", isAuth, async (req, res) => {
         let pub = await publicationService.getOne(id);
         let creator = String(pub.creator);
 
-        console.log(String(userId) === creator);
         if (String(userId) === creator) {
+            if (pub.peopleApplied.length>0) {
+                pub.peopleApplied.map(uid=> userService.getOne(String(uid))
+                                .then(user=>{
+                                    let publicationsJoined = user.publicationsJoined;
+                                    let index = publicationsJoined.indexOf(id);
+                                    publicationsJoined.splice(index,1);
+                                    User.updateOne({ _id: uid}, { publicationsJoined })
+                                        .then(()=>{
+                                            console.log("successfully deleted applied for")
+                                        })
+                                        .catch(err=> console.log(err.message))
+                                }))
+            }
+
             publicationService.removeOne(id)
                 .then(() => {
                     userService.getOne(userId)

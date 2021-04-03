@@ -25,6 +25,18 @@ router.get("/:userId/publicationsMade", (req,res)=>{
         })
 });
 
+router.get("/:userId/publicationsApplied", (req,res)=>{
+    let userId = req.params.userId;
+    userService.getAppliedForPublications(userId)
+        .then(pubs=>{
+            res.status(200).json({publications:pubs})
+        })
+        .catch(err=>{
+            console.log(err.message);
+            res.status(404).json({message: "User or publications not found"})
+        })
+})
+
 router.delete("/:userId/delete", (req,res)=>{
     let userId = req.params.userId;
     userService.remove(userId)  

@@ -12,6 +12,13 @@ function getUserPublications(userId){
                 .lean();
 }
 
+async function getAppliedForPublications(userId){
+    let user = await getOne(userId);
+    let publicationsAppliedFor = user.publicationsJoined;
+
+    return await Publication.find().where('_id').in(publicationsAppliedFor).lean();
+}
+
 function remove(userId){
     return User.findByIdAndRemove(userId);
 }
@@ -19,5 +26,6 @@ function remove(userId){
 module.exports = {
     getOne,
     getUserPublications,
+    getAppliedForPublications,
     remove
 }
