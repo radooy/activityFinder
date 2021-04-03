@@ -24,9 +24,7 @@ const ActivitiesSection = () => {
 
 
     return (
-        <>
         <ActivityPresentation state={state}/>
-        </>
     )
 }
 

@@ -7,12 +7,7 @@ import Edit from "./Edit/Edit"
 import Filter from "./Filter/Filter"
 
 const User = () => {
-    //Header
-
-
-
     return(
-        <>
         <Switch>
             <Route exact path="/" component={HomePage}/>
             <Route path="/create" component={CreatePage}/>
@@ -21,12 +16,7 @@ const User = () => {
             <Route path="/edit/:id" component={Edit}/>
             <Route path='/filter' component={Filter}/>
         </Switch>
-        </>
     );
-
-        
-
-    //Footer
 }
 
 export default User

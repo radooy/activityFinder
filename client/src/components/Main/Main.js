@@ -10,21 +10,8 @@ const Main = () => {
 
     return (
         <MainContainer>
-        
-        {/* If not logged in */}
 
-            {userInfo.loggedIn===false && <GuestPage/>}
-
-        {/* /If not logged in */}
-
-
-
-        {/* If logged in */}
-
-            {userInfo.loggedIn && <User/>}
-
-        {/* /If logged in */}
-
+            {userInfo.loggedIn ? <User/> : <GuestPage/>}
 
         </MainContainer>
     );

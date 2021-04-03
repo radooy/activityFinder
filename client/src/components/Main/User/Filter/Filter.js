@@ -2,6 +2,7 @@ import { useState } from "react"
 import { FilterWrapper, FilterParagraph, Select } from "./filterStyle"
 import { Button } from "../../mainStyle"
 import ActivitiesPresentation from "../Home/AcctivitiesSection/ActivitiesPresentation"
+import { NoActivitiesDiv } from "../Home/AcctivitiesSection/activitiesSectionStyle"
 
 const Filter = (props) => {
     let [sportsButton, setSportsButton] = useState(true);
@@ -11,6 +12,7 @@ const Filter = (props) => {
     let [currentCity, setCurrentCity] = useState("Sofia");
     let [currentSport, setCurrentSport] = useState("Football");
     let [publications, setPublications] = useState([]);
+    let [showNoActivities, setShowNoActivities] = useState(false);
 
     const onCitiesButtonClick = () => {
         setSportsButton(false);
@@ -38,6 +40,7 @@ const Filter = (props) => {
         setSportsButton(true);
         setCitiesButton(true);
         setPublications([]);
+        setShowNoActivities(false);
     }
 
     const onCitySelectHandler = (e) => {
@@ -59,6 +62,7 @@ const Filter = (props) => {
             }).then(res=>res.json())
             .then(data=>{
                 if (data.message) throw data.message
+                data.publications.length===0 ? setShowNoActivities(true) : setShowNoActivities(false);
                 setPublications(data.publications);
             })
             .catch(err=>console.log(err))
@@ -68,6 +72,7 @@ const Filter = (props) => {
             }).then(res=>res.json())
                 .then(data=>{
                     if (data.message) throw data.message
+                    data.publications.length===0 ? setShowNoActivities(true) : setShowNoActivities(false);
                    setPublications(data.publications)
                 })
                 .catch(err=>console.log(err))
@@ -111,6 +116,7 @@ const Filter = (props) => {
 
         </FilterWrapper>
         {publications.length>0 && <ActivitiesPresentation state={publications}/>}
+        {showNoActivities && <NoActivitiesDiv>There are currently no activities found by the given criteria</NoActivitiesDiv>}
         </>
     )
 }
