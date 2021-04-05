@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Wrapper, Form, Input, Submit, Label } from "./formStyle"
+import { Error } from "../Main/mainStyle";
 import UserContext from "../Context/Context"
 
 class Login extends Component {
@@ -10,11 +11,19 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            redirect: null
+            redirect: null,
+            errors:{}
         }
     }
 
     static contextType = UserContext;
+
+    onFocusHandler(e){
+        this.setState({
+            ...this.state,
+            errors:{}
+        })
+    }
 
     onChangeHandler(e) {
         this.setState({
@@ -43,7 +52,12 @@ class Login extends Component {
                 this.context.logIn(data.username,data.id,data.city)
             })
             .catch(err => {
+                let errors = {};
+                errors.loginFailed = err;
                 console.log(err);
+                this.setState({
+                    errors
+                });
             });
     }
 
@@ -56,10 +70,11 @@ class Login extends Component {
             <Wrapper>
                 <Form onSubmit={this.onSubmitHandler.bind(this)}>
                     <Label htmlFor="username">Username:</Label>
-                    <Input type="text" name="username" id="username" onChange={this.onChangeHandler.bind(this)} />
+                    <Input type="text" name="username" id="username" onFocus={this.onFocusHandler.bind(this)} onChange={this.onChangeHandler.bind(this)} />
                     <Label htmlFor="password">Password:</Label>
-                    <Input type="password" name="password" id="password" onChange={this.onChangeHandler.bind(this)} />
+                    <Input type="password" name="password" id="password" onFocus={this.onFocusHandler.bind(this)} onChange={this.onChangeHandler.bind(this)} />
                     <Submit value="Log in" />
+                    {this.state.errors.loginFailed && <Error>{this.state.errors.loginFailed}</Error>}
                 </Form>
             </Wrapper>
         );

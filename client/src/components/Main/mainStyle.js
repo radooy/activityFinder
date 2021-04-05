@@ -25,8 +25,15 @@ const Button = styled.button`
 
     }
 `
+const Error = styled.div`
+    color:red;
+    font-size:smaller;
+    font-weight: bold;
+    margin:10px 0;
+`
 
 export {
     MainContainer,
-    Button
+    Button,
+    Error
 }
