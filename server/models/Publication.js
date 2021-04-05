@@ -9,12 +9,11 @@ const PublicationSchema = new mongoose.Schema({
         type: String,
         validate:{
             validator: function(value){
-                return /^[A-Za-z]{2,16}$/.test(value);
+                return /^([A-Z]{1})([a-z])+ ([A-Z]{1})([a-z])+$/.test(value);
             },
             message: MONGOOSE_NAME_VALIDATION
         },
-        trim: true,
-        required: [true, "Please enter your first name!"]
+        required: [true, "Please enter first and last name!"]
     },
     sport: {
         type: String,
