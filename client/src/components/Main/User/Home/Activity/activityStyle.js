@@ -7,6 +7,7 @@ const ActivityWrapper = styled.div`
     margin:10px;
     flex-wrap:wrap;
     box-shadow: inset 0 0 40px #ffffff;
+    min-height:330px;
     
     
 
