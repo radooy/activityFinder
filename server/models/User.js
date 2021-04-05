@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         validate:{
             validator: function(value){
-                return /^[a-z0-9]{6,16}$/.test(value);
+                return /^[a-z0-9]{6,40}$/.test(value);
             },
             message: MONGOOSE_PASSWORD_VALIDATION
         },
