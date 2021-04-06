@@ -27,7 +27,7 @@ const Button = styled.button`
 `
 const Error = styled.div`
     color:red;
-    font-size:smaller;
+    font-size:${props=> props.fontSize || "smaller" };
     font-weight: bold;
     margin:10px 0;
 `

@@ -70,11 +70,15 @@ class Login extends Component {
             <Wrapper>
                 <Form onSubmit={this.onSubmitHandler.bind(this)}>
                     <Label htmlFor="username">Username:</Label>
-                    <Input type="text" name="username" id="username" onFocus={this.onFocusHandler.bind(this)} onChange={this.onChangeHandler.bind(this)} />
+                    <Input type="text" name="username" id="username"
+                        onFocus={this.onFocusHandler.bind(this)}
+                        onChange={this.onChangeHandler.bind(this)} />
                     <Label htmlFor="password">Password:</Label>
-                    <Input type="password" name="password" id="password" onFocus={this.onFocusHandler.bind(this)} onChange={this.onChangeHandler.bind(this)} />
+                    <Input type="password" name="password" id="password"
+                        onFocus={this.onFocusHandler.bind(this)}
+                        onChange={this.onChangeHandler.bind(this)} />
                     <Submit value="Log in" />
-                    {this.state.errors.loginFailed && <Error>{this.state.errors.loginFailed}</Error>}
+                   <Error>{this.state.errors.loginFailed}</Error>
                 </Form>
             </Wrapper>
         );
