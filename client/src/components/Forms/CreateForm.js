@@ -199,28 +199,28 @@ class CreateForm extends Component {
                         defaultValue={this.state.nameOfUser}
                         onFocus={this.onFocusHandler.bind(this)} 
                         onChange={this.onChangeHandler.bind(this)} />
-                    <Error fontSize={fontSize}>{this.state.errors.nameOfUser}</Error>
+                    {this.state.errors.nameOfUser && <Error fontSize={fontSize}>{this.state.errors.nameOfUser}</Error>}
 
                     <Label htmlFor="description">About the activity:</Label>
                     <Input type="text" name="description" id="description" placeholder="exact location etc."
                         defaultValue={this.state.description}
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
-                    <Error fontSize={fontSize}>{this.state.errors.descriptionChars}</Error>
-                    <Error fontSize={fontSize}>{this.state.errors.descriptionLength}</Error>
+                    {this.state.errors.descriptionChars && <Error fontSize={fontSize}>{this.state.errors.descriptionChars}</Error>}
+                    {this.state.errors.descriptionLength && <Error fontSize={fontSize}>{this.state.errors.descriptionLength}</Error>}
 
                     <Label htmlFor="date">Date:</Label>
                     <Input type="datetime-local" name="date" id="date"
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
-                    <Error fontSize={fontSize}>{this.state.errors.date}</Error>
+                    {this.state.errors.date && <Error fontSize={fontSize}>{this.state.errors.date}</Error>}
 
                     <Label htmlFor="peopleNeeded">People needed:</Label>
                     <Input type="number" min="1" max="20" name="peopleNeeded" id="peopleNeeded"
                         value={this.state.peopleNeeded}
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
-                    <Error fontSize={fontSize}>{this.state.errors.peopleNeeded}</Error>
+                    {this.state.errors.peopleNeeded && <Error fontSize={fontSize}>{this.state.errors.peopleNeeded}</Error>}
 
                     <Label htmlFor="sport">Choose sport:</Label>
                     <Select name="sport" id="sport"
@@ -241,14 +241,14 @@ class CreateForm extends Component {
                         defaultValue={this.state.phoneNumber}
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
-                    <Error fontSize={fontSize}>{this.state.errors.phoneNumber}</Error>
+                    {this.state.errors.phoneNumber && <Error fontSize={fontSize}>{this.state.errors.phoneNumber}</Error>}
 
                     <Label htmlFor="imgUrl">Image Url:</Label>
                     <Input type="text" name="imgUrl" id="imgUrl" placeholder="http://example"
                         defaultValue={this.state.imgUrl}
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
-                    <Error fontSize={fontSize}>{this.state.errors.imgUrl}</Error>
+                    {this.state.errors.imgUrl && <Error fontSize={fontSize}>{this.state.errors.imgUrl}</Error>}
 
                     <Submit className="activity-submit" value={this.props.buttonName || "Create"} />
                 </Form>

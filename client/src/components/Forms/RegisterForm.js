@@ -117,22 +117,22 @@ class RegisterForm extends Component {
                     <Input type="text" name="username" id="username" placeholder="example123"
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
-                    <Error>{this.state.errors.usernameLength}</Error>
-                    <Error>{this.state.errors.usernameIsTaken}</Error>
-                    <Error>{this.state.errors.usernameSymbols}</Error>
+                    {this.state.errors.usernameLength && <Error>{this.state.errors.usernameLength}</Error>}
+                    {this.state.errors.usernameIsTaken && <Error>{this.state.errors.usernameIsTaken}</Error>}
+                    {this.state.errors.usernameSymbols && <Error>{this.state.errors.usernameSymbols}</Error>}
                     
                     <Label htmlFor="password">Password:</Label>
                     <Input type="password" name="password" id="password"
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
-                    <Error>{this.state.errors.passwordLength}</Error>
-                    <Error>{this.state.errors.passwordSymbols}</Error>
+                    {this.state.errors.passwordLength && <Error>{this.state.errors.passwordLength}</Error>}
+                    {this.state.errors.passwordSymbols && <Error>{this.state.errors.passwordSymbols}</Error>}
                     
                     <Label htmlFor="rePassword">Repeat password:</Label>
                     <Input type="password" name="rePassword" id="rePassword"
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
-                    <Error>{this.state.errors.passwordMissMatch}</Error>
+                    {this.state.errors.passwordMissMatch && <Error>{this.state.errors.passwordMissMatch}</Error>}
                     
                     <Label htmlFor="city">Choose your city:</Label>
                     <Select name="city" id="city"

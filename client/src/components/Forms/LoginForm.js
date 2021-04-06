@@ -78,7 +78,7 @@ class Login extends Component {
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
                     <Submit value="Log in" />
-                   <Error>{this.state.errors.loginFailed}</Error>
+                    {this.state.errors.loginFailed && <Error>{this.state.errors.loginFailed}</Error>}
                 </Form>
             </Wrapper>
         );
