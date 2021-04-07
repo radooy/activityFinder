@@ -31,15 +31,18 @@ The Front-end is a **React** client-side rendered, based on [Create-react-app](h
 - Clone the repository
 - Open it in VSCode or whatever editor you chose
 - Open the terminal
-- To install all dependencies type:
-    > npm install
-- When the dependencies are installed type in the terminal:
+- Install dependencies
+- To install server dependencies go to:
     > cd server
 - Then:
+    > npm install
+- After that we need to start the server by typing:
     > npm start
 - When the server starts open new terminal and type in:
     > cd client
-- Then:
+- To install client dependencies type again:
+    > npm install
+- When this is done start the client by typing again:
     > npm start
 
 **Now your default browser should open at http://localhost:3000 and you are all set to give it a try!**
