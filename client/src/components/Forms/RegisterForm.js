@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Redirect } from "react-router-dom"
 import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle"
 import { Error } from "../Main/mainStyle"
+import toast from "react-hot-toast"
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -48,6 +49,7 @@ class RegisterForm extends Component {
         }
 
         this.setState({errors},()=>console.log(this.state.errors));
+        Object.keys(errors).length>0 && toast.error("Please fill the form with valid data!")
         return isValid;
 
     }
@@ -81,6 +83,7 @@ class RegisterForm extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data.message) throw data.message;
+                toast.success('Registration complete!');
                 this.setState({
                     ...this.state,
                     redirect: "/login"

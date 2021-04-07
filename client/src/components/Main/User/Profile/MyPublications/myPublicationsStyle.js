@@ -5,6 +5,12 @@ const Wrapper = styled.div`
     width:100%;
 `
 
+const Heading = styled.h2`
+    margin:10px 40px;
+    font-size: 30px;
+`
+
 export {
-    Wrapper
+    Wrapper,
+    Heading
 }

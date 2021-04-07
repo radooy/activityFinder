@@ -1,9 +1,16 @@
-import CreateForm from "../../../Forms/CreateForm"
+import ActivityForm from "../../../Forms/ActivityForm"
+import { Button } from "../../mainStyle";
 
-const CreatePage = () => {
+const CreatePage = (props) => {
+
+    const onBackClickHandler = ()=>{
+        props.history.goBack();
+    }
+
     return(
         <div>
-            <CreateForm/>
+            <Button onClick={onBackClickHandler}>Back</Button>
+            <ActivityForm/>
         </div>
     );
 }

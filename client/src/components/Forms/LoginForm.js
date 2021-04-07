@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Wrapper, Form, Input, Submit, Label } from "./formStyle"
-import { Error } from "../Main/mainStyle";
 import UserContext from "../Context/Context"
+import toast from "react-hot-toast"
 
 class Login extends Component {
     constructor(props) {
@@ -12,7 +12,6 @@ class Login extends Component {
             username: "",
             password: "",
             redirect: null,
-            errors:{}
         }
     }
 
@@ -21,7 +20,6 @@ class Login extends Component {
     onFocusHandler(e){
         this.setState({
             ...this.state,
-            errors:{}
         })
     }
 
@@ -45,6 +43,7 @@ class Login extends Component {
             .then(data => {
                 if (data.message) throw data.message;
                 document.cookie = `x-auth-token = ${data.token}`;
+                toast.success(`Logged in as ${data.username}!`);
                 this.setState({
                     ...this.state,
                     redirect : "/"
@@ -52,12 +51,8 @@ class Login extends Component {
                 this.context.logIn(data.username,data.id,data.city)
             })
             .catch(err => {
-                let errors = {};
-                errors.loginFailed = err;
                 console.log(err);
-                this.setState({
-                    errors
-                });
+                toast.error(`${err}`);
             });
     }
 
@@ -78,7 +73,6 @@ class Login extends Component {
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />
                     <Submit value="Log in" />
-                    {this.state.errors.loginFailed && <Error>{this.state.errors.loginFailed}</Error>}
                 </Form>
             </Wrapper>
         );

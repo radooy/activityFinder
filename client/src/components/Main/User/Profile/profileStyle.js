@@ -7,23 +7,6 @@ const Wrapper = styled.div`
     border-radius: 20px;
     padding: 60px;
 
-
-    .my-publications-button{
-        font-family:${font};
-        max-width:200px;
-        width:100%;
-        margin:10px;
-        background-color: #2c2353;
-        &:hover{
-            font-size:20px;
-            color: #2c2353;
-            background-color:white;
-        }
-    }
-
-    .applied-for{
-        height:70px;
-    }
 `
 
 const Heading = styled.h2`

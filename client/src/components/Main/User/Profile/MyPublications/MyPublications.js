@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import Context from "../../../../Context/Context"
 import ActivityPresentation from "../../Home/AcctivitiesSection/ActivitiesPresentation"
-import {Wrapper} from "./myPublicationsStyle"
+import {Wrapper, Heading} from "./myPublicationsStyle"
 
 const MyPublications = () => {
 
@@ -18,10 +18,11 @@ const MyPublications = () => {
                 setPublications(data.publications)
             }).catch(err=>console.log(err))
             
-    },[])
+    },[id])
 
     return(
         <Wrapper>
+            {publications.length>0 && <Heading>Activities created:</Heading>}
             <ActivityPresentation state={publications}/>
         </Wrapper>
         

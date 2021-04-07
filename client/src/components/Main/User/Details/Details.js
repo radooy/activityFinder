@@ -4,6 +4,7 @@ import Context from "../../../Context/Context"
 import Activity from "../Home/Activity/Activity"
 import { DetailsWrapper} from "./detailsStyle"
 import { Button } from "../../mainStyle"
+import toast from "react-hot-toast"
 
 const Details = (props) => {
     const id = props.match.params.id;
@@ -40,7 +41,7 @@ const Details = (props) => {
                 console.log(err)
                 setRedirect("/error");
             })
-    }, []);
+    }, [context.id, id]);
 
     const onApplyHandler = ()=>{
         fetch(`http://localhost:5000/api/publications/${id}/apply`,{
@@ -50,6 +51,7 @@ const Details = (props) => {
         .then(res=>res.json())
         .then(data=>{
             if (data.message) throw data.message;
+            toast.success(`Applied!`);
             setPeopleApplied(peopleApplied+1);
             setVisible(true);
         })
@@ -65,6 +67,7 @@ const Details = (props) => {
         .then(data=>{
             console.log(data);
             if (data.message) throw data.message
+            toast.error(`Unapplied!`);
             setPeopleApplied(peopleApplied-1);
             setVisible(false);
         })
@@ -83,7 +86,8 @@ const Details = (props) => {
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
-            if (data.message) throw data.message
+            if (data.message) throw data.message;
+            toast.success(`Activity deleted successfully!`);
             setRedirect("/")
         })
         .catch(err=>console.log(err));

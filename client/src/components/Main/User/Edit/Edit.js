@@ -1,13 +1,18 @@
 import { Heading } from "./editStyle"
-import CreateForm from "../../../Forms/CreateForm"
+import ActivityForm from "../../../Forms/ActivityForm"
+import { Button } from "../../mainStyle";
 
 const Edit = (props)=>{
     const id = props.match.params.id;
+    const onBackClickHandler = ()=>{
+        props.history.goBack();
+    }
 
     return (
         <>
+        <Button onClick={onBackClickHandler}>Back</Button>
         <Heading>Edit your publication</Heading>
-        <CreateForm id={id} buttonName="Edit" />
+        <ActivityForm id={id} buttonName="Edit" />
         </>
     );
 }

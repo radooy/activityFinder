@@ -19,7 +19,7 @@ const Header = () => {
             <StyledUl>
                 {userInfo.loggedIn && <>
                     <Link to="/filter" className="header-link"> <StyledLi>Filter</StyledLi> </Link>
-                    <Link to="/create" className="header-link"> <StyledLi>Create a publication</StyledLi> </Link>
+                    <Link to="/create" className="header-link"> <StyledLi>Create an activity</StyledLi> </Link>
                     <Link to="/my-profile" className="header-link"> <StyledLi>My profile</StyledLi> </Link>
                     <StyledLi className="header-link logout" onClick={logOut}>Logout</StyledLi>
                 </>

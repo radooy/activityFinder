@@ -6,7 +6,7 @@ import { Wrapper, Heading, Container } from "./profileStyle"
 import MyPublications from "./MyPublications/MyPublications"
 import Applied from "./MyPublications/AppliedFor"
 
-const Profile = () => {
+const Profile = (props) => {
 
     let context = useContext(Context);
     let username = context.username;
@@ -16,7 +16,7 @@ const Profile = () => {
             <Heading>{username}'s profile</Heading>
 
             <Container>
-                <ProfileNav />
+                <ProfileNav {...props} />
                 <Switch>
                     <Route path="/my-profile/publications-made" component={MyPublications} />
                     <Route path="/my-profile/publications-applied" component={Applied} />
