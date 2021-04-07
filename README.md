@@ -9,7 +9,7 @@ The project's Back-end is an ExpressJS based **Rest API** server with MongoDB At
 The Front-end is a **React** client-side rendered, based on [Create-react-app](https://reactjs.org/docs/create-a-new-react-app.html) template, application.
 
 ## Technologies used
-### Rest API:
+### Rest API
 - [ExpressJS](https://expressjs.com/) - v4.17.1
 - [MongoDB](https://www.mongodb.com/) - v3.65.0
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
