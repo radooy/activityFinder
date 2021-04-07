@@ -41,4 +41,5 @@ The Front-end is a **React** client-side rendered, based on [Create-react-app](h
     > cd client
 - Then:
     > npm start
-- **Now your default browser should open at http://localhost:3000 and you are all set to give it a try**
+
+**Now your default browser should open at http://localhost:3000 and you are all set to give it a try**
