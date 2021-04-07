@@ -5,7 +5,7 @@ import Profile from "../User/Profile/Profile"
 import Details from "./Details/Details"
 import Edit from "./Edit/Edit"
 import Filter from "./Filter/Filter"
-import ErrorPage from "../../Error/ErrorPage"
+import ErrorPage from "../../404/ErrorPage"
 
 const User = () => {
     return(

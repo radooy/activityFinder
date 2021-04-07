@@ -4,7 +4,7 @@ import SiteIntroBody from "./SiteIntro/SiteIntroBody";
 import LoginForm from "../../Forms/LoginForm";
 import RegisterForm from "../../Forms/RegisterForm";
 import { ContentWrapper } from "./guestStyle"
-import ErrorPage from "../../Error/ErrorPage"
+import ErrorPage from "../../404/ErrorPage"
 
 const GuestPage = (props) => {
     

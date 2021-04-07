@@ -24,7 +24,17 @@ const Heading = styled.h1`
     text-shadow: 2px 2px #000000;
 `
 
+const Paragraph = styled.p`
+    text-align:center;
+    animation-name: ${fadeIn};
+    animation-duration: 5s;
+    font-size : 25px;
+    color:black;
+    text-shadow: 1px 1px #ffffff;
+`
+
 export {
     Wrapper,
-    Heading
+    Heading,
+    Paragraph
 }
