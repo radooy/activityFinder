@@ -28,7 +28,7 @@ The Front-end is a **React** client-side rendered, based on [Create-react-app](h
 - [React-hot-toast](https://react-hot-toast.com/) - v1.0.2
 
 ## Starting the app
-- Clone the repository - you can do that from [here](https://github.com/radooy/activityFinder.git)
+- Clone the repository
 - Open it in VSCode or whatever editor you chose
 - Open the terminal
 - To install all dependencies type:
