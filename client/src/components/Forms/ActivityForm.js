@@ -2,8 +2,9 @@ import { Component } from "react"
 import { Redirect } from "react-router-dom"
 import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle"
 import { Error } from "../Main/mainStyle";
+import toast from "react-hot-toast";
 
-class CreateForm extends Component {
+class ActivityForm extends Component {
     constructor(props) {
         super(props)
 
@@ -67,6 +68,8 @@ class CreateForm extends Component {
             errors
         });
 
+        Object.keys(errors).length>0 && toast.error("Please fill the form with valid data!")
+
         return isValid;
     }
 
@@ -108,6 +111,7 @@ class CreateForm extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data.message) throw data.message;
+                toast.success('Activity successfully created!');
                 console.log('Success:', data);
                 this.setState({
                     redirect: "/"
@@ -143,6 +147,7 @@ class CreateForm extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data.message) throw data.message;
+                toast.success('Activity successfully edited!');
                 console.log('Success:', data);
                 this.setState({
                     redirect:`/details/${this.props.id}`
@@ -257,4 +262,4 @@ class CreateForm extends Component {
     }
 }
 
-export default CreateForm
+export default ActivityForm
