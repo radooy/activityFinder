@@ -28,7 +28,7 @@ const PublicationSchema = new mongoose.Schema({
         type: String,
         validate:{
             validator: function(value){
-                return /^[a-zA-Z0-9 .!?"-]{8,200}$/.test(value);
+                return /^[a-zA-Z0-9 .,!?-]{8,200}$/.test(value);
             },
             message: MONGOOSE_DESC_VALIDATION
         },
