@@ -46,6 +46,10 @@ The Front-end is a **React** client-side rendered, based on [Create-react-app](h
 
 ## In-app guide
 
+### Test username and password
+**Username**: test  
+**Password**: test123
+
 ### Guest
 - After successfully starting the app you will be directed to the guest home page which has a navigation with **Logo**, "***Login***" and "***Register***" elements
 - Clicking on either **Create free account** or **Register** will render the register form
