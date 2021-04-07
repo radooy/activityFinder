@@ -43,3 +43,65 @@ The Front-end is a **React** client-side rendered, based on [Create-react-app](h
     > npm start
 
 **Now your default browser should open at http://localhost:3000 and you are all set to give it a try!**
+
+## In-app guide
+
+### Guest
+- After successfully starting the app you will be directed to the guest home page which has a navigation with **Logo**, "***Login***" and "***Register***" elements
+- Clicking on either **Create free account** or **Register** will render the register form
+- Clicking on either **here** or **Login** will render the login form
+- Clicking on the site logo will render the guest home page
+- Clicking on **About** in the footer will render the about page
+- Clicking on **Radooy** in the footer will create a new blank page which will be redirected to my github profile
+
+#### Register
+- In order to make a **successful registration** the **username** you choose should be **unique** and only consist of **latin letter, numbers or - . _ symbols and should be between 4 and 20 characters long** and the **password** should contain only **latin letters and numbers and should be atleast 6 characters long** and be the **same as repeat password**
+- If the values in the input fields **don't match the requirements above**, a notification will appear and a message for every **error** beneath the error target
+- After **successful registration** you will be redirected to **login page**
+
+#### Login
+- In order to make a **successful login** you need to type in a **valid username and password**
+- If either the **username or password is wrong** a notification will appear saying that one of them is **not valid**
+- After **successful login** you will be redirected to **user home page** with a notification "Logged in as ***username***"
+
+### User
+The navigation items appart from **Logo** will be set to "***Filter***", "***Create an activity***", "***My profile***" and "***Logout***" and won't change until the user logs out.  
+The footer is remaining the same as the **Guest** footer.
+
+#### Home page
+- A heading will appear saying "Avalable activities for you, ***username***"
+- The user home page will render a **preview** (including only sport, city, date and applied) of every one of **all the available activities** (which the all the users created including your own)
+- If there are **no activities** a message will be shown saying that **there are no available activities**
+- Clicking on the logo will render the ***Home Page*** **(user)**
+- Clicking on **any of the available activities** will lead to a **details page** for the chosen activity
+- Clicking on the ***Filter*** button will lead to a **filter page**
+- Clicking on the ***Create an activity*** will lead to a **create page**
+- Clicking on ***My profile*** will lead to a **profile page**
+- Clicking on ***Logout*** will result in a **logout** and user will be **redirected to login page (guest)**
+
+#### Create page
+- A form for creating an activity and a **Back** button is rendered
+- Clicking on the **Back** button will bring you back to the previous page **clicked**
+- In order for an activity to be created it should pass the following requirements:
+    - **First and last name** of user should contain only **latin letters and a single space between first and last name**
+    - **About the activity** description should be between **8 and 200 chars** and can contain **" ,!.?"** symbols
+    - **Date** ***must*** be selected from the calendar
+    - **People needed** must be in the interval between **1 and 20**
+    - **Sport** and **City** must be selected from the lists, otherwise the **default values** are as those on top of the lists - for sport - **Football**, for city - **Sofia**
+    - **Phone number** must be exactly **10 characters** long and should start with **0**
+    - **Image URL** must start with ***http:// or https://*** 
+    - **All** fields are **required**
+- If some of the requirements are **not pleased** notification is shown and **error messages** are applied beneith the inputs with errors
+- After **successfully creating** an activity a notification is shown saying that the activity is created and user will be **redirected** to user **home page**
+
+#### Details page
+- Renders the **full information** for the activity with a **Back** button
+- If the user is the **creator** of the activity additional buttons **Edit** and **Delete** are rendered
+- If the user is **not the creator** of the activity and if there are **still people needed**, button **Apply** or **Unapply** is rendered, depending on **if** the user is already **applied** for the activity or **not**. If there **isn't any space left** (the count of people needed is equal to the count of people applied) for the current unapplied user, the only button that's being rendered is **Back** button
+- Clicking the ***Edit*** button will lead to **Edit** page
+- Clicking on ***Delete*** button will result in **deleting** the current activity. After that a notification appears saying that the **deletion was successful** and the user is **redirected to the home page**
+- Clicking on the **Back** button will bring you back to the previous page **clicked**
+- Clicking on the **Apply** button will apply the user in the activity's people applied array and will **increase the count of people applied by 1**. A notification will be shown saying that the user has **applied successfully**. The **Unapply** button is being shown
+- Clicking on **Unapply** will **decrease the count of people applied by 1** and a message will be shown saying that the user has **unapplied successfully**. The **Apply** button is shown
+
+#### Edit page
