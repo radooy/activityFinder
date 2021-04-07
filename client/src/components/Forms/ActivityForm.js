@@ -141,13 +141,14 @@ class ActivityForm extends Component {
                 peopleNeeded: Number(this.state.peopleNeeded),
                 phoneNumber: this.state.phoneNumber,
                 city: this.state.city,
-                imgUrl: this.state.imgUrl
+                imgUrl: this.state.imgUrl,
+                dateFromPublication:null
             })
         })
             .then(response => response.json())
             .then(data => {
                 if (data.message) throw data.message;
-                toast.success('Activity successfully edited!');
+                toast.success('Activity successfully updated!');
                 console.log('Success:', data);
                 this.setState({
                     redirect:`/details/${this.props.id}`
@@ -184,7 +185,8 @@ class ActivityForm extends Component {
                         description: data.publication.description,
                         peopleNeeded: Number(data.publication.peopleNeeded),
                         phoneNumber: data.publication.phoneNumber,
-                        imgUrl: data.publication.imgUrl
+                        imgUrl: data.publication.imgUrl,
+                        dateFromPublication: data.publication.date
                     })
                 });
         }
@@ -215,6 +217,7 @@ class ActivityForm extends Component {
                     {this.state.errors.descriptionLength && <Error fontSize={fontSize}>{this.state.errors.descriptionLength}</Error>}
 
                     <Label htmlFor="date">Date:</Label>
+                    {this.props.info && <div>If you don't want to select a new date it will remain: {this.state.dateFromPublication}</div>}
                     <Input type="datetime-local" name="date" id="date"
                         onFocus={this.onFocusHandler.bind(this)}
                         onChange={this.onChangeHandler.bind(this)} />

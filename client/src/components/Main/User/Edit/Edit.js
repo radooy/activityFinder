@@ -1,6 +1,6 @@
 import { Heading } from "./editStyle"
 import ActivityForm from "../../../Forms/ActivityForm"
-import { Button } from "../../mainStyle";
+import { Button } from "../../mainStyle"
 
 const Edit = (props)=>{
     const id = props.match.params.id;
@@ -12,7 +12,7 @@ const Edit = (props)=>{
         <>
         <Button onClick={onBackClickHandler}>Back</Button>
         <Heading>Edit your publication</Heading>
-        <ActivityForm id={id} buttonName="Edit" />
+        <ActivityForm id={id} buttonName="Edit" info/>
         </>
     );
 }
