@@ -1,12 +1,12 @@
-import { Heading } from "./editStyle"
-import ActivityForm from "../../../Forms/ActivityForm"
-import { Button } from "../../mainStyle"
+import { Heading } from "./editStyle";
+import ActivityForm from "../../../Forms/ActivityForm";
+import { Button } from "../../mainStyle";
 
 const Edit = (props)=>{
     const id = props.match.params.id;
     const onBackClickHandler = ()=>{
         props.history.goBack();
-    }
+    };
 
     return (
         <>
@@ -15,6 +15,6 @@ const Edit = (props)=>{
         <ActivityForm id={id} buttonName="Edit" info/>
         </>
     );
-}
+};
 
 export default Edit

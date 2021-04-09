@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import { ErrorImage, Wrapper, Button } from "./errorPageStyle"
+import { Link } from "react-router-dom";
+import { ErrorImage, Wrapper, Button } from "./errorPageStyle";
 
 const ErrorPage = ()=>{
     return(
@@ -8,7 +8,7 @@ const ErrorPage = ()=>{
             <Link to="/"><Button>Home page</Button></Link>
         </Wrapper>
         
-    )
-}
+    );
+};
 
 export default ErrorPage

@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom"
-import Activity from "../Activity/Activity"
-import { ActivitiesWrappper, NoActivitiesDiv } from "./activitiesSectionStyle"
+import { Link } from "react-router-dom";
+import Activity from "../Activity/Activity";
+import { ActivitiesWrappper, NoActivitiesDiv } from "./activitiesStyle";
 
-const ActivityPresentation = (props)=>{
+const ActivitiesPreview = (props)=>{
     return(
         <ActivitiesWrappper display={props.state.length === 0 ? "block" : "grid"}>
             {props.state.length > 0 ? props.state.map(activity =>
@@ -13,7 +13,6 @@ const ActivityPresentation = (props)=>{
                         <Activity
                             detailed={false}
                             sport={activity.sport}
-                            description={activity.description}
                             city={activity.city}
                             date={activity.date}
                             peopleApplied={activity.peopleApplied.length}
@@ -26,6 +25,6 @@ const ActivityPresentation = (props)=>{
                 ): <NoActivitiesDiv>There are currently no activities to show!</NoActivitiesDiv>}
         </ActivitiesWrappper>
     );
-}
+};
 
-export default ActivityPresentation
+export default ActivitiesPreview

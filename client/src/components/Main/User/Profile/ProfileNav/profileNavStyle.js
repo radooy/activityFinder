@@ -1,13 +1,13 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-const font = "'Audiowide', cursive;"
+const font = "'Audiowide', cursive;";
 
 const ButtonContainer = styled.div`
     display:grid;
     margin-right: 20px;
     align-self:flex-start;
 
-    .my-publications-button{
+    .my-activities-button{
         font-family:${font};
         max-width:200px;
         width:100%;

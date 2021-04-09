@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import UserContext from "../../../Context/Context";
-import ActivitiesSection from "./AcctivitiesSection/ActivitiesSection"
-import {Wrapper, Heading} from "./homeStyle"
+import AllActivities from "./Activities/AllActivities";
+import { Wrapper, Heading } from "./homeStyle";
 
 const HomePage = () => {
 
@@ -11,10 +11,10 @@ const HomePage = () => {
 
         <Wrapper>
             <Heading>Available activities for you, {userInfo.username}</Heading>
-            <ActivitiesSection/>
+            <AllActivities/>
         </Wrapper>
 
     );
-}
+};
 
 export default HomePage

@@ -11,7 +11,7 @@ const Header = () => {
     const logOut = () => {
         userInfo.logOut();
         history.push("/login");
-    }
+    };
 
     return (
         <StyledHeader>
@@ -33,4 +33,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default Header

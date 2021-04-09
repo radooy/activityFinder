@@ -1,4 +1,4 @@
-import ActivityForm from "../../../Forms/ActivityForm"
+import ActivityForm from "../../../Forms/ActivityForm";
 import { Button } from "../../mainStyle";
 
 const CreatePage = (props) => {
@@ -13,6 +13,6 @@ const CreatePage = (props) => {
             <ActivityForm/>
         </div>
     );
-}
+};
 
 export default CreatePage

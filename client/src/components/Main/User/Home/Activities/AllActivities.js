@@ -1,8 +1,8 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext } from "react";
 import UserContext from "../../../../Context/Context";
-import ActivityPresentation from "./ActivitiesPresentation"
+import ActivitiesPreview from "./ActivitiesPreview";
 
-const ActivitiesSection = () => {
+const AllActivities = () => {
 
     const [state, setState] = useState([]);
 
@@ -20,12 +20,12 @@ const ActivitiesSection = () => {
             .catch(err => {
                 console.log(err)
             })
-    }, [userInfo])
+    }, [userInfo]);
 
 
     return (
-        <ActivityPresentation state={state}/>
-    )
-}
+        <ActivitiesPreview state={state}/>
+    );
+};
 
-export default ActivitiesSection
+export default AllActivities

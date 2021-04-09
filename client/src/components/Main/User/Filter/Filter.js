@@ -1,12 +1,12 @@
-import { useState } from "react"
-import { FilterWrapper, FilterParagraph, Select } from "./filterStyle"
-import { Button } from "../../mainStyle"
-import ActivitiesPresentation from "../Home/AcctivitiesSection/ActivitiesPresentation"
-import { NoActivitiesDiv } from "../Home/AcctivitiesSection/activitiesSectionStyle"
+import { useState } from "react";
+import { FilterWrapper, FilterParagraph, Select } from "./filterStyle";
+import { Button } from "../../mainStyle";
+import ActivitiesPreview from "../Home/Activities/ActivitiesPreview";
+import { NoActivitiesDiv } from "../Home/Activities/activitiesStyle";
 
 const Filter = (props) => {
-    let [sportsButton, setSportsButton] = useState(true);
-    let [citiesButton, setCitiesButton] = useState(true);
+    let [sportsButtonVisible, setSportsButtonVisible] = useState(true);
+    let [citiesButtonVisible, setCitiesButtonVisible] = useState(true);
     let [cities, setCities] = useState([]);
     let [sports, setSports] = useState([]);
     let [currentCity, setCurrentCity] = useState("Sofia");
@@ -14,8 +14,8 @@ const Filter = (props) => {
     let [publications, setPublications] = useState([]);
     let [showNoActivities, setShowNoActivities] = useState(false);
 
-    const onCitiesButtonClick = () => {
-        setSportsButton(false);
+    const onCitiesButtonClickHandler = () => {
+        setSportsButtonVisible(false);
 
         fetch("http://localhost:5000/api/utils/cities")
             .then(res => res.json())
@@ -23,10 +23,10 @@ const Filter = (props) => {
                 setCities(data.cities);
             })
             .catch(err => console.log(err));
-    }
+    };
 
-    const onSportsButtonClick = () => {
-        setCitiesButton(false);
+    const onSportsButtonClickHandler = () => {
+        setCitiesButtonVisible(false);
 
         fetch("http://localhost:5000/api/utils/sports")
             .then(res => res.json())
@@ -36,27 +36,27 @@ const Filter = (props) => {
             .catch(err => console.log(err));
     }
 
-    const onResetButtonClick = () => {
-        setSportsButton(true);
-        setCitiesButton(true);
+    const onResetButtonClickHandler = () => {
+        setSportsButtonVisible(true);
+        setCitiesButtonVisible(true);
         setPublications([]);
         setShowNoActivities(false);
     }
 
     const onCitySelectHandler = (e) => {
-        setCurrentCity(e.target.value)
-    }
+        setCurrentCity(e.target.value);
+    };
 
     const onSportSelectHandler = (e) => {
-        setCurrentSport(e.target.value)
-    }
+        setCurrentSport(e.target.value);
+    };
 
     const onBackClickHandler = ()=>{
         props.history.goBack();
-    }
+    };
 
-    const onGoButtonClick = () =>{
-        if(sportsButton){
+    const onGoButtonClickHandler = () =>{
+        if(sportsButtonVisible){
             fetch(`http://localhost:5000/api/publications/filter?sport=${currentSport}`,{
                 credentials:"include"
             }).then(res=>res.json())
@@ -65,7 +65,7 @@ const Filter = (props) => {
                 data.publications.length===0 ? setShowNoActivities(true) : setShowNoActivities(false);
                 setPublications(data.publications);
             })
-            .catch(err=>console.log(err))
+            .catch(err=>console.log(err));
         }else{
             fetch(`http://localhost:5000/api/publications/filter?city=${currentCity}`,{
                 credentials:"include"
@@ -75,9 +75,9 @@ const Filter = (props) => {
                     data.publications.length===0 ? setShowNoActivities(true) : setShowNoActivities(false);
                    setPublications(data.publications)
                 })
-                .catch(err=>console.log(err))
-        }
-    }
+                .catch(err=>console.log(err));
+        };
+    };
     
     return (
         <>
@@ -85,39 +85,39 @@ const Filter = (props) => {
 
             <FilterParagraph>Filter by:</FilterParagraph>
 
-            {citiesButton && 
-            <Button className="select-btn" onClick={onCitiesButtonClick}>City</Button>
+            {citiesButtonVisible && 
+            <Button className="select-btn" onClick={onCitiesButtonClickHandler}>City</Button>
             }
 
-            {!sportsButton && 
+            {!sportsButtonVisible && 
             <Select onChange={(e) => onCitySelectHandler(e)} >
                     {cities.map(city=> <option key={city} value={city}>{city}</option>)}
             </Select>}
 
-            {sportsButton && 
-            <Button className="select-btn" onClick={onSportsButtonClick}>Sports</Button> 
+            {sportsButtonVisible && 
+            <Button className="select-btn" onClick={onSportsButtonClickHandler}>Sports</Button> 
             }
 
-            {!citiesButton && 
+            {!citiesButtonVisible && 
             <Select onChange={(e) => onSportSelectHandler(e)}>
                     {sports.map(sport=> <option key={sport} value={sport}>{sport}</option>)}
             </Select>}
-
             
-            
-            {(!citiesButton || !sportsButton) && <>
-            <Button className="go-btn" onClick={onGoButtonClick}>GO!</Button>
-            <Button className="reset-btn" onClick={onResetButtonClick}>Reset</Button>
+            {(!citiesButtonVisible || !sportsButtonVisible) && <>
+            <Button className="go-btn" onClick={onGoButtonClickHandler}>GO!</Button>
+            <Button className="reset-btn" onClick={onResetButtonClickHandler}>Reset</Button>
             </>
             }
-            
 
             <Button className="back-btn" onClick={onBackClickHandler}>Back</Button>
 
         </FilterWrapper>
-        {publications.length>0 && <ActivitiesPresentation state={publications}/>}
+
+        {publications.length>0 && <ActivitiesPreview state={publications}/>}
+
         {showNoActivities && <NoActivitiesDiv>There are currently no activities found by the given criteria</NoActivitiesDiv>}
         </>
-    )
-}
+    );
+};
+
 export default Filter

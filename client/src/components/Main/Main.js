@@ -1,19 +1,19 @@
 import { useContext } from "react";
-import UserContext from "../Context/Context";
-import User from "./User/User"
+import Context from "../Context/Context";
+import User from "./User/User";
 import GuestPage from "./Guest/GuestPage";
 import { MainContainer } from "./mainStyle";
 
 const Main = (props) => {
-    const userInfo = useContext(UserContext);
+    const context = useContext(Context);
 
     return (
         <MainContainer>
             
-            {userInfo.loggedIn ? <User/> : <GuestPage {...props}/>}
+            {context.loggedIn ? <User/> : <GuestPage {...props}/>}
 
         </MainContainer>
     );
-}
+};
 
-export default Main;
+export default Main

@@ -1,5 +1,5 @@
-import StyledFooter from "./footerStyle"
-import { Link } from "react-router-dom"
+import StyledFooter from "./footerStyle";
+import { Link } from "react-router-dom";
 const Footer = () => {
     return(
     <StyledFooter>
@@ -7,6 +7,6 @@ const Footer = () => {
         <span><Link to="/about" className="footer-link">About</Link></span>
     </StyledFooter>
     );
-}
+};
 
-export default Footer;
+export default Footer

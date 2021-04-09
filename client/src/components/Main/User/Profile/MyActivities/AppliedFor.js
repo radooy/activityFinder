@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react"
-import Context from "../../../../Context/Context"
-import ActivityPresentation from "../../Home/AcctivitiesSection/ActivitiesPresentation"
-import {Wrapper, Heading} from "./myPublicationsStyle"
+import { useContext, useEffect, useState } from "react";
+import Context from "../../../../Context/Context";
+import ActivitiesPreview from "../../Home/Activities/ActivitiesPreview";
+import {Wrapper, Heading} from "./myActivitiesStyle";
 
 const Applied = () => {
 
@@ -14,19 +14,19 @@ const Applied = () => {
             credentials:"include"
         }).then(res=>res.json())
             .then(data=>{
-                if (data.message) throw data.message
-                setPublications(data.publications)
-            }).catch(err=>console.log(err))
+                if (data.message) throw data.message;
+                setPublications(data.publications);
+            }).catch(err=>console.log(err));
             
-    },[id])
+    },[id]);
 
     return(
         <Wrapper>
             {publications.length>0 && <Heading>Activities applied for:</Heading>}
-            <ActivityPresentation state={publications}/>
+            <ActivitiesPreview state={publications}/>
         </Wrapper>
         
-    )
-}
+    );
+};
 
 export default Applied

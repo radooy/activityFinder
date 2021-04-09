@@ -1,4 +1,4 @@
-import {ActivityWrapper, Heading, InfoFor} from "./activityStyle"
+import {ActivityWrapper, Heading, InfoFor} from "./activityStyle";
 
 const Activity = ({detailed, nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl, peopleApplied}) => {
     
@@ -25,7 +25,7 @@ const Activity = ({detailed, nameOfUser, sport, date, description, peopleNeeded,
             </>
             }
         </ActivityWrapper>
-    )
-}
+    );
+};
 
 export default Activity

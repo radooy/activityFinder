@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Context from "./Context"
+import Context from "./Context";
 
 class UserAuthProvider extends Component{
     constructor(props){
@@ -10,8 +10,8 @@ class UserAuthProvider extends Component{
             username: "",
             id: "",
             city:""
-        }
-    }
+        };
+    };
 
     logIn = (username,id,city) => {
         this.setState({
@@ -19,8 +19,8 @@ class UserAuthProvider extends Component{
             username,
             id,
             city
-        })
-    }
+        });
+    };
 
     logOut = () => {
         document.cookie = `x-auth-token= ;expires=Thu, 01 Jan 1970 00:00:01 GMT;`
@@ -29,8 +29,8 @@ class UserAuthProvider extends Component{
             username: "",
             id: "",
             city:""
-        })
-    }
+        });
+    };
 
     componentDidMount(){
         fetch("http://localhost:5000/api/auth/verify",{
@@ -48,18 +48,18 @@ class UserAuthProvider extends Component{
                 username: data.username,
                 id: data.id,
                 city:data.city
-            })
+            });
         })
         .catch(err=>console.log(err));
-    }
+    };
 
 
     render(){
         if (this.state.loggedIn === null) {
             return (
                 <span>Loading...</span>
-            )
-        }
+            );
+        };
         return(
         <Context.Provider value={{
             loggedIn: this.state.loggedIn,
@@ -72,10 +72,9 @@ class UserAuthProvider extends Component{
         }}>
             {this.props.children}
         </Context.Provider>
-        )
-        
-    }
+        );
+    };
     
-}
+};
 
 export default UserAuthProvider
