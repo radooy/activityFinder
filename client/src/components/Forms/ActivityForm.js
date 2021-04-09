@@ -4,6 +4,7 @@ import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle";
 import { Error } from "../Main/mainStyle";
 import toast from "react-hot-toast";
 import { fetcher } from "../../utils/helpers";
+import { validation } from "../../utils/plainText"
 
 class ActivityForm extends Component {
     constructor(props) {
@@ -33,33 +34,34 @@ class ActivityForm extends Component {
         const { nameOfUser, date, description, peopleNeeded, phoneNumber, imgUrl } = this.state;
         let errors = {};
         let isValid = true;
+        let message = validation.activity;
 
         if ((nameOfUser.trim().length===0) || /^([A-Z]{1})([a-z])+ ([A-Z]{1})([a-z])+$/.test(nameOfUser)===false){
-            errors.nameOfUser = "User's first and last name field is required and both should start with capital letter followed by lowercase letters and a single space between first and last name!";
+            errors.nameOfUser = message.nameOfUser;
         };
 
         if (!date){
-            errors.date = "Please select a date!";
+            errors.date = message.date;
         };
 
         if (description.trim().length<8 || description.length>200) {
-            errors.descriptionLength = "Description must be between 8 and 200 symbols!";
+            errors.descriptionLength = message.descriptionLength;
         };
 
         if (/^[a-zA-Z0-9 .!?"-]{8,200}$/.test(description)===false) {
-            errors.descriptionChars = "Description can contain only latin letters, numbers,spaces and '!', '?','-' signs!";
+            errors.descriptionChars = message.descroptionChars;
         };
 
         if (Number(peopleNeeded)<1 || Number(peopleNeeded)>20){
-            errors.peopleNeeded = "Please select a number between 1 and 20!";
+            errors.peopleNeeded = message.peopleNeeded;
         };
 
         if ((phoneNumber.trim().length!==10) || /^[0]{1}[0-9]{9}$/.test(phoneNumber)===false){
-            errors.phoneNumber = "Phone number must be exactly 10 numbers and should start with '0' !";
+            errors.phoneNumber = message.phoneNumber;
         };
 
         if ((imgUrl.trim().length===0) || /^https?:\/\/(.*)$/.test(imgUrl)===false) {
-            errors.imgUrl = "Please enter a valid url! URL should start with either http:// or https://";
+            errors.imgUrl = message.imgUrl;
         };
 
         this.setState({
@@ -67,7 +69,7 @@ class ActivityForm extends Component {
         });
 
         if (Object.keys(errors).length>0){
-            toast.error("Please fill the form with valid data!");
+            toast.error(message.error);
             isValid = false;
         };
         return isValid;

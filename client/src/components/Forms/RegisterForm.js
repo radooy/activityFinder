@@ -4,6 +4,7 @@ import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle";
 import { Error } from "../Main/mainStyle";
 import toast from "react-hot-toast";
 import { fetcher } from "../../utils/helpers";
+import { validation } from "../../utils/plainText";
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -27,25 +28,25 @@ class RegisterForm extends Component {
         const {username, password, rePassword} = this.state;
         let errors = {};
         let isValid = true;
-
+        let message = validation.register;
         if(username.length<4 || username.length>20){
-            errors.usernameLength = "Username must be between 4 and 20 symbols!";
+            errors.usernameLength = message.usernameLength;
         };
 
         if(/^[a-zA-z0-9._-]+$/.test(username)===false){
-            errors.usernameSymbols = "Username must contain only latin letters or numbers!";
+            errors.usernameSymbols = message.usernameSymbols;
         };
 
         if(password.length<6 || password.length>40){
-            errors.passwordLength = "Password must be between 6 and 40 symbols!";
+            errors.passwordLength = message.passwordLength;
         };
 
         if(/^[a-z0-9]+$/.test(password) === false){
-            errors.passwordSymbols = "Password must contain only latin letters and/or numbers!";
+            errors.passwordSymbols = message.passwordSymbols;
         };
 
         if(password!==rePassword){
-            errors.passwordMissMatch = "Password and repeat password fields must match!";
+            errors.passwordMissMatch = message.passwordsMissMatch;
         };
 
         this.setState({
@@ -53,7 +54,7 @@ class RegisterForm extends Component {
         });
 
         if(Object.keys(errors).length>0){
-            toast.error("Please fill the form with valid data!");
+            toast.error(message.error);
             isValid=false;
         };
         return isValid;
