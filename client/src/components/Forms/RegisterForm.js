@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle";
 import { Error } from "../Main/mainStyle";
 import toast from "react-hot-toast";
+import { fetcher } from "../../utils/helpers";
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class RegisterForm extends Component {
             errors.usernameLength = "Username must be between 4 and 20 symbols!";
         };
 
-        if(/^[a-z0-9._-]+$/.test(username)===false){
+        if(/^[a-zA-z0-9._-]+$/.test(username)===false){
             errors.usernameSymbols = "Username must contain only latin letters or numbers!";
         };
 
@@ -73,15 +74,12 @@ class RegisterForm extends Component {
     onSubmitHandler(e) {
         e.preventDefault();
 
-        let isValid = this.validateForm();
+        const isValid = this.validateForm();
+        const endpoint = "/auth/register";
+        const { password , rePassword, city} = this.state;
+        const username = this.state.username.toLowerCase();
 
-        isValid && fetch("http://localhost:5000/api/auth/register", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username: this.state.username.toLowerCase(), password: this.state.password, rePassword: this.state.rePassword, city: this.state.city })
-        })
+        isValid && fetcher(endpoint, "POST", {username, password, rePassword, city})
             .then(response => response.json())
             .then(data => {
                 if (data.message) throw data.message;
@@ -96,9 +94,9 @@ class RegisterForm extends Component {
                 errors.usernameIsTaken = err;
                 this.setState({
                     errors
-                })
+                });
             });
-    };
+        };
 
     componentDidMount() {
         fetch("http://localhost:5000/api/utils/cities")

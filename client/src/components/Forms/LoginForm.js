@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Wrapper, Form, Input, Submit, Label } from "./formStyle";
 import Context from "../Context/Context";
 import toast from "react-hot-toast";
+import { fetcher } from "../../utils/helpers";
 
 class Login extends Component {
     constructor(props) {
@@ -27,13 +28,9 @@ class Login extends Component {
 
     onSubmitHandler(e) {
         e.preventDefault();
-        fetch("http://localhost:5000/api/auth/login", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username: this.state.username.toLowerCase(), password: this.state.password })
-        })
+        const { username, password } = this.state;
+        const endpoint = "/auth/login";
+        fetcher(endpoint, "POST", {username, password})
             .then(response => response.json())
             .then(data => {
                 if (data.message) throw data.message;

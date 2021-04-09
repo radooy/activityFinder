@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle";
 import { Error } from "../Main/mainStyle";
 import toast from "react-hot-toast";
+import { fetcher } from "../../utils/helpers";
 
 class ActivityForm extends Component {
     constructor(props) {
@@ -86,70 +87,39 @@ class ActivityForm extends Component {
 
     onSubmitHandler(e) {
         e.preventDefault();
-        let isValid = this.validateForm();
-
-        isValid && fetch("http://localhost:5000/api/publications/create", {
-            credentials: "include",
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                nameOfUser: this.state.nameOfUser,
-                sport: this.state.sport,
-                date: this.state.date,
-                description: this.state.description,
-                peopleNeeded: Number(this.state.peopleNeeded),
-                phoneNumber: this.state.phoneNumber,
-                city: this.state.city,
-                imgUrl: this.state.imgUrl
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) throw data.message;
-                toast.success('Activity successfully created!');
-                console.log('Success:', data);
-                this.setState({
-                    redirect: "/"
-                });
-
-            }).catch(err => console.log(err));
+        const { nameOfUser, sport, date, description, phoneNumber, city, imgUrl } = this.state;
+        const peopleNeeded = Number(this.state.peopleNeeded);
+        const isValid = this.validateForm();
+        const endpoint = "/publications/create";
+        isValid && fetcher(endpoint, "POST", {nameOfUser, sport, date, description, phoneNumber, city, imgUrl, peopleNeeded})
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message) throw data.message;
+                            toast.success('Activity successfully created!');
+                            console.log('Success:', data);
+                            this.setState({
+                            redirect: "/"
+                            });
+                        }).catch(err => console.log(err));
     };
 
     onEditHandler(e){
         e.preventDefault();
         let isValid = this.validateForm();
-        
-        isValid && fetch(`http://localhost:5000/api/publications/${this.props.id}`, {
-            credentials: "include",
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 
-                nameOfUser: this.state.nameOfUser,
-                sport: this.state.sport,
-                date: this.state.date,
-                description: this.state.description,
-                peopleNeeded: Number(this.state.peopleNeeded),
-                phoneNumber: this.state.phoneNumber,
-                city: this.state.city,
-                imgUrl: this.state.imgUrl,
-                dateFromPublication:null
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) throw data.message;
-                toast.success('Activity successfully updated!');
-                console.log('Success:', data);
-                this.setState({
-                    redirect:`/details/${this.props.id}`
-                })
-            }).catch(err => console.log(err));
+        let endpoint =`/publications/${this.props.id}`;
+        let { nameOfUser, sport, date, description, phoneNumber, city, imgUrl } = this.state;
+        let peopleNeeded = Number(this.state.peopleNeeded);
+        isValid && fetcher(endpoint, "PATCH", {nameOfUser, sport, date, description, phoneNumber, city, imgUrl, peopleNeeded})
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message) throw data.message;
+                        toast.success('Activity successfully updated!');
+                        console.log('Success:', data);
+                        this.setState({
+                        redirect:`/details/${this.props.id}`
+                        })
+                    }).catch(err => console.log(err));    
     };
-
 
     componentDidMount() {
         fetch("http://localhost:5000/api/utils/cities")
