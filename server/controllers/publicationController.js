@@ -154,7 +154,7 @@ router.patch("/:id", isAuth, async (req, res) => {
         console.log(creator);
         if (String(userId) === creator) {
             let { nameOfUser, sport, date, description, peopleNeeded, city, phoneNumber, imgUrl } = req.body;
-            let dateFormated = moment(new Date(date)).format("DD.MM.YYYY HH:mm");
+            let dateFormated = date[2]!=="." ? moment(new Date(date)).format("DD.MM.YYYY HH:mm") : date;
             publicationService.updateOne(id, nameOfUser, sport, dateFormated, description, peopleNeeded, city, phoneNumber, imgUrl)
                 .then(() => {
                     res.status(200).json({ Success: "Updated successfully!" })
