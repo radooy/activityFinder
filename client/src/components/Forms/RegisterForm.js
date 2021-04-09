@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { Redirect } from "react-router-dom"
-import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle"
-import { Error } from "../Main/mainStyle"
-import toast from "react-hot-toast"
+import { Redirect } from "react-router-dom";
+import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle";
+import { Error } from "../Main/mainStyle";
+import toast from "react-hot-toast";
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -17,7 +17,10 @@ class RegisterForm extends Component {
             redirect: null,
             errors: {}
         }
-    }
+        this.onChangeHandler = this.onChangeHandler.bind(this);
+        this.onSubmitHandler = this.onSubmitHandler.bind(this);
+        this.onFocusHandler = this.onFocusHandler.bind(this);
+    };
     
     validateForm = () => {
         const {username, password, rePassword} = this.state;
@@ -26,47 +29,46 @@ class RegisterForm extends Component {
 
         if(username.length<4 || username.length>20){
             errors.usernameLength = "Username must be between 4 and 20 symbols!";
-            isValid = false;
-        }
+        };
 
         if(/^[a-z0-9._-]+$/.test(username)===false){
-            errors.usernameSymbols = "Username must contain only latin letters or numbers!"
-            isValid=false;
-        }
+            errors.usernameSymbols = "Username must contain only latin letters or numbers!";
+        };
 
         if(password.length<6 || password.length>40){
             errors.passwordLength = "Password must be between 6 and 40 symbols!";
-            isValid = false;
-        }
+        };
 
         if(/^[a-z0-9]+$/.test(password) === false){
-            errors.passwordSymbols = "Password must contain only latin letters or numbers!"
-        }
+            errors.passwordSymbols = "Password must contain only latin letters and/or numbers!";
+        };
 
         if(password!==rePassword){
             errors.passwordMissMatch = "Password and repeat password fields must match!";
-            isValid = false;
-        }
+        };
 
-        this.setState({errors},()=>console.log(this.state.errors));
-        Object.keys(errors).length>0 && toast.error("Please fill the form with valid data!")
-        return isValid;
-
-    }
-
-    onFocusHandler(e){
         this.setState({
-            ...this.state,
+            errors
+        });
+
+        if(Object.keys(errors).length>0){
+            toast.error("Please fill the form with valid data!");
+            isValid=false;
+        };
+        return isValid;
+    };
+
+    onFocusHandler(){
+        this.setState({
             errors:{}
-        })
-    }
+        });
+    };
 
     onChangeHandler(e) {
         this.setState({
-            ...this.state,
             [e.target.name]: e.target.value
-        })
-    }
+        });
+    };
 
     onSubmitHandler(e) {
         e.preventDefault();
@@ -85,7 +87,6 @@ class RegisterForm extends Component {
                 if (data.message) throw data.message;
                 toast.success('Registration complete!');
                 this.setState({
-                    ...this.state,
                     redirect: "/login"
                 });
             })
@@ -97,56 +98,56 @@ class RegisterForm extends Component {
                     errors
                 })
             });
-    }
+    };
 
     componentDidMount() {
         fetch("http://localhost:5000/api/utils/cities")
             .then(res => res.json())
             .then((data) => {
-                this.setState({ cities: data.cities })
+                this.setState({ cities: data.cities });
             })
             .catch(err => console.log(err));
-    }
+    };
 
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
-
+        let errors = this.state.errors;
         return (
             <Wrapper>
-                <Form onSubmit={this.onSubmitHandler.bind(this)}>
+                <Form onSubmit={this.onSubmitHandler}>
                     <Label htmlFor="username">Username:</Label>
                     <Input type="text" name="username" id="username" placeholder="example123"
-                        onFocus={this.onFocusHandler.bind(this)}
-                        onChange={this.onChangeHandler.bind(this)} />
-                    {this.state.errors.usernameLength && <Error>{this.state.errors.usernameLength}</Error>}
-                    {this.state.errors.usernameIsTaken && <Error>{this.state.errors.usernameIsTaken}</Error>}
-                    {this.state.errors.usernameSymbols && <Error>{this.state.errors.usernameSymbols}</Error>}
+                        onFocus={this.onFocusHandler}
+                        onChange={this.onChangeHandler} />
+                    {errors.usernameLength && <Error>{errors.usernameLength}</Error>}
+                    {errors.usernameIsTaken && <Error>{errors.usernameIsTaken}</Error>}
+                    {errors.usernameSymbols && <Error>{errors.usernameSymbols}</Error>}
                     
                     <Label htmlFor="password">Password:</Label>
                     <Input type="password" name="password" id="password"
-                        onFocus={this.onFocusHandler.bind(this)}
-                        onChange={this.onChangeHandler.bind(this)} />
-                    {this.state.errors.passwordLength && <Error>{this.state.errors.passwordLength}</Error>}
-                    {this.state.errors.passwordSymbols && <Error>{this.state.errors.passwordSymbols}</Error>}
+                        onFocus={this.onFocusHandler}
+                        onChange={this.onChangeHandler} />
+                    {errors.passwordLength && <Error>{errors.passwordLength}</Error>}
+                    {errors.passwordSymbols && <Error>{errors.passwordSymbols}</Error>}
                     
                     <Label htmlFor="rePassword">Repeat password:</Label>
                     <Input type="password" name="rePassword" id="rePassword"
-                        onFocus={this.onFocusHandler.bind(this)}
-                        onChange={this.onChangeHandler.bind(this)} />
-                    {this.state.errors.passwordMissMatch && <Error>{this.state.errors.passwordMissMatch}</Error>}
+                        onFocus={this.onFocusHandler}
+                        onChange={this.onChangeHandler} />
+                    {errors.passwordMissMatch && <Error>{errors.passwordMissMatch}</Error>}
                     
                     <Label htmlFor="city">Choose your city:</Label>
                     <Select name="city" id="city"
-                        onChange={this.onChangeHandler.bind(this)}>
+                        onChange={this.onChangeHandler}>
                         {this.state.cities.map((city) => <option key={city} value={city}> {city} </option>)}
                     </Select>
                     <Submit value="Join us" />
                 </Form>
             </Wrapper>
         );
-    }
-}
+    };
+};
 
 export default RegisterForm
