@@ -12,7 +12,7 @@ const Profile = (props) => {
     let context = useContext(Context);
     let username = context.username;
 
-    //again monkey code
+    //again monkey code 
     if (props.location.pathname!=="/my-profile" &&
         props.location.pathname!=="/my-profile/activities-made" &&
         props.location.pathname!=="/my-profile/activities-applied") {
