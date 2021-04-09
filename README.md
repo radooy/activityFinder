@@ -29,7 +29,7 @@ The Front-end is a **React** client-side rendered, based on [Create-react-app](h
 
 ## Starting the app
 - Clone the repository
-- Open it in VSCode or whatever editor you chose
+- Open it in VSCode or whatever editor you choose
 - Open the terminal
 - Install dependencies
 - To install server dependencies go to:
