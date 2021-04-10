@@ -19,8 +19,7 @@ const validation = {
         imgUrl: "Please enter a valid url! URL should start with either http:// or https://",
         error: "Please fill the form with valid data!"
     }
-
-}
+};
 
 export {
     siteIntroBody,

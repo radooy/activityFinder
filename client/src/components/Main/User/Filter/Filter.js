@@ -5,14 +5,14 @@ import ActivitiesPreview from "../Home/Activities/ActivitiesPreview";
 import { NoActivitiesDiv } from "../Home/Activities/activitiesStyle";
 
 const Filter = (props) => {
-    let [sportsButtonVisible, setSportsButtonVisible] = useState(true);
-    let [citiesButtonVisible, setCitiesButtonVisible] = useState(true);
-    let [cities, setCities] = useState([]);
-    let [sports, setSports] = useState([]);
-    let [currentCity, setCurrentCity] = useState("Sofia");
-    let [currentSport, setCurrentSport] = useState("Football");
-    let [publications, setPublications] = useState([]);
-    let [showNoActivities, setShowNoActivities] = useState(false);
+    const [sportsButtonVisible, setSportsButtonVisible] = useState(true);
+    const [citiesButtonVisible, setCitiesButtonVisible] = useState(true);
+    const [cities, setCities] = useState([]);
+    const [sports, setSports] = useState([]);
+    const [currentCity, setCurrentCity] = useState("Sofia");
+    const [currentSport, setCurrentSport] = useState("Football");
+    const [publications, setPublications] = useState([]);
+    const [showNoActivities, setShowNoActivities] = useState(false);
 
     const onCitiesButtonClickHandler = () => {
         setSportsButtonVisible(false);

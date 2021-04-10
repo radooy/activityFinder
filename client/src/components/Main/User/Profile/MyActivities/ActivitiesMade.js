@@ -6,8 +6,8 @@ import {Wrapper, Heading} from "./myActivitiesStyle";
 const ActivitiesMade = () => {
 
     const context = useContext(Context);
-    let [publications, setPublications] = useState([]);
-    let id = context.id;
+    const [publications, setPublications] = useState([]);
+    const id = context.id;
 
     useEffect(()=>{
         fetch(`http://localhost:5000/api/users/${id}/publicationsMade`,{

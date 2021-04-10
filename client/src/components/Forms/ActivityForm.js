@@ -22,6 +22,7 @@ class ActivityForm extends Component {
             cities: [],
             sports: [],
             redirect: null,
+            dateFromPublication:"",
             errors: {}
         };
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -178,7 +179,7 @@ class ActivityForm extends Component {
                     {errors.descriptionLength && <Error fontSize={fontSize}>{errors.descriptionLength}</Error>}
 
                     <Label htmlFor="date">Date:</Label>
-                    {this.props.info && <div>If you don't want to select a new date it will remain: {this.state.dateFromPublication}</div>}
+                    {this.props.dateInfoNeeded && <div>If you don't want to select a new date it will remain: {this.state.dateFromPublication}</div>}
                     <Input type="datetime-local" name="date" id="date"
                         onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler} />

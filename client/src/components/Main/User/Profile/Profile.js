@@ -9,8 +9,8 @@ import ErrorPage from "../../../404/ErrorPage";
 
 const Profile = (props) => {
 
-    let context = useContext(Context);
-    let username = context.username;
+    const context = useContext(Context);
+    const username = context.username;
 
     //again monkey code 
     if (props.location.pathname!=="/my-profile" &&

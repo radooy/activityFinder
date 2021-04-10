@@ -12,7 +12,7 @@ const Edit = (props)=>{
         <>
         <Button onClick={onBackClickHandler}>Back</Button>
         <Heading>Edit your publication</Heading>
-        <ActivityForm id={id} buttonName="Edit" info/>
+        <ActivityForm id={id} buttonName="Edit" dateInfoNeeded/>
         </>
     );
 };
