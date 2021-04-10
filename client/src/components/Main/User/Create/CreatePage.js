@@ -2,10 +2,9 @@ import ActivityForm from "../../../Forms/ActivityForm";
 import { Button } from "../../mainStyle";
 
 const CreatePage = (props) => {
-
     const onBackClickHandler = ()=>{
         props.history.goBack();
-    }
+    };
 
     return(
         <div>

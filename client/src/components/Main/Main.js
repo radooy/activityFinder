@@ -9,9 +9,7 @@ const Main = (props) => {
 
     return (
         <MainContainer>
-            
             {context.loggedIn ? <User/> : <GuestPage {...props}/>}
-
         </MainContainer>
     );
 };

@@ -34,14 +34,14 @@ const Filter = (props) => {
                 setSports(data.sports);
             })
             .catch(err => console.log(err));
-    }
+    };
 
     const onResetButtonClickHandler = () => {
         setSportsButtonVisible(true);
         setCitiesButtonVisible(true);
         setPublications([]);
         setShowNoActivities(false);
-    }
+    };
 
     const onCitySelectHandler = (e) => {
         setCurrentCity(e.target.value);

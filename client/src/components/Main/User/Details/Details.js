@@ -9,6 +9,7 @@ import ErrorPage from "../../../404/ErrorPage";
 
 const Details = (props) => {
     const id = props.match.params.id;
+    const context = useContext(Context);
 
     const [activity, setActivity] = useState({});
     const [redirect, setRedirect] = useState("");
@@ -16,16 +17,6 @@ const Details = (props) => {
     const [visible, setVisible] = useState(false);
     const [isCreator, setCreator] = useState(false);
     const [notFound, setNotFound] = useState(false);
-
-    const context = useContext(Context);
-
-    const icreaseCount = () => {
-        setPeopleApplied(prevState => prevState+1);
-    };
-
-    const decreaseCount = () => {
-        setPeopleApplied(prevState => prevState-1);
-    }
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/publications/${id}`, {
@@ -51,6 +42,14 @@ const Details = (props) => {
                 setNotFound(true);
             });
     }, [context.id, id]);
+
+    const icreaseCount = () => {
+        setPeopleApplied(prevState => prevState+1);
+    };
+
+    const decreaseCount = () => {
+        setPeopleApplied(prevState => prevState-1);
+    };
 
     const onApplyHandler = ()=>{
         fetch(`http://localhost:5000/api/publications/${id}/apply`,{

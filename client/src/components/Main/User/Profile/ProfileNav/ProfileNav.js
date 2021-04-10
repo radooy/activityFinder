@@ -3,7 +3,6 @@ import { ButtonContainer } from "./profileNavStyle";
 import { Button } from "../../../mainStyle";
 
 const ProfileNav = (props) => {
-
     const onBackClickHandler = ()=>{
         props.history.push("/");
     };
