@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Wrapper, Form, Input, Submit, Label } from "./formStyle";
-import Context from "../Context/Context";
+import UserContext from "../Contexts/UserContext";
 import toast from "react-hot-toast";
 import { fetcher } from "../../utils/helpers";
 
@@ -18,7 +18,7 @@ class Login extends Component {
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
     };
 
-    static contextType = Context;
+    static contextType = UserContext;
 
     onChangeHandler(e) {
         this.setState({

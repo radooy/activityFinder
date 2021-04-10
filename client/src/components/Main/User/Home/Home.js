@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import Context from "../../../Context/Context";
+import UserContext from "../../../Contexts/UserContext";
 import AllActivities from "./Activities/AllActivities";
 import { Wrapper, Heading } from "./homeStyle";
 
 const HomePage = () => {
-    const userInfo = useContext(Context);
+    const userInfo = useContext(UserContext);
 
     return(
         <Wrapper>

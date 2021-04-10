@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import Context from "../../../../Context/Context";
+import Context from "../../../../Contexts/UserContext";
 import ActivitiesPreview from "../../Home/Activities/ActivitiesPreview";
 import {Wrapper, Heading} from "./myActivitiesStyle";
 

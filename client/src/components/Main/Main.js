@@ -1,16 +1,19 @@
 import { useContext } from "react";
-import Context from "../Context/Context";
+import UserContext from "../Contexts/UserContext";
+import DataProvider from "../Contexts/DataProvider";
 import User from "./User/User";
 import GuestPage from "./Guest/GuestPage";
 import { MainContainer } from "./mainStyle";
 
 const Main = (props) => {
-    const context = useContext(Context);
+    const context = useContext(UserContext);
 
     return (
-        <MainContainer>
-            {context.loggedIn ? <User/> : <GuestPage {...props}/>}
-        </MainContainer>
+        <DataProvider>
+            <MainContainer>
+                {context.loggedIn ? <User/> : <GuestPage {...props}/>}
+            </MainContainer>
+        </DataProvider>
     );
 };
 

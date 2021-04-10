@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Context from "./Context";
+import UserContext from "./UserContext";
 
 class UserAuthProvider extends Component{
     constructor(props){
@@ -61,7 +61,7 @@ class UserAuthProvider extends Component{
             );
         };
         return(
-        <Context.Provider value={{
+        <UserContext.Provider value={{
             loggedIn: this.state.loggedIn,
             id: this.state.id,
             username: this.state.username,
@@ -71,7 +71,7 @@ class UserAuthProvider extends Component{
 
         }}>
             {this.props.children}
-        </Context.Provider>
+        </UserContext.Provider>
         );
     };
     

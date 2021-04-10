@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import Context from "../../../../Context/Context";
+import UserContext from "../../../../Contexts/UserContext";
 import ActivitiesPreview from "../../Home/Activities/ActivitiesPreview";
 import {Wrapper, Heading} from "./myActivitiesStyle";
 
 const ActivitiesMade = () => {
 
-    const context = useContext(Context);
+    const context = useContext(UserContext);
     const [publications, setPublications] = useState([]);
     const id = context.id;
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import UserContext from "../Context/Context";
+import UserContext from "../Contexts/UserContext";
 import { Link, useHistory } from "react-router-dom";
 import { StyledHeader, StyledUl, StyledLi, Logo } from "./headerStyle";
 

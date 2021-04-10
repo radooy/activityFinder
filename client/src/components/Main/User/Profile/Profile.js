@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import ProfileNav from "./ProfileNav/ProfileNav";
-import Context from "../../../Context/Context";
+import Context from "../../../Contexts/UserContext";
 import { Wrapper, Heading, Container } from "./profileStyle";
 import ActivitiesMade from "./MyActivities/ActivitiesMade";
 import Applied from "./MyActivities/AppliedFor";

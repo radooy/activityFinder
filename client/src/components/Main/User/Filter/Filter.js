@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FilterWrapper, FilterParagraph, Select } from "./filterStyle";
 import { Button } from "../../mainStyle";
 import ActivitiesPreview from "../Home/Activities/ActivitiesPreview";
 import { NoActivitiesDiv } from "../Home/Activities/activitiesStyle";
+import DataContext from "../../../Contexts/DataContext";
+import toast from "react-hot-toast";
 
 const Filter = (props) => {
     const [sportsButtonVisible, setSportsButtonVisible] = useState(true);
@@ -14,26 +16,16 @@ const Filter = (props) => {
     const [publications, setPublications] = useState([]);
     const [showNoActivities, setShowNoActivities] = useState(false);
 
+    const dataContext = useContext(DataContext);
+
     const onCitiesButtonClickHandler = () => {
         setSportsButtonVisible(false);
-
-        fetch("http://localhost:5000/api/utils/cities")
-            .then(res => res.json())
-            .then((data) => {
-                setCities(data.cities);
-            })
-            .catch(err => console.log(err));
+        setCities(dataContext.cities);
     };
 
     const onSportsButtonClickHandler = () => {
         setCitiesButtonVisible(false);
-
-        fetch("http://localhost:5000/api/utils/sports")
-            .then(res => res.json())
-            .then((data) => {
-                setSports(data.sports);
-            })
-            .catch(err => console.log(err));
+        setSports(dataContext.sports);
     };
 
     const onResetButtonClickHandler = () => {
@@ -41,6 +33,8 @@ const Filter = (props) => {
         setCitiesButtonVisible(true);
         setPublications([]);
         setShowNoActivities(false);
+        setCurrentCity("Sofia");
+        setCurrentSport("Football");
     };
 
     const onCitySelectHandler = (e) => {
@@ -63,6 +57,10 @@ const Filter = (props) => {
             .then(data=>{
                 if (data.message) throw data.message
                 data.publications.length===0 ? setShowNoActivities(true) : setShowNoActivities(false);
+                data.publications.length===0 && toast.error("Sorry, no activities by this criteria",{
+                    icon: "🥺",
+                    duration:2000
+                })
                 setPublications(data.publications);
             })
             .catch(err=>console.log(err));
@@ -73,6 +71,10 @@ const Filter = (props) => {
                 .then(data=>{
                     if (data.message) throw data.message
                     data.publications.length===0 ? setShowNoActivities(true) : setShowNoActivities(false);
+                    data.publications.length===0 && toast.error("Sorry, no activities by this criteria",{
+                        icon: "🥺",
+                        duration:2000
+                    })
                    setPublications(data.publications)
                 })
                 .catch(err=>console.log(err));

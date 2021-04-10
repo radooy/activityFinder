@@ -4,7 +4,8 @@ import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle";
 import { Error } from "../Main/mainStyle";
 import toast from "react-hot-toast";
 import { fetcher } from "../../utils/helpers";
-import { validation } from "../../utils/plainText"
+import { validation } from "../../utils/plainText";
+import DataContext from "../Contexts/DataContext";
 
 class ActivityForm extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class ActivityForm extends Component {
             cities: [],
             sports: [],
             redirect: null,
-            dateFromPublication:"",
+            dateFromPublication: "",
             errors: {}
         };
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -31,37 +32,39 @@ class ActivityForm extends Component {
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
     };
 
-    validateForm(){
+    static contextType = DataContext;
+
+    validateForm() {
         const { nameOfUser, date, description, peopleNeeded, phoneNumber, imgUrl } = this.state;
         let errors = {};
         let isValid = true;
         let message = validation.activity;
 
-        if ((nameOfUser.trim().length===0) || /^([A-Z]{1})([a-z])+ ([A-Z]{1})([a-z])+$/.test(nameOfUser)===false){
+        if ((nameOfUser.trim().length === 0) || /^([A-Z]{1})([a-z])+ ([A-Z]{1})([a-z])+$/.test(nameOfUser) === false) {
             errors.nameOfUser = message.nameOfUser;
         };
 
-        if (!date){
+        if (!date) {
             errors.date = message.date;
         };
 
-        if (description.trim().length<8 || description.length>200) {
+        if (description.trim().length < 8 || description.length > 200) {
             errors.descriptionLength = message.descriptionLength;
         };
 
-        if (/^[a-zA-Z0-9 .!?"-]{8,200}$/.test(description)===false) {
+        if (/^[a-zA-Z0-9 .!?"-]{8,200}$/.test(description) === false) {
             errors.descriptionChars = message.descroptionChars;
         };
 
-        if (Number(peopleNeeded)<1 || Number(peopleNeeded)>20){
+        if (Number(peopleNeeded) < 1 || Number(peopleNeeded) > 20) {
             errors.peopleNeeded = message.peopleNeeded;
         };
 
-        if ((phoneNumber.trim().length!==10) || /^[0]{1}[0-9]{9}$/.test(phoneNumber)===false){
+        if ((phoneNumber.trim().length !== 10) || /^[0]{1}[0-9]{9}$/.test(phoneNumber) === false) {
             errors.phoneNumber = message.phoneNumber;
         };
 
-        if ((imgUrl.trim().length===0) || /^https?:\/\/(.*)$/.test(imgUrl)===false) {
+        if ((imgUrl.trim().length === 0) || /^https?:\/\/(.*)$/.test(imgUrl) === false) {
             errors.imgUrl = message.imgUrl;
         };
 
@@ -69,16 +72,16 @@ class ActivityForm extends Component {
             errors
         });
 
-        if (Object.keys(errors).length>0){
+        if (Object.keys(errors).length > 0) {
             toast.error(message.error);
             isValid = false;
         };
         return isValid;
     };
 
-    onFocusHandler(){
+    onFocusHandler() {
         this.setState({
-            errors:{}
+            errors: {}
         });
     };
 
@@ -94,55 +97,52 @@ class ActivityForm extends Component {
         const peopleNeeded = Number(this.state.peopleNeeded);
         const isValid = this.validateForm();
         const endpoint = "/publications/create";
-        isValid && fetcher(endpoint, "POST", {nameOfUser, sport, date, description, phoneNumber, city, imgUrl, peopleNeeded})
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.message) throw data.message;
-                            toast.success('Activity successfully created!');
-                            console.log('Success:', data);
-                            this.setState({
-                            redirect: "/"
-                            });
-                        }).catch(err => console.log(err));
+        isValid && fetcher(endpoint, "POST", { nameOfUser, sport, date, description, phoneNumber, city, imgUrl, peopleNeeded })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) throw data.message;
+                toast.success('Activity successfully created!',{
+                    icon:"🏆"
+                });
+                console.log('Success:', data);
+                this.setState({
+                    redirect: "/"
+                });
+            }).catch(err => console.log(err));
     };
 
-    onEditHandler(e){
+    onEditHandler(e) {
         e.preventDefault();
         let isValid = this.validateForm();
-        let endpoint =`/publications/${this.props.id}`;
+        let endpoint = `/publications/${this.props.id}`;
         let { nameOfUser, sport, date, description, phoneNumber, city, imgUrl } = this.state;
         let peopleNeeded = Number(this.state.peopleNeeded);
-        isValid && fetcher(endpoint, "PATCH", {nameOfUser, sport, date, description, phoneNumber, city, imgUrl, peopleNeeded})
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.message) throw data.message;
-                        toast.success('Activity successfully updated!');
-                        console.log('Success:', data);
-                        this.setState({
-                        redirect:`/details/${this.props.id}`
-                        })
-                    }).catch(err => console.log(err));    
+        isValid && fetcher(endpoint, "PATCH", { nameOfUser, sport, date, description, phoneNumber, city, imgUrl, peopleNeeded })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) throw data.message;
+                toast.success('Activity successfully updated!',{
+                    icon:"👏"
+                });
+                console.log('Success:', data);
+                this.setState({
+                    redirect: `/details/${this.props.id}`
+                })
+            }).catch(err => console.log(err));
     };
 
     componentDidMount() {
-        fetch("http://localhost:5000/api/utils/cities")
-            .then(res => res.json())
-            .then((data) => {
-                this.setState({ cities: data.cities })
-            }).catch(err => console.log(err));
+        this.setState({
+            cities: this.context.cities,
+            sports: this.context.sports
+        });
 
-        fetch("http://localhost:5000/api/utils/sports")
-            .then(res => res.json())
-            .then((data) => {
-                this.setState({ sports: data.sports })
-            }).catch(err => console.log(err));
-
-        if(this.props.id){
+        if (this.props.id) {
             fetch(`http://localhost:5000/api/publications/${this.props.id}`)
                 .then(res => res.json())
                 .then(data => {
                     this.setState({
-                        nameOfUser:data.publication.nameOfUser,
+                        nameOfUser: data.publication.nameOfUser,
                         date: data.publication.date,
                         description: data.publication.description,
                         peopleNeeded: Number(data.publication.peopleNeeded),
@@ -150,7 +150,7 @@ class ActivityForm extends Component {
                         imgUrl: data.publication.imgUrl,
                         dateFromPublication: data.publication.date
                     })
-                }).catch(err=>console.log(err));
+                }).catch(err => console.log(err));
         };
     };
 
@@ -164,9 +164,9 @@ class ActivityForm extends Component {
             <Wrapper>
                 <Form onSubmit={this.props.id ? this.onEditHandler : this.onSubmitHandler}>
                     <Label htmlFor="nameOfUser">First and last name of creator:</Label>
-                    <Input type="text" name="nameOfUser" id="nameOfUser" placeholder="Example Example" 
+                    <Input type="text" name="nameOfUser" id="nameOfUser" placeholder="Example Example"
                         defaultValue={this.state.nameOfUser}
-                        onFocus={this.onFocusHandler} 
+                        onFocus={this.onFocusHandler}
                         onChange={this.onChangeHandler} />
                     {errors.nameOfUser && <Error fontSize={fontSize}>{errors.nameOfUser}</Error>}
 

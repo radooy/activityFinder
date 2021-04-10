@@ -5,6 +5,7 @@ import { Error } from "../Main/mainStyle";
 import toast from "react-hot-toast";
 import { fetcher } from "../../utils/helpers";
 import { validation } from "../../utils/plainText";
+import DataContext from "../Contexts/DataContext";
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -23,6 +24,8 @@ class RegisterForm extends Component {
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.onFocusHandler = this.onFocusHandler.bind(this);
     };
+
+    static contextType = DataContext;
     
     validateForm = () => {
         const {username, password, rePassword} = this.state;
@@ -100,12 +103,7 @@ class RegisterForm extends Component {
         };
 
     componentDidMount() {
-        fetch("http://localhost:5000/api/utils/cities")
-            .then(res => res.json())
-            .then((data) => {
-                this.setState({ cities: data.cities });
-            })
-            .catch(err => console.log(err));
+        this.setState({ cities: this.context.cities });
     };
 
     render() {

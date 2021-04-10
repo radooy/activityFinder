@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
-import Context from "../../../Context/Context";
+import UserContext from "../../../Contexts/UserContext";
 import Activity from "../Home/Activity/Activity";
 import { DetailsWrapper} from "./detailsStyle";
 import { Button } from "../../mainStyle";
@@ -9,7 +9,7 @@ import ErrorPage from "../../../404/ErrorPage";
 
 const Details = (props) => {
     const id = props.match.params.id;
-    const context = useContext(Context);
+    const context = useContext(UserContext);
 
     const [activity, setActivity] = useState({});
     const [redirect, setRedirect] = useState("");
@@ -60,7 +60,8 @@ const Details = (props) => {
         .then(data=>{
             if (data.message) throw data.message;
             toast.success("Applied!",{
-                duration: 2000
+                duration: 2000,
+                icon: "🥳"
             });
             icreaseCount();
             setVisible(true);
@@ -79,6 +80,7 @@ const Details = (props) => {
             if (data.message) throw data.message
             toast.error("Unapplied!",{
                 duration: 2000,
+                icon: "😔"
             });
             decreaseCount();
             setVisible(false);
