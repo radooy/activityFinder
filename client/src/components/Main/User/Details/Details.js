@@ -19,6 +19,14 @@ const Details = (props) => {
 
     const context = useContext(Context);
 
+    const icreaseCount = () => {
+        setPeopleApplied(prevState => prevState+1);
+    };
+
+    const decreaseCount = () => {
+        setPeopleApplied(prevState => prevState-1);
+    }
+
     useEffect(() => {
         fetch(`http://localhost:5000/api/publications/${id}`, {
             credentials: "include"
@@ -55,7 +63,7 @@ const Details = (props) => {
             toast.success("Applied!",{
                 duration: 2000
             });
-            setPeopleApplied(peopleApplied+1);
+            icreaseCount();
             setVisible(true);
         })
         .catch(err=>console.log(err));
@@ -73,7 +81,7 @@ const Details = (props) => {
             toast.error("Unapplied!",{
                 duration: 2000,
             });
-            setPeopleApplied(peopleApplied-1);
+            decreaseCount();
             setVisible(false);
         })
         .catch(err=>console.log(err));
