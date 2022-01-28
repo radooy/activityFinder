@@ -26,6 +26,8 @@ The Front-end is a **React** client-side rendered, based on [Create-react-app](h
 - [React-router-dom](https://github.com/ReactTraining/react-router#readme) - v5.2.0
 - [Styled-components](https://styled-components.com/) - v5.2.1
 - [React-hot-toast](https://react-hot-toast.com/) - v1.0.2
+- [@reduxjs/toolkit](https://redux-toolkit.js.org/) - v1.7.1
+- [react-redux](https://react-redux.js.org/) - v7.2.6
 
 ## Starting the app
 - Clone the repository
