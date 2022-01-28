@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import UserContext from "../../../../Contexts/UserContext";
+import { useEffect, useState } from "react";
 import ActivitiesPreview from "../../Home/Activities/ActivitiesPreview";
 import {Wrapper, Heading} from "./myActivitiesStyle";
+import { useSelector } from "react-redux";
 
 const ActivitiesMade = () => {
 
-    const context = useContext(UserContext);
+    const id = useSelector((state) => state.user.value.id);
     const [publications, setPublications] = useState([]);
-    const id = context.id;
 
     useEffect(()=>{
         fetch(`http://localhost:5000/api/users/${id}/publicationsMade`,{

@@ -1,15 +1,17 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import UserContext from "../../../Contexts/UserContext";
 import Activity from "../Home/Activity/Activity";
 import { DetailsWrapper} from "./detailsStyle";
 import { Button } from "../../mainStyle";
 import toast from "react-hot-toast";
 import ErrorPage from "../../../404/ErrorPage";
+import { useSelector } from "react-redux";
+
 
 const Details = (props) => {
     const id = props.match.params.id;
-    const context = useContext(UserContext);
+    const userID = useSelector((state) => state.user.value.id);
+
 
     const [activity, setActivity] = useState({});
     const [redirect, setRedirect] = useState("");
@@ -26,11 +28,11 @@ const Details = (props) => {
             .then(data => {
                 if (data.message) throw data.message;
 
-                if (data.publication.peopleApplied.includes(context.id)) {
+                if (data.publication.peopleApplied.includes(userID)) {
                     setVisible(true);
                 };
 
-                if (data.publication.creator.toString()===context.id) {
+                if (data.publication.creator.toString()===userID) {
                     setCreator(true);
                 };
 
@@ -41,7 +43,7 @@ const Details = (props) => {
                 console.log(err);
                 setNotFound(true);
             });
-    }, [context.id, id]);
+    }, [userID, id]);
 
     const icreaseCount = () => {
         setPeopleApplied(prevState => prevState+1);
