@@ -1,14 +1,13 @@
-import { useContext } from "react";
-import UserContext from "../../../Contexts/UserContext";
 import AllActivities from "./Activities/AllActivities";
 import { Wrapper, Heading } from "./homeStyle";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
-    const userInfo = useContext(UserContext);
+    const username = useSelector((state) => state.user.value.username);
 
     return(
         <Wrapper>
-            <Heading>Available activities for you, {userInfo.username}</Heading>
+            <Heading>Available activities for you, {username}</Heading>
             <AllActivities/>
         </Wrapper>
     );

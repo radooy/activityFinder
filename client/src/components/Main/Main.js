@@ -1,17 +1,18 @@
-import { useContext } from "react";
-import UserContext from "../Contexts/UserContext";
 import DataProvider from "../Contexts/DataProvider";
 import User from "./User/User";
 import GuestPage from "./Guest/GuestPage";
 import { MainContainer } from "./mainStyle";
+import { useSelector } from "react-redux";
 
 const Main = (props) => {
-    const context = useContext(UserContext);
+    const loggedIn = useSelector((state)=>{
+        return state.user.value.loggedIn
+    });
 
     return (
         <DataProvider>
             <MainContainer>
-                {context.loggedIn ? <User/> : <GuestPage {...props}/>}
+                {loggedIn ? <User/> : <GuestPage {...props}/>}
             </MainContainer>
         </DataProvider>
     );
