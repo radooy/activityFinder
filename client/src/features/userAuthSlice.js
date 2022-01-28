@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialStateValue = {
     loggedIn:false,
     username: "",
     id:"",
@@ -8,21 +8,21 @@ const initialState = {
 }
 
 export const userSlice = createSlice({
-    name: "userAuth",
-    initialState,
+    name: "user",
+    initialState: {
+        value: initialStateValue
+    },
     reducers: {
         logIn: (state, action) => {
-            state = {
-                loggedIn: true,
-                username: action.payload.username,
-                id: action.payload.id,
-                city: action.payload.city
-            };
+            state.value.loggedIn =true;
+            state.value.username = action.payload.username;
+            state.value.id = action.payload.id;
+            state.value.city = action.payload.city;
         },
     
         logOut: (state, action) => {
             document.cookie = `x-auth-token= ;expires=Thu, 01 Jan 1970 00:00:01 GMT;`
-            state = initialState;
+            state.value = initialStateValue;
         },
     }
 });
