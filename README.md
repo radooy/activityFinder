@@ -6,7 +6,7 @@
 **Activity-finder** is a **SPA** (Single-page application) project dedicated to help people who are new in town and/or don't have friends who like to sport.  
 The main goal of the application is to make the life of those who want to stay active easier.  
 The project's Back-end is an ExpressJS based **Rest API** server with MongoDB Atlas.  
-The Front-end is a **React** client-side rendered, based on [Create-react-app](https://reactjs.org/docs/create-a-new-react-app.html) template, application.
+The Front-end is a **React** client-side rendered, based on [Create-react-app](https://reactjs.org/docs/create-a-new-react-app.html) template, application with [@reduxjs/toolkit](https://redux-toolkit.js.org/) as a state management tool.
 
 ## Technologies used
 ### Rest API
@@ -26,6 +26,8 @@ The Front-end is a **React** client-side rendered, based on [Create-react-app](h
 - [React-router-dom](https://github.com/ReactTraining/react-router#readme) - v5.2.0
 - [Styled-components](https://styled-components.com/) - v5.2.1
 - [React-hot-toast](https://react-hot-toast.com/) - v1.0.2
+- [@reduxjs/toolkit](https://redux-toolkit.js.org/) - v1.7.1
+- [react-redux](https://react-redux.js.org/) - v7.2.6
 
 ## Starting the app
 - Clone the repository
