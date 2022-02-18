@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialStateValue = {
+    isLoading: false,
     loggedIn:false,
     username: "",
     id:"",
@@ -43,11 +44,16 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(auth.fulfilled, (state, action) => {
+            state.value.isLoading = false;
             state.value.loggedIn =action.payload.isVerified;
             state.value.username = action.payload.username;
             state.value.id = action.payload.id;
             state.value.city = action.payload.city;
-        })
+        });
+        builder.addCase(auth.pending, (state, action) => {
+            state.value.isLoading = true;
+        });
+
     }
 });
 
