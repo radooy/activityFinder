@@ -26,10 +26,10 @@ const Button = styled.button`
     }
 `
 const Error = styled.div`
-    color:red;
+    color: #a70000;
     font-size:${props=> props.fontSize || "smaller" };
     font-weight: bold;
-    margin:10px 0;
+    margin: 5px 0;
 `
 
 export {

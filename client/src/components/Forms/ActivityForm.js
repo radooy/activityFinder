@@ -158,7 +158,7 @@ class ActivityForm extends Component {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         };
-        let fontSize = "17px";
+        const fontSize = "13px";
         let errors = this.state.errors;
         return (
             <Wrapper>

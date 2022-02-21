@@ -28,13 +28,13 @@ const Form = styled.form`
     display:grid;
 
     .activity-submit{
+        margin-top: 10px;
         max-width:150px;
         height:30px;
     }
 `
 
 const Input = styled.input`
-    margin-bottom:15px;
     background-color:#ccc7c7;
     color:#000000;
     border-radius:10px;
@@ -69,7 +69,7 @@ const Submit = styled.input.attrs({
     font-weight:800;
     cursor: pointer;
     background-color:#ccc7c7;
-
+    margin-top: 10px;
 
     &:hover{
         color:#ccc7c7;;
@@ -80,7 +80,7 @@ const Label = styled.label`
     text-align: center;
     font-size:25px;
     color:#ffffff;;
-    margin-bottom:8px;
+    margin: 5px 0;
 
 `
 
