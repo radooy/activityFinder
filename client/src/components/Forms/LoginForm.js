@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { fetcher } from "../../utils/helpers";
 import { logIn } from "../../features/userAuthSlice";
 import { useDispatch } from "react-redux";
+import { Error } from "../Main/mainStyle";
 
 
 import React from 'react';
@@ -16,7 +17,31 @@ function Login() {
         redirect: null,
     });
 
+    const [formErrors, setFormErrors] = useState({});
+
     const dispatch = useDispatch();
+
+    const validateForm = () => {
+        const formErrors = {
+            username: {},
+            password: {}
+        };
+        let isValid = true;
+
+        if (!userData.username) {
+            formErrors.username.required = "Please add a username!";
+            isValid = false;
+        }
+
+        if (!userData.password) {
+            formErrors.password.required = "Please add a password!";
+            isValid = false;
+        }
+
+        setFormErrors(formErrors);
+
+        return isValid;
+    }
 
     const onChangeHandler = (e) => {
         setUserData((prevState) => ({
@@ -27,6 +52,8 @@ function Login() {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
+        const isValid = validateForm();
+        if (!isValid) return;
         const { username, password } = {...userData};
         const endpoint = "/auth/login";
         fetcher(endpoint, "POST", {username, password})
@@ -42,7 +69,6 @@ function Login() {
                 dispatch(logIn({username: data.username, id: data.id, city: data.city}));
             })
             .catch(err => {
-                console.log(err);
                 toast.error(`${err}`);
             });
     };
@@ -57,9 +83,11 @@ function Login() {
                 <Label htmlFor="username">Username:</Label>
                 <Input type="text" name="username" id="username"
                     onChange={onChangeHandler} />
+                {formErrors.username && <Error>{formErrors.username.required}</Error>}
                 <Label htmlFor="password">Password:</Label>
                 <Input type="password" name="password" id="password"
                     onChange={onChangeHandler} />
+                {formErrors.password && <Error>{formErrors.password.required}</Error>}
                 <Submit value="Log in" />
             </Form>
         </Wrapper>
@@ -67,70 +95,3 @@ function Login() {
 };
 
 export default Login;
-
-
-// class Login extends Component {
-//     constructor(props) {
-//         super(props)
-
-//         this.state = {
-//             username: "",
-//             password: "",
-//             redirect: null,
-//         }
-//         this.onChangeHandler = this.onChangeHandler.bind(this);
-//         this.onSubmitHandler = this.onSubmitHandler.bind(this);
-//     };
-
-//     dispatch = useDispatch();
-
-//     onChangeHandler(e) {
-//         this.setState({
-//             [e.target.name]: e.target.value.toLowerCase()
-//         })
-//     };
-
-//     onSubmitHandler(e) {
-//         e.preventDefault();
-//         const { username, password } = this.state;
-//         const endpoint = "/auth/login";
-//         fetcher(endpoint, "POST", {username, password})
-//             .then(response => response.json())
-//             .then(data => {
-//                 if (data.message) throw data.message;
-//                 document.cookie = `x-auth-token = ${data.token}`;
-//                 toast.success(`Logged in as ${data.username}!`);
-//                 this.setState({
-//                     redirect : "/"
-//                 });
-
-//                 // this.context.logIn(data.username,data.id,data.city);
-//             })
-//             .catch(err => {
-//                 console.log(err);
-//                 toast.error(`${err}`);
-//             });
-//     };
-
-//     render() {
-
-//         if (this.state.redirect) {
-//             return <Redirect to= {this.state.redirect}/>
-//         }
-//         return (
-//             <Wrapper>
-//                 <Form onSubmit={this.onSubmitHandler}>
-//                     <Label htmlFor="username">Username:</Label>
-//                     <Input type="text" name="username" id="username"
-//                         onChange={this.onChangeHandler} />
-//                     <Label htmlFor="password">Password:</Label>
-//                     <Input type="password" name="password" id="password"
-//                         onChange={this.onChangeHandler} />
-//                     <Submit value="Log in" />
-//                 </Form>
-//             </Wrapper>
-//         );
-//     };
-// };
-
-// export default Login
