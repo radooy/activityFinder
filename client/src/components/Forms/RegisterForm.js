@@ -1,150 +1,144 @@
-import { Component } from "react";
+import { useState } from 'react'
 import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 import { Wrapper, Form, Input, Submit, Label, Select } from "./formStyle";
 import { Error } from "../Main/mainStyle";
-import toast from "react-hot-toast";
 import { fetcher } from "../../utils/helpers";
 import { validation } from "../../utils/plainText";
-import DataContext from "../Contexts/DataContext";
 
-class RegisterForm extends Component {
-    constructor(props) {
-        super(props)
 
-        this.state = {
-            username: "",
-            password: "",
-            rePassword: "",
-            city: "Sofia",
-            cities: [],
-            redirect: null,
-            errors: {}
-        }
-        this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.onSubmitHandler = this.onSubmitHandler.bind(this);
-        this.onFocusHandler = this.onFocusHandler.bind(this);
-    };
+function RegisterForm() {
+    const [state, setState] = useState({
+        username: "",
+        password: "",
+        rePassword: "",
+        city: "Sofia",
+        redirect: null,
+        errors: {}
+    });
 
-    static contextType = DataContext;
-    
-    validateForm = () => {
-        const {username, password, rePassword} = this.state;
+    const cities = useSelector((state) => state.data.value.cities);
+
+    const validateForm = () => {
+        const { username, password, rePassword } = state;
+        const message = validation.register;
         let errors = {};
         let isValid = true;
-        let message = validation.register;
-        if(username.length<4 || username.length>20){
+        
+        if (username.length < 4 || username.length > 20) {
             errors.usernameLength = message.usernameLength;
         };
 
-        if(/^[a-zA-z0-9._-]+$/.test(username)===false){
+        if (/^[a-zA-z0-9._-]+$/.test(username) === false) {
             errors.usernameSymbols = message.usernameSymbols;
         };
 
-        if(password.length<6 || password.length>40){
+        if (password.length < 6 || password.length > 40) {
             errors.passwordLength = message.passwordLength;
         };
 
-        if(/^[a-z0-9]+$/.test(password) === false){
+        if (/^[a-z0-9]+$/.test(password) === false) {
             errors.passwordSymbols = message.passwordSymbols;
         };
 
-        if(password!==rePassword){
+        if (password !== rePassword) {
             errors.passwordMissMatch = message.passwordsMissMatch;
         };
 
-        this.setState({
+        setState((prevState) => ({
+            ...prevState,
             errors
-        });
+        }));
 
-        if(Object.keys(errors).length>0){
+        if (Object.keys(errors).length > 0) {
             toast.error(message.error);
-            isValid=false;
+            isValid = false;
         };
         return isValid;
     };
 
-    onFocusHandler(){
-        this.setState({
-            errors:{}
-        });
+    const onFocusHandler = () => {
+        setState((prevState) => ({
+            ...prevState,
+            errors: {}
+        }));
+
     };
 
-    onChangeHandler(e) {
-        this.setState({
+    const onChangeHandler = (e) => {
+        setState((prevState) => ({
+            ...prevState,
             [e.target.name]: e.target.value
-        });
+        }));
     };
 
-    onSubmitHandler(e) {
+    const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        const isValid = this.validateForm();
+        const isValid = validateForm();
         const endpoint = "/auth/register";
-        const { password , rePassword, city} = this.state;
-        const username = this.state.username.toLowerCase();
+        const { password, rePassword, city } = state;
+        const username = state.username.toLowerCase();
 
-        isValid && fetcher(endpoint, "POST", {username, password, rePassword, city})
+        isValid && fetcher(endpoint, "POST", { username, password, rePassword, city })
             .then(response => response.json())
             .then(data => {
                 if (data.message) throw data.message;
                 toast.success('Registration complete!');
-                this.setState({
-                    redirect: "/login"
-                });
+                setState({redirect: "/login"});
             })
             .catch(err => {
                 console.log(err);
                 let errors = {};
                 errors.usernameIsTaken = err;
-                this.setState({
+                setState((prevState) => ({
+                    ...prevState,
                     errors
-                });
+                }));
+        
             });
-        };
-
-    componentDidMount() {
-        this.setState({ cities: this.context.cities });
     };
 
-    render() {
-        if (this.state.redirect) {
-            return <Redirect to={this.state.redirect} />
-        }
-        let errors = this.state.errors;
-        return (
-            <Wrapper>
-                <Form onSubmit={this.onSubmitHandler}>
-                    <Label htmlFor="username">Username:</Label>
-                    <Input type="text" name="username" id="username" placeholder="example123"
-                        onFocus={this.onFocusHandler}
-                        onChange={this.onChangeHandler} />
-                    {errors.usernameLength && <Error>{errors.usernameLength}</Error>}
-                    {errors.usernameIsTaken && <Error>{errors.usernameIsTaken}</Error>}
-                    {errors.usernameSymbols && <Error>{errors.usernameSymbols}</Error>}
-                    
-                    <Label htmlFor="password">Password:</Label>
-                    <Input type="password" name="password" id="password"
-                        onFocus={this.onFocusHandler}
-                        onChange={this.onChangeHandler} />
-                    {errors.passwordLength && <Error>{errors.passwordLength}</Error>}
-                    {errors.passwordSymbols && <Error>{errors.passwordSymbols}</Error>}
-                    
-                    <Label htmlFor="rePassword">Repeat password:</Label>
-                    <Input type="password" name="rePassword" id="rePassword"
-                        onFocus={this.onFocusHandler}
-                        onChange={this.onChangeHandler} />
-                    {errors.passwordMissMatch && <Error>{errors.passwordMissMatch}</Error>}
-                    
-                    <Label htmlFor="city">Choose your city:</Label>
-                    <Select name="city" id="city"
-                        onChange={this.onChangeHandler}>
-                        {this.state.cities.map((city) => <option key={city} value={city}> {city} </option>)}
-                    </Select>
-                    <Submit value="Join us" />
-                </Form>
-            </Wrapper>
-        );
+    if (state.redirect) {
+        return <Redirect to={state.redirect} />
     };
-};
+
+    const errors = state.errors;
+
+    return (
+        <Wrapper>
+            <Form onSubmit={onSubmitHandler}>
+                <Label htmlFor="username">Username:</Label>
+                <Input type="text" name="username" id="username" placeholder="example123"
+                    onFocus={onFocusHandler}
+                    onChange={onChangeHandler} />
+                {errors.usernameLength && <Error>{errors.usernameLength}</Error>}
+                {errors.usernameIsTaken && <Error>{errors.usernameIsTaken}</Error>}
+                {errors.usernameSymbols && <Error>{errors.usernameSymbols}</Error>}
+
+                <Label htmlFor="password">Password:</Label>
+                <Input type="password" name="password" id="password"
+                    onFocus={onFocusHandler}
+                    onChange={onChangeHandler} />
+                {errors.passwordLength && <Error>{errors.passwordLength}</Error>}
+                {errors.passwordSymbols && <Error>{errors.passwordSymbols}</Error>}
+
+                <Label htmlFor="rePassword">Repeat password:</Label>
+                <Input type="password" name="rePassword" id="rePassword"
+                    onFocus={onFocusHandler}
+                    onChange={onChangeHandler} />
+                {errors.passwordMissMatch && <Error>{errors.passwordMissMatch}</Error>}
+
+                <Label htmlFor="city">Choose your city:</Label>
+                <Select name="city" id="city"
+                    onChange={onChangeHandler}>
+                    {cities.map((city) => <option key={city} value={city}> {city} </option>)}
+                </Select>
+                <Submit value="Join us" />
+            </Form>
+        </Wrapper>
+    )
+}
 
 export default RegisterForm
