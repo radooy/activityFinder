@@ -9,8 +9,15 @@ const ProfileNav = (props) => {
 
     return(
     <ButtonContainer>
-        <NavLink activeClassName="active" to="/my-profile/activities-made"><Button className="my-activities-button">My activities</Button></NavLink>
-        <NavLink to ="/my-profile/activities-applied"><Button className="my-activities-button applied-for">Activities applied</Button></NavLink>
+        <NavLink activeClassName="active" to="/my-profile/activities-made">
+            <Button className="my-activities-button">My activities</Button>
+        </NavLink>
+        <NavLink to ="/my-profile/activities-applied">
+            <Button className="my-activities-button applied-for">Activities applied</Button>
+        </NavLink>
+        <NavLink to ="/my-profile/edit">
+            <Button className="my-activities-button">Edit profile</Button>
+        </NavLink>
         <Button className = "back" onClick = {onBackClickHandler}>Back</Button>
     </ButtonContainer>
     );
